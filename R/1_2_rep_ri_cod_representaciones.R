@@ -1,3 +1,7 @@
+# Representaciones
+# Las representaciones con las capas base de ejemplo del repositorio son ejemplos, no versiones finales por lo que 
+# las representaciones graficas y geograficas no coinciden con los presentados en el proyecto SIM-SINAP.
+
 library("sf")
 library("rgdal")
 library("raster")
@@ -8,24 +12,24 @@ library("heatmaply")
 library("maptools")
 
 # cargar objetos creados con el script operativo
-load("rep_rri_cod/rep_ri_objetos_operativo.RData")
+load("productos/rep_ri/rep_ri_objetos_operativo.RData")
 
 # 1. Cargar shapefiles utiles
 
 # 1.1 Shapefile territorrial
 
-terr <- shapefile("rep_rri_otros/Territoriales/Territorales.shp") %>% 
-  spTransform(CRS("+init=epsg:4326"))
+terr <- shapefile("capas_base_ejemplos/Territorial/Territoriales_final.shp") # %>% 
+#  spTransform(CRS("+init=epsg:4326"))
 nombre_corto <- c("Amazonia", "AndesNoro", "AndesOcc", "Caribe", "Orinoquia", "Pacifico")
 
 # 1.2 Shapefile Nacional
 
-col_sf <- shapefile("rep_rri_otros/Nacional/nacional_wgs84.shp") %>% 
-  spTransform(CRS("+init=epsg:4326")) %>% 
+col_sf <- shapefile("capas_base_ejemplos/Nacional/Colombia_FINAL.shp") %>% 
+#  spTransform(CRS("+init=epsg:4326")) %>% 
   st_as_sf()
 
 # 1.4 Shapefiles union runap territorial (paso codigo operativo 5.1.1)
-shapefiles_runap_terr <- list.files("rep_rri_gdb/Union_Terr_RUNAPRRi/", ".shp$", full.names = T)
+shapefiles_runap_terr <- list.files("productos/rep_ri/RUNAPRRi/", "terr.shp$", full.names = T)
 shapefiles_runap_terr <- lapply(shapefiles_runap_terr, shapefile)
 
 #######################################
@@ -38,20 +42,23 @@ shapefiles_runap_terr <- lapply(shapefiles_runap_terr, shapefile)
 
 # A. Representacion numerica
 
+dir.create("productos/rep_ri/rep_num", showWarnings = F)
+
 Rep.num <- c(Rep_aps, tasa.increm.anual)
 Rep.num <- qpcR:::cbind.na(Rep_aps, tasa.increm.anual)
 mean(na.omit(Rep_aps))
 
-tiempos <- c(1990,1994,1998,2000,2002,
-             2006,2010,2014,2018,2020)
+tiempos <- c(1990, 2010)
 
 Repre_total <- as.data.frame(cbind(tiempos, Rep_aps))
 
-write.csv(Repre_total, "rep_rri_Ic_spp/rep_num/RRi_nac.csv")
+write.csv(Repre_total, "productos/rep_ri/rep_num/RRi_nac.csv")
 
 # B. Representacion grafica
 
-jpeg("rep_rri_Ic_spp/rep_gra/Repre_riqueza_Sist_AP.jpg", res = c(300,300), width = 2480, height = 2480)
+dir.create("productos/rep_ri/rep_gra", showWarnings = F)
+
+jpeg("productos/rep_ri/rep_gra/Repre_riqueza_Sist_AP.jpg", res = c(300,300), width = 2480, height = 2480)
 repr_plot<- ggplot(Repre_total, aes(factor(tiempos), Rep_aps, color = tiempos)) +
   geom_boxplot(color = "black") +
   geom_smooth(method = "auto", se=FALSE, color="red", aes(group=1)) +
@@ -65,7 +72,7 @@ dev.off()
 
 # C. Representacion geografica
 
-smallestExtent <- extent(ap1990)
+smallestExtent <- extent(ap1990) 
 
 # extent San Andres para generar innset en el mapa
 SAExtent <- extent(c(-82, -81, 12.25,  13.5))
@@ -77,19 +84,20 @@ SACut  <- ggplot(data = col_sf) +
 
 # lista de shapefiles del RUNAP con el aporte al porcentaje de 
 # representatividad por AP
-data_rep_ap <- list(ap1990, ap1994, ap1998, ap2000, ap2002, ap2006, ap2010, 
-                    ap2014, ap2018, ap2020) 
-
+data_rep_ap <- list(ap1990, ap2010) 
 
 # mapa por capa temporal del RUNAP, porcentaje de representatividad
+
+dir.create("productos/rep_ri/rep_geo", showWarnings = F)
 
 for(i in 1:length(tiempos)){
   print(tiempos[i])
   datai <- data_rep_ap[[i]]
+  
   datai <- crop(datai, smallestExtent)
   colRRi <- names(datai)[grep(names(datai), pattern = "RRi")][1]
   
-  # categorizar los datos de representatividad
+  # categorizar los datos de representatividad 
   datai@data[, colRRi] <- cut(x = datai@data[, colRRi], breaks = c(0, 0.5, 1, 1.5, 2 , 2.5, 3, 100),
                               labels = c("0 — 0.5%", "0.5 — 1%", "1 — 1.5%", "1.5 — 2%", "2 — 2.5%", "2.5 — 3%", "> 3%"))
   datai <- st_as_sf(datai)
@@ -98,7 +106,9 @@ for(i in 1:length(tiempos)){
   cols <- RdYlGn(7)
   names(cols) <- c("0 — 0.5%", "0.5 — 1%", "1 — 1.5%", "1.5 — 2%", "2 — 2.5%", "2.5 — 3%", "> 3%")
   
-  tiff(paste0("rep_rri_Ic_spp/rep_geo/NACIONAL/", tiempos[i], ".tif"), res = c(300,300), width = 2480, height = 3508, compression = "lzw")
+  dir.create("productos/rep_ri/rep_geo/NACIONAL", showWarnings = F)
+  
+  tiff(paste0("productos/rep_ri/rep_geo/NACIONAL/", tiempos[i], ".tif"), res = c(300,300), width = 2480, height = 3508, compression = "lzw")
   
   plotdatai <- ggplot() + 
     geom_sf(data = col_sf, fill = "transparent", color = "black") +
@@ -124,16 +134,15 @@ for(i in 1:length(tiempos)){
 
 # A. Representacion numerica
 
-tiempo.periodo <- c("1990-1994","1994-1998","1998-2000","2000-2002","2002-2006",
-                    "2006-2010","2010-2014","2014-2018","2018-2020")
+tiempo.periodo <- c("1990-2010")
 
 Acumacion_total <- as.data.frame(cbind(tiempo.periodo, tasa.increm.anual))
 
-write.csv(Acumacion_total, "rep_rri_Id_cambio_spp/rep_num/deltaRRi_nac.csv")
+write.csv(Acumacion_total, "productos/rep_ri/rep_num/deltaRRi_nac.csv")
 
 # B. Representacion grafica
 
-jpeg("rep_rri_Id_cambio_spp/rep_gra/Diferencia_internanual SINAP.jpg", res = c(300,300), width = 2480, height = 2480)
+jpeg("productos/rep_ri/rep_gra/Diferencia_internanual SINAP.jpg", res = c(300,300), width = 2480, height = 2480)
 repr_plot_diff <- ggplot(Acumacion_total, aes(factor(tiempo.periodo), tasa.increm.anual, color = tiempo.periodo)) +
   geom_boxplot(color = "black") +
   geom_smooth(method = "loess", se=FALSE, color="red", aes(group=1)) +
@@ -170,7 +179,7 @@ for(i in 1:length(tiempos)){
   cols <- c(  RdYlGn(8), "gray25")
   names(cols) <- c("-4— -2", "-2—0", "0—2%", "2—4%", "4—6%", "6—8%", "8—10%", "> 10%", NA)
   
-  tiff(paste0("rep_rri_Id_cambio_spp/rep_geo/NACIONAL/", tiempo.periodo[i], ".tif"), res = c(300,300), width = 2480, height = 3508, compression = "lzw")
+  tiff(paste0("productos/rep_ri/rep_geo/NACIONAL/", tiempo.periodo[i], ".tif"), res = c(300,300), width = 2480, height = 3508, compression = "lzw")
   
   plotdatai <- ggplot() + 
     geom_sf(data = col_sf, fill = "transparent", color = "black") +
@@ -208,15 +217,15 @@ rownames(dat_rep_ri_terr) <- tiempos
 
 ## media
 media_rep_territorial <- data.frame("media" = apply(dat_rep_ri_terr, 2, mean))
-write.csv(media_rep_territorial, "rep_rri_Ic_spp/rep_num/RRi_terr_media.csv")
+write.csv(media_rep_territorial, "productos/rep_ri/rep_num/RRi_terr_media.csv")
 
 ## values
-write.csv(dat_rep_ri_terr, "rep_rri_Ic_spp/rep_num/RRi_terr.csv")
+write.csv(dat_rep_ri_terr, "productos/rep_ri/rep_num/RRi_terr.csv")
 
 
 # B. Representacion grafica
 
-jpeg("rep_rri_Ic_spp/rep_gra/Repre_riqueza_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
+jpeg("productos/rep_ri/rep_gra/Repre_riqueza_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
   par(mfrow=c(3,2))
   plot(dat_rep_ri_terr[,1], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
        xlab="Año", xaxt= "n", ylab="Porcentaje")
@@ -270,7 +279,9 @@ for(i in 1:length(tiempos)){
   cols <- RdYlGn(7)
   names(cols) <- c("0 — 10%", "10 — 20%", "20 — 30%", "30 — 40%", "40 — 50%", "50 — 60%", "> 60%")
   
-  tiff(paste0("rep_rri_Ic_spp/rep_geo/TERRITORIAL/", tiempos[i], ".tif"), res = c(300,300), width = 2480, height = 3050, compression = "lzw")
+  dir.create("productos/rep_ri/rep_geo/TERRITORIAL", showWarnings = F)
+  
+  tiff(paste0("productos/rep_ri/rep_geo/TERRITORIAL/", tiempos[i], ".tif"), res = c(300,300), width = 2480, height = 3050, compression = "lzw")
   
   plotdatai <- ggplot() + 
     geom_sf(data = col_sf, fill = "transparent", color = "grey25", linetype = "dashed")+
@@ -301,40 +312,39 @@ for(i in 1:length(tiempos)){
 
 # A. Representacion numerica
 
-tiempo.periodo.2 <- c("90-94","94-98","98-00","00-02", "02-06","06-10","10-14",
-                      "14-18","18-20")
+tiempo.periodo.2 <- c("90-10")
 
 colnames(tasa.incremento.territorial) <- tiempo.periodo.2
 
 #media
 
 media_rep_territorial <- data.frame("media" = apply(tasa.incremento.territorial, 1, mean))
-write.csv(media_rep_territorial, "rep_rri_Id_cambio_spp/rep_num/deltaRRi_terr_media.csv")
+write.csv(media_rep_territorial, "productos/rep_ri/rep_num/deltaRRi_terr_media.csv")
 
-write.csv(tasa.incremento.territorial, "rep_rri_Id_cambio_spp/rep_num/deltaRRi_terr_.csv")
+write.csv(tasa.incremento.territorial, "productos/rep_ri/rep_num/deltaRRi_terr_.csv")
 
 # B. Representacion grafica
 
-jpeg("rep_rri_Id_cambio_spp/rep_gra/Diferencia_internanual_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
+jpeg("productos/rep_ri/rep_gra/Diferencia_internanual_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
   par(mfrow=c(3,2))
   plot(tasa.incremento.territorial[1,], xaxt= "n", type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
        xlab="Año", ylab="Porcentaje")
-  axis(1, seq(1, 9, by=1), labels= tiempo.periodo.2)
+#  axis(1, seq(1, 2, by=1), labels= tiempo.periodo.2)
   plot(tasa.incremento.territorial[2,], xaxt= "n",type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
        xlab="Año", ylab="Porcentaje")
-  axis(1, seq(1, 9, by=1), labels= tiempo.periodo.2)
+#  axis(1, seq(1, 2, by=1), labels= tiempo.periodo.2)
   plot(tasa.incremento.territorial[3,], xaxt= "n",type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
        xlab="Año", ylab="Porcentaje")
-  axis(1, seq(1, 9, by=1), labels= tiempo.periodo.2)
+#  axis(1, seq(1, 2, by=1), labels= tiempo.periodo.2)
   plot(tasa.incremento.territorial[4,], xaxt= "n",type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
        xlab="Año", ylab="Porcentaje")
-  axis(1, seq(1, 9, by=1), labels= tiempo.periodo.2)
+#  axis(1, seq(1, 2, by=1), labels= tiempo.periodo.2)
   plot(tasa.incremento.territorial[5,], xaxt= "n",type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
        xlab="Año", ylab="Porcentaje")
-  axis(1, seq(1, 9, by=1), labels= tiempo.periodo.2)
+#  axis(1, seq(1, 2, by=1), labels= tiempo.periodo.2)
   plot(tasa.incremento.territorial[6,], xaxt= "n",type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
        xlab="Año", ylab="Porcentaje")
-  axis(1, seq(1, 9, by=1), labels= tiempo.periodo.2)
+#  axis(1, seq(1, 2, by=1), labels= tiempo.periodo.2)
 dev.off()
 
 # Representacion geografica
@@ -368,7 +378,7 @@ for(i in 1:length(tiempos)){
   cols <- RdYlGn(8)
   names(cols) <- c("-4— -2", "-2—0", "0—2%", "2—4%", "4—6%", "6—8%", "8—10%", "> 10%")
   
-  tiff(paste0("rep_rri_Id_cambio_spp/rep_geo/TERRITORIAL/", tiempo.periodo[i], ".tif"), res = c(300,300), width = 2480, height = 2480, compression = "lzw")
+  tiff(paste0("productos/rep_ri/rep_geo/TERRITORIAL/", tiempo.periodo[i], ".tif"), res = c(300,300), width = 2480, height = 2480, compression = "lzw")
   
   plotdatac <- ggplot() + 
     geom_sf(data = col_sf, fill = "transparent", color = "grey25", linetype = "dashed")+
@@ -399,6 +409,8 @@ for(i in 1:length(tiempos)){
 
 # 2.3 Territorial individual
 
+### OJO AQUI FINALIXE DE AJUSTAR #####
+
 for(i in 1:length(terr@data$nombre)){
   
   print(colnames(dat_rep_ri_terr)[i])
@@ -419,20 +431,20 @@ for(i in 1:length(terr@data$nombre)){
   
   print("numerica")
   
-  dir.create(paste0("rep_rri_Ic_spp/rep_num/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+  dir.create("productos/rep_ri/rep_num/TERRITORIALES_INDIVIDUAL", showWarnings = F)
   
   Repre_totali <- data.frame("tiempos" = tiempos, "SIRAP" = dat_rep_ri_terr[, i])
   
-  write.csv(Repre_totali, file = paste0("rep_rri_Ic_spp/rep_num/TERRITORIALES_INDIVIDUAL/",
+  write.csv(Repre_totali, file = paste0("productos/rep_ri/rep_num/TERRITORIALES_INDIVIDUAL/",
                                         nombre_corto[i], ".csv"))
   # B. Representación grafica
   
   print("grafica")
   
-  dir.create(paste0("rep_rri_Ic_spp/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+  dir.create(paste0("productos/rep_ri/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
   
     
-  jpeg(paste0("rep_rri_Ic_spp/rep_gra/TERRITORIALES_INDIVIDUAL/Repre_riqueza_", nombre_corto[i], ".jpg"), res = c(300,300), width = 2480, height = 2480)
+  jpeg(paste0("productos/rep_ri/rep_gra/TERRITORIALES_INDIVIDUAL/Repre_riqueza_", nombre_corto[i], ".jpg"), res = c(300,300), width = 2480, height = 2480)
   repr_plot<- ggplot(Repre_totali, aes(factor(tiempos), Rep_terri, color = tiempos)) +
     geom_boxplot(color = "black") +
     geom_smooth(method = "auto", se=FALSE, color="red", aes(group=1)) +
@@ -453,14 +465,14 @@ for(i in 1:length(terr@data$nombre)){
     st_as_sf()
   
   # Shape colombia oficial
-  col_small_sf <- shapefile("rep_rri_otros/Nacional/nacional_wgs84.shp") %>% 
+  col_small_sf <- shapefile("capas_base_ejemplos/Nacional/Colombia_FINAL.shp") %>% 
     spTransform(CRS("+init=epsg:4326")) %>% crop(terr_small) %>% 
     st_as_sf()
   
   extent(terr_small)
   
   # preparacion de carpetas
-  dir.create(paste0("rep_rri_Ic_spp/rep_geo/TERRITORIALES_INDIVIDUAL/", 
+  dir.create(paste0("productos/rep_ri/rep_geo/TERRITORIALES_INDIVIDUAL/", 
                     nombre_corto[i]), showWarnings = F)
   
   # particularidades por mapa  
@@ -476,7 +488,7 @@ for(i in 1:length(terr@data$nombre)){
   
   # mapa por capa temporal del RUNAP por territorial, porcentaje de representatividad y diferencia
   
-  dir.create(paste0("rep_rri_Ic_spp/rep_geo/TERRITORIALES_INDIVIDUAL/",
+  dir.create(paste0("productos/rep_ri/rep_geo/TERRITORIALES_INDIVIDUAL/",
                     nombre_corto[i]), showWarnings = FALSE)
     
   for(c in 1:length(tiempos)){
@@ -495,7 +507,7 @@ for(i in 1:length(terr@data$nombre)){
     cols <- RdYlGn(7)
     names(cols) <- c("0 — 0.5%", "0.5 — 1%", "1 — 1.5%", "1.5 — 2%", "2 — 2.5%", "2.5 — 3%", "> 3%")
     
-    tiff(paste0("rep_rri_Ic_spp/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", tiempos[c], ".tif"), res = c(300,300), width = 2480, height = 2480, compression = "lzw")
+    tiff(paste0("productos/rep_ri/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", tiempos[c], ".tif"), res = c(300,300), width = 2480, height = 2480, compression = "lzw")
     
     plotdatac <- ggplot() + 
       geom_sf(data = terr_small, fill = "transparent", color = "grey25")+
@@ -527,20 +539,20 @@ for(i in 1:length(terr@data$nombre)){
   
   # A. Representación numerica
   
-  dir.create(paste0("rep_rri_Id_cambio_spp/rep_num/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+  dir.create(paste0("productos/rep_ri/rep_num/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
   
   Acumacion_totali <- data.frame("tiempo.periodo" = tiempo.periodo, "SIRAP" = t(tasa.incremento.territorial)[,i])
   
-  write.csv(Acumacion_totali, file = paste0("rep_rri_Id_cambio_spp/rep_num/TERRITORIALES_INDIVIDUAL/",
+  write.csv(Acumacion_totali, file = paste0("productos/rep_ri/rep_num/TERRITORIALES_INDIVIDUAL/",
                                         nombre_corto[i], ".csv"), row.names = F)
   
   # B. Representacion grafica de la diferencia del % de representatividad 
   
   print("grafica")
   
-  dir.create(paste0("rep_rri_Id_cambio_spp/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+  dir.create(paste0("productos/rep_ri/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
   
-  jpeg(paste0("rep_rri_Id_cambio_spp/rep_gra/TERRITORIALES_INDIVIDUAL/Diferencia_internanual_", nombre_corto[i],".jpg"), res = c(300,300), width = 2480, height = 2480)
+  jpeg(paste0("productos/rep_ri/rep_gra/TERRITORIALES_INDIVIDUAL/Diferencia_internanual_", nombre_corto[i],".jpg"), res = c(300,300), width = 2480, height = 2480)
   repr_plot_diff <- ggplot(Acumacion_totali, aes(factor(tiempo.periodo), tasa.increm.i, color = tiempo.periodo)) +
     geom_boxplot(color = "black") +
     geom_smooth(method = "loess", se=FALSE, color="red", aes(group=1)) +

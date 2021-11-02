@@ -1,3 +1,6 @@
+# If.t. Cambio en la media de representatividad ecologica del SINAP - Distribucion de 
+# Especies
+
 #________________________________________#
 # Codigo escrito por Felipe Suarez       #
 # Version :  01-07-2020                  #
@@ -7,9 +10,6 @@
 #por Carlos Munoz                        #
 # Agosto de 2021                         #
 #________________________________________#
-
-# If.t. Cambio en la media de representatividad ecologica del SINAP - Distribucion de 
-# Especies
 
 library(SpaDES)
 library(raster)
@@ -24,18 +24,16 @@ library(dplyr)
 
 # 1.1 Cargar rutas de los modelos Nivel1 BioModelos
 
-list_raster <-list.files(path = "rep_distspp_capas_base/BioModelos_N1_proj/", pattern="*.tif$", full.names = T)
+list_raster <-list.files(path = "capas_base_ejemplos/BioModelos_N1/", pattern="*.tif$", full.names = T)
 
 # 1.2 Leer archivos RUNAP, en formato raster (.tif).
 
-RUNAP_1990 <- raster("rep_distspp_capas_base/RUNAP_rasters/RUNAP_1990_pnnid.tif")
-RUNAP_2000 <- raster("rep_distspp_capas_base/RUNAP_rasters/RUNAP_2000_pnnid.tif")
-RUNAP_2010 <- raster("rep_distspp_capas_base/RUNAP_rasters/RUNAP_2010_pnnid.tif")
-RUNAP_2020 <- raster("rep_distspp_capas_base/RUNAP_rasters/RUNAP_2020_pnnid.tif")
+RUNAP_1990 <- raster("capas_base_ejemplos/RUNAP_rasters/RUNAP_1990_pnnid.tif")
+RUNAP_2010 <- raster("capas_base_ejemplos/RUNAP_rasters/RUNAP_2010_pnnid.tif")
 
 # 1.3 Cargar archivo shapefiile Territorial
 
-Territoriales <- readOGR("rep_distspp_capas_base/Territorial/Territoriales_final.shp")
+Territoriales <- readOGR("capas_base_ejemplos/Territorial/Territoriales_final.shp")
 
 # 2. Funciones
 #
@@ -45,6 +43,10 @@ Territoriales <- readOGR("rep_distspp_capas_base/Territorial/Territoriales_final
 # especies
 # ras.RUNAP: raster, raster del sistema nacional de areas protegidas, puede ser cualquier 
 # capa de poligonos rasterizada
+# do.equal_proj: logico, se prende o apaga la reproyección de los BioModelos al mismo CRS de los raster del RUNAP.
+# El indicador necesaita que los raster de los BioModelos este en el mismo CRS que los raster del RUNAP.
+# Este proceso consume tiempo y recursos, es posible que el proceso se mas rapido dentro de un SIG y posterior
+# cargarlo en R. Por defecto TRUE.
 #
 #
 # Return: 
@@ -67,12 +69,22 @@ Territoriales <- readOGR("rep_distspp_capas_base/Territorial/Territoriales_final
 # Rodrigues, A.S.L., et al. (2004b) Global Gap Analysis: Priority Regions for 
 # Expanding the Global Protected-Area Network. BioScience 54(12), 1092-1100.
 
-DistSpRUNAP <- function(path.Spraster, ras.RUNAP){
+DistSpRUNAP <- function(path.Spraster, ras.RUNAP, do.equal_proj = T){
   
   print(path.Spraster)
   
   #leer raster por especie
   focus_sp <- raster::raster(path.Spraster)
+  
+  if(do.equal_proj == T){
+  
+  # cambiar proyeccion
+    template <- projectRaster(from = focus_sp, to= ras.RUNAP)
+    
+    #template is an empty raster that has the projected extent of r2 but is aligned with r1 (i.e. same resolution, origin, and crs of r1)
+    focus_sp <- projectRaster(from = focus_sp, to= template)
+  
+  }
   
   # Revisar si el raster del BioModelo intercepta con el raster de las Areas Protegidas
   # del RUNAP 
@@ -281,24 +293,13 @@ sp_stats_1990 <- lapply(X = list_raster, function(X) DistSpRUNAP(path.Spraster =
 sp_stats_1990 <- do.call(rbind, sp_stats_1990)
 rep_distSpp_1990 <- rep_distSpp(stats_periodo = sp_stats_1990, raster_runap = RUNAP_1990)
 
-# 2000
-sp_stats_2000 <- lapply(X = list_raster, function(X) DistSpRUNAP(path.Spraster = X, ras.RUNAP = RUNAP_2000)) 
-sp_stats_2000 <- do.call(rbind, sp_stats_2000)
-rep_distSpp_2000 <- rep_distSpp(stats_periodo = sp_stats_2000, raster_runap = RUNAP_2000)
-
 #2010
 sp_stats_2010 <- lapply(X = list_raster, function(X) DistSpRUNAP(path.Spraster = X, ras.RUNAP = RUNAP_2010)) 
 sp_stats_2010 <- do.call(rbind, sp_stats_2010)
 rep_distSpp_2010 <- rep_distSpp(stats_periodo = sp_stats_2010, raster_runap = RUNAP_2010)
 
-#2020
-sp_stats_2020 <- lapply(X = list_raster, function(X) DistSpRUNAP(path.Spraster = X, ras.RUNAP = RUNAP_2020)) 
-sp_stats_2020 <- do.call(rbind, sp_stats_2020)
-rep_distSpp_2020 <- rep_distSpp(stats_periodo = sp_stats_2020, raster_runap = RUNAP_2020)
-
 # vector de la media de representatividad de distribucion para cada periodo a nivel nacional
-rep_distSpp_Nal <- c(rep_distSpp_1990$media_rep_distSpp, rep_distSpp_2000$media_rep_distSpp, 
-                     rep_distSpp_2010$media_rep_distSpp, rep_distSpp_2020$media_rep_distSpp) %>% 
+rep_distSpp_Nal <- c(rep_distSpp_1990$media_rep_distSpp, rep_distSpp_2010$media_rep_distSpp) %>% 
   round(3)
 
 
@@ -326,45 +327,11 @@ rep_distSpp_Terr_1990 <- lapply(1:nrow(Territoriales), function(x) {
 }
 )
 
-# 2000
-rep_distSpp_Terr_2000 <- lapply(1:nrow(Territoriales), function(x) { 
-  
-  # cortar las areas protegidas a la extension de cada territorial
-  raster.Areas.terrx <-  raster::crop(rep_distSpp_2000$raster_rep_distrSpp, Territoriales[x, ]) %>%
-    raster::mask(Territoriales[x, ]) 
-  
-  df.Areas.terrx <- as.data.frame(raster.Areas.terrx) %>% na.omit() %>% unique()
-  
-  media_territorialx <- mean(df.Areas.terrx[ , 1], na.rm = T)
-  
-  return(list(raster.terrx = raster.Areas.terrx, media_terrx = media_territorialx))
-  
-}
-)
-
 # 2010
 rep_distSpp_Terr_2010 <- lapply(1:nrow(Territoriales), function(x) { 
   
   # cortar las areas protegidas a la extension de cada territorial
   raster.Areas.terrx <-  raster::crop(rep_distSpp_2010$raster_rep_distrSpp, Territoriales[x, ]) %>%
-    raster::mask(Territoriales[x, ]) 
-  
-  df.Areas.terrx <- as.data.frame(raster.Areas.terrx) %>% na.omit() %>% unique()
-  
-  media_territorialx <- mean(df.Areas.terrx[ , 1], na.rm = T)
-  
-  return(list(raster.terrx = raster.Areas.terrx, media_terrx = media_territorialx))
-  
-}
-)
-
-# 2020
-
-rep_distSpp_Terr_2020 <- lapply(1:nrow(Territoriales), function(x) { 
-  
-  # cortar las areas protegidas a la extension de cada territorial
-  
-  raster.Areas.terrx <-  raster::crop(rep_distSpp_2020$raster_rep_distrSpp, Territoriales[x, ]) %>%
     raster::mask(Territoriales[x, ]) 
   
   df.Areas.terrx <- as.data.frame(raster.Areas.terrx) %>% na.omit() %>% unique()
@@ -385,8 +352,8 @@ rep_distSpp_Terr_res <- list()
 
 for(i in 1:length(Territoriales)){
   
-  rep_distSpp_terri <- c(rep_distSpp_Terr_1990[[i]]$media_terrx, rep_distSpp_Terr_2000[[i]]$media_terrx, 
-                         rep_distSpp_Terr_2010[[i]]$media_terrx, rep_distSpp_Terr_2020[[i]]$media_terrx)
+  rep_distSpp_terri <- c(rep_distSpp_Terr_1990[[i]]$media_terrx, 
+                         rep_distSpp_Terr_2010[[i]]$media_terrx)
   
   Delta_rep_distSpp_terri <- c(0, diff(rep_distSpp_terri))
   
@@ -397,7 +364,7 @@ for(i in 1:length(Territoriales)){
 
 rep_distSpp_Terr_res <- do.call(cbind.data.frame, rep_distSpp_Terr_res) %>% t() %>% round(3)
 
-tiempos <- c("1990", "2000", "2010", "2020")
+tiempos <- c("1990", "2010")
 colnames(rep_distSpp_Terr_res) <- c(paste0("rep_distSpp_", tiempos), paste0("Delta_rep_distSpp_", tiempos))
 rownames(rep_distSpp_Terr_res) <- Territoriales$nombre
 
@@ -409,14 +376,8 @@ rownames(rep_distSpp_Terr_res) <- Territoriales$nombre
 
 # 3.3.2 Calcular delta de la la representatividad de la distribución de especies por AP
 
-drep_distSpp_AP_1990_2000 <- rep_distSpp_2000$raster_rep_distrSpp - rep_distSpp_1990$raster_rep_distrSpp
-names(drep_distSpp_AP_1990_2000) <- "drep_distSpp_AP_1990_2000"
-
-drep_distSpp_AP_2000_2010 <- rep_distSpp_2010$raster_rep_distrSpp - rep_distSpp_2000$raster_rep_distrSpp
-names(drep_distSpp_AP_2000_2010) <- "drep_distSpp_AP_2000_2010"
-
-drep_distSpp_AP_2010_2020 <- rep_distSpp_2020$raster_rep_distrSpp - rep_distSpp_2010$raster_rep_distrSpp
-names(drep_distSpp_AP_2010_2020) <- "drep_distSpp_AP_2010_2020"
+drep_distSpp_AP_1990_2010 <- rep_distSpp_2010$raster_rep_distrSpp - rep_distSpp_1990$raster_rep_distrSpp
+names(drep_distSpp_AP_1990_2010) <- "drep_distSpp_AP_1990_2010"
 
 
 # save(drep_distSpp_AP_1990_2000, drep_distSpp_AP_2000_2010, drep_distSpp_AP_2010_2020, rep_distSpp_1990,

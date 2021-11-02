@@ -15,21 +15,31 @@ En desarrollo.
 
 Librerias requeridas y sus versiones por cada indicador
 
-1. Riqueza de especies 
+1. Representatividad ecológica: Riqueza de especies 
 
 ```
 "dismo" 1.3-3
 "sf" 1.0-2
-"rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023 al volverse obsoleto el paquete, vease documentación rgdal)
+"rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023)
 "raster" 3.4-13 
 "qpcR" 1.4-1
 "dplyr" 1.0.7
 ```
 
+2. Representatividad ecológica: distribución de especies
 
-
+```
+"SpaDES" 2.0.7
+"raster" 3.4-13
+"xfun" 0.25
+"rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023)
+"ReIns" 1.4-1 (1.0.10)
+"dplyr" 1.0.7 
+```
 
 ##### Representaciones
+
+Las representaciones generadas con las capas base de ejemplo ubicadas dentro de este repositorio son ejemplos del código usado, no versiones finales, por lo que las representaciones númericas, gráficas y geográficas no coinciden con los presentados en el proyecto SIM-SINAP. Revise los documentos en la carpeta anexos para encontrar enlaces a versiones finales.
 
 ```
 "sf" version 1.0-2

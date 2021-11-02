@@ -1,3 +1,7 @@
+# Representaciones
+# Las representaciones con las capas base de ejemplo del repositorio son ejemplos, no versiones finales por lo que 
+# las representaciones graficas y geograficas no coinciden con los presentados en el proyecto SIM-SINAP.
+
 library("sf")
 library("rgdal")
 library("raster")
@@ -13,12 +17,13 @@ options(warn = -1)
 
 # 1. Shapefile utiles
 
-col_sf <- read_sf("rep_distspp_otros/Nacional/Colombia_FINAL.shp")
+col_sf <- read_sf("capas_base_ejemplos/Nacional/Colombia_FINAL.shp")
 
-RUNAP_1990_shp <- read_sf("rep_distspp_otros/RUNAP_shp/RUNAP_1990.shp")
-RUNAP_2000_shp <- read_sf("rep_distspp_otros/RUNAP_shp/RUNAP_2000.shp")
-RUNAP_2010_shp <- read_sf("rep_distspp_otros/RUNAP_shp/RUNAP_2010.shp")
-RUNAP_2020_shp <- read_sf("rep_distspp_otros/RUNAP_shp/RUNAP_2020.shp")
+RUNAP_1990_shp <- read_sf("capas_base_ejemplos/RUNAP_shapefiles/RUNAP_1990.shp")
+RUNAP_2010_shp <- read_sf("capas_base_ejemplos/RUNAP_shapefiles/RUNAP_2010.shp")
+
+
+dir.create("productos/rep_distspp/")
 
 # 2. Cambio en el porcentaje de representatividad distribución de especies
 
@@ -26,24 +31,24 @@ RUNAP_2020_shp <- read_sf("rep_distspp_otros/RUNAP_shp/RUNAP_2020.shp")
 #   2.1 Nacional
 #     A. numerica
 
-dir.create("rep_distspp/rep_num")
+dir.create("productos/rep_distspp/rep_num")
 
-tiempos <- c(1990, 2000, 2010, 2020) %>% as.data.frame()
+tiempos <- c(1990, 2010) %>% as.data.frame()
 
 rep_distSpp_Nal <- data.frame(tiempos, rep_distSpp_Nal, Delta_rep_distSpp_Nal)
 
 colnames(rep_distSpp_Nal) <- c("Periodo", "rep_distSpp_Nal", "Delta_rep_distSpp_Nal")
 
-write.csv(rep_distSpp_Nal, "rep_distspp/rep_num/rep_distSpp_Nal.csv", row.names = F)
+write.csv(rep_distSpp_Nal, "productos/rep_distspp/rep_num/rep_distSpp_Nal.csv", row.names = F)
 
 
 #     B. grafica
 
-dir.create("rep_distspp/rep_gra")
+dir.create("productos/rep_distspp/rep_gra")
 
 # porcentaje representatividad
 
-jpeg("rep_distspp/rep_gra/rep_distSpp_Nal.jpg", res = c(300,300), width = 2480, height = 2480)
+jpeg("productos/rep_distspp/rep_gra/rep_distSpp_Nal.jpg", res = c(300,300), width = 2480, height = 2480)
 repr_plot<- ggplot(rep_distSpp_Nal, aes(factor(Periodo), rep_distSpp_Nal, color = Periodo)) +
   geom_line(color="red", aes(group=1)) +
   ylim(c(0,100))+
@@ -56,7 +61,7 @@ dev.off()
 
 # deltas del porcentaje de representatividad
 
-jpeg("rep_distspp/rep_gra/drep_distSpp_Nal.jpg", res = c(300,300), width = 2480, height = 2480)
+jpeg("productos/rep_distspp/rep_gra/drep_distSpp_Nal.jpg", res = c(300,300), width = 2480, height = 2480)
 repr_plot<- ggplot(rep_distSpp_Nal, aes(factor(Periodo), Delta_rep_distSpp_Nal, color = Periodo)) +
   geom_line(color="red", aes(group=1)) +
   ylim(c(-5,20))+
@@ -70,10 +75,12 @@ dev.off()
 
 #     C. geografica
 
-dir.create("rep_distspp/rep_geo/NACIONAL", showWarnings = F)
+dir.create("productos/rep_distspp/rep_geo", showWarnings = F)
 
-rep_distSpp_xAps <- list(rep_distSpp_1990$raster_rep_distrSpp, rep_distSpp_2000$raster_rep_distrSpp,
-                         rep_distSpp_2010$raster_rep_distrSpp, rep_distSpp_2020$raster_rep_distrSpp)
+dir.create("productos/rep_distspp/rep_geo/NACIONAL", showWarnings = F)
+
+rep_distSpp_xAps <- list(rep_distSpp_1990$raster_rep_distrSpp,
+                         rep_distSpp_2010$raster_rep_distrSpp)
 
 # Mapas del porcentaje por periodo
 
@@ -98,7 +105,7 @@ for(i in 1:nrow(tiempos)){ # el desencadenante son el numero de años que se usa
   cols <- RdYlGn(5)
   names(cols) <- c("0-20", "20-40", "40-60", "60-80", "80-100")
   
-  tiff(paste0("rep_distspp/rep_geo/NACIONAL/rep_distSpp_", tiempos[i, 1], ".tif"), res = c(300,300), 
+  tiff(paste0("productos/rep_distspp/rep_geo/NACIONAL/rep_distSpp_", tiempos[i, 1], ".tif"), res = c(300,300), 
        width = 2480, height = 3508, compression = "lzw")
   plot_datai <- ggplot() +
     geom_sf(data = col_sf, fill = "transparent", color = "gray20") +
@@ -117,11 +124,11 @@ for(i in 1:nrow(tiempos)){ # el desencadenante son el numero de años que se usa
 
 # Mapas de deltas
 
-drep_distSpp_xAps <- list(drep_distSpp_AP_1990_2000, drep_distSpp_AP_2000_2010, drep_distSpp_AP_2010_2020)
+drep_distSpp_xAps <- list(drep_distSpp_AP_1990_2010)
 
-runaps_shps <- list(RUNAP_2000_shp, RUNAP_2010_shp, RUNAP_2020_shp) # lista de runaps sin el primer año
+runaps_shps <- list(RUNAP_2010_shp) # lista de runaps sin el primer año
 
-periodos <- c("1990-2000", "2000-2010", "2010-2020")
+periodos <- c("1990-2010")
 
 
 for(i in 1:length(drep_distSpp_xAps)){
@@ -151,10 +158,10 @@ for(i in 1:length(drep_distSpp_xAps)){
   
   runap_sf <- runaps_shps[[i]]
   
-  tiff(paste0("rep_distspp/rep_geo/NACIONAL/drep_distspp_", periodos[i], ".tif"), res = c(300,300), 
+  tiff(paste0("productos/rep_distspp/rep_geo/NACIONAL/drep_distspp_", periodos[i], ".tif"), res = c(300,300), 
        width = 2480, height = 3508, compression = "lzw")
   plotdatai <- ggplot() +
-    geom_sf(data = runap_sf, fill = "transparent", color = "gray90") +
+    geom_sf(data = st_transform(runap_sf, st_crs(col_sf)), fill = "transparent", color = "gray90") +
     geom_sf(data = col_sf, fill = "transparent", color = "gray20") +
     geom_raster(data = info_rasdistSpp_df , aes(x = x, y = y, fill = drasdistSpp_cat))+
     scale_fill_manual(values = cols, name = paste0("Cambio en el porcentaje \n de representatividad ecologica\nDistribución de especies\n", periodos[i]))+
@@ -175,55 +182,55 @@ for(i in 1:length(drep_distSpp_xAps)){
 #     A. numerica
 
 
-write.csv(rep_distSpp_Terr_res, "rep_distspp/rep_num/drep_distSpp_Ter.csv", row.names = T)
+write.csv(rep_distSpp_Terr_res, "productos/rep_distspp/rep_num/drep_distSpp_Ter.csv", row.names = T)
 
 terr_nombres_small <- c("Amazonia", "Andes_Noro", "Andes_Occ", "Caribe", "Orinoquia", "Pacifico")
 
 #     B. grafica
 
 # porcentaje representatividad
-jpeg("rep_distspp/rep_gra/rep_distSpp_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
+jpeg("productos/rep_distspp/rep_gra/rep_distSpp_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
   par(mfrow=c(3,2))
-  plot(rep_distSpp_Terr_res[1, c(1:4)], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[1, c(1:2)], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
        xlab="Año", xaxt= "n", ylab="Representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[2, c(1:4)], type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[2, c(1:2)], type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[3, c(1:4)], type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[3, c(1:2)], type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[4, c(1:4)], type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[4, c(1:2)], type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[5, c(1:4)], type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[5, c(1:2)], type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[6, c(1:4)], type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[6, c(1:2)], type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Porcentaje representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
 dev.off()
 
 
 # deltas en el porcentaje representatividad
-jpeg("rep_distspp/rep_gra/drep_distSpp_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
+jpeg("productos/rep_distspp/rep_gra/drep_distSpp_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
   par(mfrow=c(3,2))
-  plot(rep_distSpp_Terr_res[1, c(5:8)], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[1, c(3:4)], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
        xlab="Año", xaxt= "n", ylab="Cambio representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[2, c(5:8)], type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[2, c(3:4)], type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Cambio representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[3, c(5:8)], type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[3, c(3:4)], type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Cambio representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[4, c(5:8)], type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[4, c(3:4)], type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Cambio representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[5, c(5:8)], type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[5, c(3:4)], type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Cambio representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-  plot(rep_distSpp_Terr_res[6, c(5:8)], type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
+  plot(rep_distSpp_Terr_res[6, c(3:4)], type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
        xlab="Año", xaxt= "n",  ylab="Cambio representatividad (%)")
   axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
 dev.off()
@@ -231,7 +238,7 @@ dev.off()
 
 #     C. geografica
 
-dir.create("rep_distspp/rep_geo/TERRITORIALES", showWarnings = F)
+dir.create("productos/rep_distspp/rep_geo/TERRITORIALES", showWarnings = F)
 
 # unir datos con shapefile
 
@@ -263,7 +270,7 @@ for(i in 1:nrow(tiempos)){ # el desencadenante son el numero de años que se usa
   cols <- RdYlGn(7)
   names(cols) <- c("0—10", "10—20", "20—30", "30—40", "40—50", "50—60", "60—70")
   
-  tiff(paste0("rep_distspp/rep_geo/TERRITORIALES/rep_", tiempos[i, 1], ".tif"), res = c(300,300), 
+  tiff(paste0("productos/rep_distspp/rep_geo/TERRITORIALES/rep_", tiempos[i, 1], ".tif"), res = c(300,300), 
        width = 2480, height = 3508, compression = "lzw")
   plot_datai <- ggplot() +
     geom_sf(data = col_sf, fill = "transparent", color = "grey25", linetype = "dashed")+
@@ -300,7 +307,7 @@ for(i in 1:length(periodos)){
   cols <- RdYlGn(6)
   names(cols) <- c("-5—0", "0—5", "5—10", "10—15", "15—20", "20—25")
   
-  tiff(paste0("rep_distspp/rep_geo/TERRITORIALES/dreps_", periodos[i], ".tif"), res = c(300,300), 
+  tiff(paste0("productos/rep_distspp/rep_geo/TERRITORIALES/dreps_", periodos[i], ".tif"), res = c(300,300), 
        width = 2480, height = 3508, compression = "lzw")
   plot_datai <- ggplot() +
     geom_sf(data = col_sf, fill = "transparent", color = "grey25", linetype = "dashed")+
@@ -319,7 +326,7 @@ for(i in 1:length(periodos)){
 
 nombre_corto <- c("Amazonia", "AndesNoro", "AndesOcc", "Caribe", "Orinoquia", "Pacifico")
 
-runaps_sf <- list(RUNAP_1990_shp, RUNAP_2000_shp, RUNAP_2010_shp, RUNAP_2020_shp )
+runaps_sf <- list(RUNAP_1990_shp, RUNAP_2010_shp)
 
 for(i in 1:length(Territoriales@data$nombre)){
   
@@ -327,20 +334,20 @@ for(i in 1:length(Territoriales@data$nombre)){
   
   #  A. numerica
   
-  dir.create(paste0("rep_distspp/rep_num/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+  dir.create(paste0("productos/rep_distspp/rep_num/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
   
   
-  res_territorial_i <- cbind(tiempos, rep_distSpp_Terr_res[i, 1:4], rep_distSpp_Terr_res[i, 5:8]) %>% as.data.frame()
+  res_territorial_i <- cbind(tiempos, rep_distSpp_Terr_res[i, 1:2], rep_distSpp_Terr_res[i, 3:4]) %>% as.data.frame()
   colnames(res_territorial_i) <- c("Periodo", "rep_distSpp", "drep_distSpp")
   
-  write.csv(res_territorial_i, paste0("rep_distspp/rep_num/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], ".csv"), 
+  write.csv(res_territorial_i, paste0("productos/rep_distspp/rep_num/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], ".csv"), 
             row.names = F)
   
   #     B. grafica
 
-  dir.create(paste0("rep_distspp/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+  dir.create(paste0("productos/rep_distspp/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
   
-  jpeg(paste0("rep_distspp/rep_gra/TERRITORIALES_INDIVIDUAL/drep_distSpp_", nombre_corto[i], ".jpg"), res = c(300,300),
+  jpeg(paste0("productos/rep_distspp/rep_gra/TERRITORIALES_INDIVIDUAL/drep_distSpp_", nombre_corto[i], ".jpg"), res = c(300,300),
        width = 2480, height = 2480)
   repr_plot<- ggplot(res_territorial_i, aes(factor(Periodo), drep_distSpp, color = Periodo)) +
     geom_line(color="red", aes(group = 1))+
@@ -383,11 +390,11 @@ for(i in 1:length(Territoriales@data$nombre)){
     
     Territorial_i_sf <- st_as_sf(Territorial_i)
     
-    dir.create(paste0("rep_distspp/rep_geo/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
-    dir.create(paste0("rep_distspp/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i]), showWarnings = F)
+    dir.create(paste0("productos/rep_distspp/rep_geo/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+    dir.create(paste0("productos/rep_distspp/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i]), showWarnings = F)
     
     
-    tiff(paste0("rep_distspp/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", "rep_distSpp_", tiempos[a, 1],
+    tiff(paste0("productos/rep_distspp/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", "rep_distSpp_", tiempos[a, 1],
                 ".tif"), res = c(300,300), width = 2480, height = 2480, compression = "lzw")
     plot_datai <- ggplot() +
       geom_sf(data = Territorial_i_sf, fill = "transparent", color = "gray20") +
@@ -430,10 +437,10 @@ for(i in 1:length(Territoriales@data$nombre)){
                      "0 - 10", "10 - 20", "20 - 30", "30 - 40",
                      "40 - 50", "50 - 60", "60 - 70", "70 - 80")
      
-    runap_sf <- runaps_sf[[b]]
+    runap_sf <- runaps_sf[[b]] %>%  st_transform(st_crs(Territorial_i_sf))
     runap_sf <- runap_sf[Territorial_i_sf, ]
     
-    tiff(paste0("rep_distspp/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", "drep_distSpp", periodos[b],
+    tiff(paste0("productos/rep_distspp/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", "drep_distSpp", periodos[b],
     ".tif"), res = c(300,300), 
           width = 2480, height = 3508, compression = "lzw")
     plotdatai <- ggplot() +

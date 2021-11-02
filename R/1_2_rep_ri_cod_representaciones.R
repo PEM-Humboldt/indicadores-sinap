@@ -12,7 +12,7 @@ library("heatmaply")
 library("maptools")
 
 # cargar objetos creados con el script operativo
-load("productos/rep_ri/rep_ri_objetos_operativo.RData")
+# load("productos/rep_ri/rep_ri_objetos_operativo.RData")
 
 # 1. Cargar shapefiles utiles
 
@@ -249,7 +249,6 @@ dev.off()
 
 # C. Representacion geografica
 
-
 for(i in 1:length(tiempos)){
   
   print(tiempos[i])
@@ -409,8 +408,6 @@ for(i in 1:length(tiempos)){
 
 # 2.3 Territorial individual
 
-### OJO AQUI FINALIXE DE AJUSTAR #####
-
 for(i in 1:length(terr@data$nombre)){
   
   print(colnames(dat_rep_ri_terr)[i])
@@ -445,7 +442,7 @@ for(i in 1:length(terr@data$nombre)){
   
     
   jpeg(paste0("productos/rep_ri/rep_gra/TERRITORIALES_INDIVIDUAL/Repre_riqueza_", nombre_corto[i], ".jpg"), res = c(300,300), width = 2480, height = 2480)
-  repr_plot<- ggplot(Repre_totali, aes(factor(tiempos), Rep_terri, color = tiempos)) +
+  repr_plot<- ggplot(Repre_totali, aes(factor(tiempos), SIRAP, color = tiempos)) +
     geom_boxplot(color = "black") +
     geom_smooth(method = "auto", se=FALSE, color="red", aes(group=1)) +
     geom_hline(yintercept = 100, color = "red", linetype = "dashed")+
@@ -460,16 +457,16 @@ for(i in 1:length(terr@data$nombre)){
   
   print("geografica")
   
+  dir.create("productos/rep_ri/rep_geo/TERRITORIALES_INDIVIDUAL/", showWarnings = F)
+  
   # territoriales small  
   terr_small <- terr[terr@data$nombre == colnames(dat_rep_ri_terr)[i], ] %>% 
     st_as_sf()
   
   # Shape colombia oficial
   col_small_sf <- shapefile("capas_base_ejemplos/Nacional/Colombia_FINAL.shp") %>% 
-    spTransform(CRS("+init=epsg:4326")) %>% crop(terr_small) %>% 
-    st_as_sf()
-  
-  extent(terr_small)
+                  crop(terr_small) %>% 
+                  st_as_sf()
   
   # preparacion de carpetas
   dir.create(paste0("productos/rep_ri/rep_geo/TERRITORIALES_INDIVIDUAL/", 
@@ -553,7 +550,7 @@ for(i in 1:length(terr@data$nombre)){
   dir.create(paste0("productos/rep_ri/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
   
   jpeg(paste0("productos/rep_ri/rep_gra/TERRITORIALES_INDIVIDUAL/Diferencia_internanual_", nombre_corto[i],".jpg"), res = c(300,300), width = 2480, height = 2480)
-  repr_plot_diff <- ggplot(Acumacion_totali, aes(factor(tiempo.periodo), tasa.increm.i, color = tiempo.periodo)) +
+  repr_plot_diff <- ggplot(Acumacion_totali, aes(factor(tiempo.periodo), SIRAP, color = tiempo.periodo)) +
     geom_boxplot(color = "black") +
     geom_smooth(method = "loess", se=FALSE, color="red", aes(group=1)) +
     ylim(c(-21,21))+

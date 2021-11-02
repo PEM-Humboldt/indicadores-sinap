@@ -1,3 +1,7 @@
+# Representaciones
+# Las representaciones con las capas base de ejemplo del repositorio son ejemplos, no versiones finales por lo que 
+# las representaciones graficas y geograficas no coinciden con los presentados en el proyecto SIM-SINAP.
+
 library("sf")
 library("rgdal")
 library("raster")
@@ -13,7 +17,7 @@ options(warn = -1)
 
 # 1. Shapefile utiles
 
-col_sf <- read_sf("rep_fun_otros/Nacional/Colombia_FINAL.shp")
+col_sf <- read_sf("capas_base_ejemplos/Nacional/Colombia_FINAL.shp")
 
 # 2. Cambio en la media de integridad
 
@@ -21,20 +25,24 @@ col_sf <- read_sf("rep_fun_otros/Nacional/Colombia_FINAL.shp")
 #   2.1 Nacional
 #     A. numerica
 
-tiempos <- c(1990, 2000, 2010, 2020) %>% as.data.frame()
+dir.create("productos/rep_func/rep_num")
+
+tiempos <- c(1990, 2010) %>% as.data.frame()
 
 Integ_table <- data.frame(tiempos, Integ_Nal, Delta_Integ_Nal)
 
 colnames(Integ_table) <- c("Periodo", "Integ_Nal", "Delta_Integ_Nal")
 
-write.csv(Integ_table, "rep_func/rep_num/dInteg_Nal.csv", row.names = F)
+write.csv(Integ_table, "productos/rep_func/rep_num/dInteg_Nal.csv", row.names = F)
 
 
 #     B. grafica
 
 # medias de integridad
 
-jpeg("rep_func/rep_gra/Repre_integ_Sist_AP.jpg", res = c(300,300), width = 2480, height = 2480)
+dir.create("productos/rep_func/rep_gra")
+
+jpeg("productos/rep_func/rep_gra/Repre_integ_Sist_AP.jpg", res = c(300,300), width = 2480, height = 2480)
 repr_plot<- ggplot(Integ_table, aes(factor(Periodo), Integ_Nal, color = Periodo)) +
   geom_line(color="red", aes(group=1)) +
   ylim(c(0,1))+
@@ -46,7 +54,7 @@ dev.off()
 
 
 # deltas de integridad
-jpeg("rep_func/rep_gra/Repre_dinteg_Sist_AP.jpg", res = c(300,300), width = 2480, height = 2480)
+jpeg("productos/rep_func/rep_gra/Repre_dinteg_Sist_AP.jpg", res = c(300,300), width = 2480, height = 2480)
 repr_plot<- ggplot(Integ_table, aes(factor(Periodo), Delta_Integ_Nal, color = Periodo)) +
   geom_line(color="red", aes(group=1)) +
   ylim(c(-0.1,0.1))+
@@ -60,10 +68,11 @@ dev.off()
 
 #     C. geografica
 
-dir.create("rep_func/rep_geo/NACIONAL", showWarnings = F)
+dir.create("productos/rep_func/rep_geo", showWarnings = F)
 
-Inte_xAps <- list(Integ2000_1990_AP$ras1, Integ2000_1990_AP$ras2, Integ2010_2000_AP$ras2, 
-                   Integ2020_2010_AP$ras2)
+dir.create("productos/rep_func/rep_geo/NACIONAL", showWarnings = F)
+
+Inte_xAps <- list(Integ2010_1990_AP$ras1, Integ2010_1990_AP$ras2)
 
 # cada objeto dInte_xAps guarda: 
 # 1. shp_dInteg_tiempo2, shapefile en donde se guardan los deltas de la media de integridad por Ap entre
@@ -90,7 +99,7 @@ for(i in 1:nrow(tiempos)){ # el desencadenante son el numero de años que se usa
   
   cols <- RdYlGn(4)
   
-  tiff(paste0("rep_func/rep_geo/NACIONAL/Integ_", tiempos[i, 1], ".tif"), res = c(300,300), 
+  tiff(paste0("productos/rep_func/rep_geo/NACIONAL/Integ_", tiempos[i, 1], ".tif"), res = c(300,300), 
        width = 2480, height = 3508, compression = "lzw")
   plot_datai <- ggplot() +
     geom_sf(data = col_sf, fill = "transparent", color = "gray20") +
@@ -105,11 +114,10 @@ for(i in 1:nrow(tiempos)){ # el desencadenante son el numero de años que se usa
 
 # Mapas de deltas
 
-dInte_xAps <- list(Integ2000_1990_AP$raster_dInteg_tiempo, Integ2010_2000_AP$raster_dInteg_tiempo,
-                   Integ2020_2010_AP$raster_dInteg_tiempo)
-runaps_shps <- list(RUNAP_shp_2000, RUNAP_shp_2010, RUNAP_shp_2020) # lista de runaps sin el primer año
+dInte_xAps <- list(Integ2010_1990_AP$raster_dInteg_tiempo)
+runaps_shps <- list(RUNAP_shp_2010) # lista de runaps sin el primer año
 
-periodos <- c("1990-2000", "2000-2010", "2010-2020")
+periodos <- c("1990-2010")
 
 
 for(i in 1:length(dInte_xAps)){
@@ -133,7 +141,7 @@ for(i in 1:length(dInte_xAps)){
   runap_sf <- runaps_shps[[i]]  %>% spTransform(crs(col_sf)) %>% st_as_sf()
   runap_sf <- runap_sf[col_sf, ]
   
-  tiff(paste0("rep_func/rep_geo/NACIONAL/dInteg_", periodos[i], ".tif"), res = c(300,300), 
+  tiff(paste0("productos/rep_func/rep_geo/NACIONAL/dInteg_", periodos[i], ".tif"), res = c(300,300), 
        width = 2480, height = 3508, compression = "lzw")
   plotdatai <- ggplot() +
     geom_sf(data = runap_sf, fill = "transparent", color = "gray90") +
@@ -157,57 +165,57 @@ for(i in 1:length(dInte_xAps)){
 #     A. numerica
 
 
-write.csv(Integ_Terr_res, "rep_func/rep_num/dInteg_Ter.csv", row.names = T)
+write.csv(Integ_Terr_res, "productos/rep_func/rep_num/dInteg_Ter.csv", row.names = T)
 
 terr_nombres_small <- c("Amazonia", "Andes_Noro", "Andes_Occ", "Caribe", "Orinoquia", "Pacifico")
 
 #     B. grafica
 
 # medias
-jpeg("rep_func/rep_gra/Integ_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
+jpeg("productos/rep_func/rep_gra/Integ_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
 par(mfrow=c(3,2))
-plot(Integ_Terr_res[1, c(1:4)], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
+plot(Integ_Terr_res[1, c(1:2)], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
      xlab="Año", xaxt= "n", ylab="Cambio integridad (Q)")
 axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[2, c(1:4)], type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
+plot(Integ_Terr_res[2, c(1:2)], type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
      xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
 axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[3, c(1:4)], type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
+plot(Integ_Terr_res[3, c(1:2)], type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
      xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
 axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[4, c(1:4)], type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
+plot(Integ_Terr_res[4, c(1:2)], type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
      xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
 axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[5, c(1:4)], type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
+plot(Integ_Terr_res[5, c(1:2)], type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
      xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
 axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[6, c(1:4)], type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
+plot(Integ_Terr_res[6, c(1:2)], type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
      xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
 axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
 dev.off()
 
 
 # deltas
-jpeg("rep_func/rep_gra/dInteg_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
-par(mfrow=c(3,2))
-plot(Integ_Terr_res[1, c(5:8)], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
-     xlab="Año", xaxt= "n", ylab="Cambio integridad (Q)")
-axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[2, c(5:8)], type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
-     xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
-axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[3, c(5:8)], type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
-     xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
-axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[4, c(5:8)], type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
-     xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
-axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[5, c(5:8)], type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
-     xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
-axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
-plot(Integ_Terr_res[6, c(5:8)], type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
-     xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
-axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
+jpeg("productos/rep_func/rep_gra/dInteg_territoriales.jpg", res = c(300,300), width = 3508, height = 2480)
+  par(mfrow=c(3,2))
+  plot(Integ_Terr_res[1, c(3:4)], type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
+       xlab="Año", xaxt= "n", ylab="Cambio integridad (Q)")
+  axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
+  plot(Integ_Terr_res[2, c(3:4)], type= "l", main="Direccion Territorial Andes Nororientales", sub="RUNAP",
+       xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
+  axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
+  plot(Integ_Terr_res[3, c(3:4)], type= "l", main="Direccion Territorial Andes Occidentales", sub="RUNAP",
+       xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
+  axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
+  plot(Integ_Terr_res[4, c(3:4)], type= "l", main="Direccion Territorial Caribe", sub="RUNAP",
+       xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
+  axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
+  plot(Integ_Terr_res[5, c(3:4)], type= "l", main="Direccion Territorial Orinoquia", sub="RUNAP",
+       xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
+  axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
+  plot(Integ_Terr_res[6, c(3:4)], type= "l", main="Direccion Territorial Pacifico", sub="RUNAP",
+       xlab="Año", xaxt= "n",  ylab="Cambio integridad (Q)")
+  axis(side = 1, at = 1:nrow(tiempos), labels = tiempos[ , 1])
 dev.off()
 
 
@@ -219,6 +227,7 @@ dir.create("rep_func/rep_geo/TERRITORIALES", showWarnings = F)
 
 Territoriales@data <- cbind(Territoriales@data, Integ_Terr_res)
 
+dir.create("productos/rep_func/rep_geo/TERRITORIALES")
 
 # Mapas de la media
 
@@ -245,7 +254,7 @@ for(i in 1:nrow(tiempos)){ # el desencadenante son el numero de años que se usa
   cols <- RdYlGn(5)
   names(cols) <- c("0—0.2", "0.2—0.4", "0.4—0.6", "0.6—0.8", "0.8—1")
   
-  tiff(paste0("rep_func/rep_geo/TERRITORIALES/Integ_", tiempos[i, 1], ".tif"), res = c(300,300), 
+  tiff(paste0("productos/rep_func/rep_geo/TERRITORIALES/Integ_", tiempos[i, 1], ".tif"), res = c(300,300), 
        width = 2480, height = 3508, compression = "lzw")
   plot_datai <- ggplot() +
     geom_sf(data = col_sf, fill = "transparent", color = "grey25", linetype = "dashed")+
@@ -258,12 +267,11 @@ for(i in 1:nrow(tiempos)){ # el desencadenante son el numero de años que se usa
   dev.off()
 }
 
-
 # Mapas de deltas
 
 for(i in 1:length(dInte_xAps)){
   
-  tiempo.chr <- tiempos[i+1,1] %>% as.character()
+  tiempo.chr <- tiempos[i+1, 1] %>% as.character()
   
   targetAll <- colnames(Territoriales@data)
   
@@ -281,7 +289,7 @@ for(i in 1:length(dInte_xAps)){
   cols <- RdYlGn(2)
   names(cols) <- c("Negativo", "Positivo o Constante")
   
-  tiff(paste0("rep_func/rep_geo/TERRITORIALES/dInteg_", periodos[i], ".tif"), res = c(300,300), 
+  tiff(paste0("productos/rep_func/rep_geo/TERRITORIALES/dInteg_", periodos[i], ".tif"), res = c(300,300), 
        width = 2480, height = 3508, compression = "lzw")
   plot_datai <- ggplot() +
     geom_sf(data = col_sf, fill = "transparent", color = "grey25", linetype = "dashed")+
@@ -306,20 +314,20 @@ for(i in 1:length(Territoriales@data$nombre)){
   
   #  A. numerica
   
-  dir.create(paste0("rep_func/rep_num/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+  dir.create(paste0("productos/rep_func/rep_num/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
   
   
-  res_territorial_i <- cbind(tiempos, Integ_Terr_res[i, 1:4], Integ_Terr_res[i, 5:8]) %>% as.data.frame()
+  res_territorial_i <- cbind(tiempos, Integ_Terr_res[i, 1:2], Integ_Terr_res[i, 3:4]) %>% as.data.frame()
   colnames(res_territorial_i) <- c("Periodo", "Integ_terr", "dinteg_terr")
   
-  write.csv(Integ_table, paste0("rep_func/rep_num/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], ".csv"), 
+  write.csv(Integ_table, paste0("productos/rep_func/rep_num/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], ".csv"), 
             row.names = F)
   
   #     B. grafica
 
-  dir.create(paste0("rep_func/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+  dir.create(paste0("productos/rep_func/rep_gra/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
   
-  jpeg(paste0("rep_func/rep_gra/TERRITORIALES_INDIVIDUAL/Repre_dinteg_", nombre_corto[i], ".jpg"), res = c(300,300),
+  jpeg(paste0("productos/rep_func/rep_gra/TERRITORIALES_INDIVIDUAL/Repre_dinteg_", nombre_corto[i], ".jpg"), res = c(300,300),
        width = 2480, height = 2480)
   repr_plot<- ggplot(res_territorial_i, aes(factor(Periodo), dinteg_terr, color = Periodo)) +
     geom_line(color="red", aes(group=1))+
@@ -352,11 +360,11 @@ for(i in 1:length(Territoriales@data$nombre)){
     
     Territorial_i_sf <- st_as_sf(Territorial_i)
     
-    dir.create(paste0("rep_func/rep_geo/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
-    dir.create(paste0("rep_func/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i]), showWarnings = F)
+    dir.create(paste0("productos/rep_func/rep_geo/TERRITORIALES_INDIVIDUAL"), showWarnings = F)
+    dir.create(paste0("productos/rep_func/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i]), showWarnings = F)
     
     
-    tiff(paste0("rep_func/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", "Integ_", tiempos[a, 1],
+    tiff(paste0("productos/rep_func/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", "Integ_", tiempos[a, 1],
                 ".tif"), 
          res = c(300,300), width = 2480, height = 2480, compression = "lzw")
     plot_dataa <- ggplot() +
@@ -396,7 +404,7 @@ for(i in 1:length(Territoriales@data$nombre)){
      runap_sf <- runap_sf[Territorial_i_sf, ]
      
      
-     tiff(paste0("rep_func/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", "dInteg_", periodos[b],
+     tiff(paste0("productos/rep_func/rep_geo/TERRITORIALES_INDIVIDUAL/", nombre_corto[i], "/", "dInteg_", periodos[b],
      ".tif"), res = c(300,300), 
           width = 2480, height = 3508, compression = "lzw")
      plotdatai <- ggplot() +

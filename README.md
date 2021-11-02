@@ -15,7 +15,7 @@ En desarrollo.
 
 Librerias requeridas y sus versiones por cada indicador
 
-1. Representatividad ecológica: Riqueza de especies 
+1. Porcentaje y cambio de la representatividad de la riqueza de especies del SINAP
 
 ```
 "dismo" 1.3-3
@@ -26,7 +26,7 @@ Librerias requeridas y sus versiones por cada indicador
 "dplyr" 1.0.7
 ```
 
-2. Representatividad ecológica: distribución de especies
+2. Cambio en el porcentaje de representatividad ecológica del SINAP - Distribución de Especies
 
 ```
 "SpaDES" 2.0.7
@@ -37,9 +37,20 @@ Librerias requeridas y sus versiones por cada indicador
 "dplyr" 1.0.7 
 ```
 
+3. Cambio en la media de la representatividad de integridad estructural del SINAP	
+
+```
+"sf" 1.0-2
+"raster" 3.4-13
+"rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023)
+"dplyr" 1.0.7 
+```
+
+
+
 ##### Representaciones
 
-Las representaciones generadas con las capas base de ejemplo ubicadas dentro de este repositorio son ejemplos del código usado, no versiones finales, por lo que las representaciones númericas, gráficas y geográficas no coinciden con los presentados en el proyecto SIM-SINAP. Revise los documentos en la carpeta anexos para encontrar enlaces a versiones finales.
+Dentro del contexto del proyecto SIM-SINAP las representaciones númericas, gráficas y geográficas hace alusión a tablas, graficas y mapas respectivamente. Las representaciones generadas con las capas base de ejemplo ubicadas dentro de este repositorio son ejemplos de las reales, no versiones finales, por lo que tales representaciones no coinciden con los presentados en el proyecto SIM-SINAP. Revise los documentos en la carpeta anexos para encontrar enlaces a versiones finales.
 
 ```
 "sf" version 1.0-2

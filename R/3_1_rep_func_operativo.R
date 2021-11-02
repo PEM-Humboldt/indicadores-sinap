@@ -1,16 +1,19 @@
+# Cambio en la media de la representatividad de integridad estructural del SINAP	
+
 #________________________________________#
 # Codigo escrito por Felipe Suarez       #
 # Version :  01-07-2020                  #
 #________________________________________#
 #                                        #
 # Revisado y modificado por Carlos Munoz #
-# Agosto-Octubre de 2021                         #
+# Agosto-Octubre de 2021                 #
 #________________________________________#
 
 library(raster)
 library(rgdal)
 library(sf)
 library(dplyr)
+
 options(warn = -1)
 # load("rep_func_cod/rep_func_objetos_operativo.RData")
 
@@ -18,21 +21,17 @@ options(warn = -1)
 # 1.1 Cargar Huella humana Colombia
 # El mapa de huella humana a utilizar varia según el año a analizar, 2018 se usa como base para 2020
 
-human.footprint_1990 <- raster("rep_fun_capas_base/Huella_humana/IHEH_1990.tif")
-human.footprint_2000 <- raster("rep_fun_capas_base/Huella_humana/IHEH_2000.tif")
-human.footprint_2010 <- raster("rep_fun_capas_base/Huella_humana/IHEH_2010.tif")
-human.footprint_2020 <- raster("rep_fun_capas_base/Huella_humana/IHEH_2018.tif")
+human.footprint_1990 <- raster("capas_base_ejemplos/HuellaHumana/HH1990.tif")
+human.footprint_2010 <- raster("capas_base_ejemplos/HuellaHumana/HH2010.tif")
 
 # 1.2 Cargar archivo shapefile del RUNAP, en este caso se refiere a 2010 y 2020
 
-RUNAP_shp_1990 <- readOGR("rep_fun_capas_base/RUNAP_proj/RUNAP_1990.shp") %>% spTransform(crs(human.footprint_1990))
-RUNAP_shp_2000 <- readOGR("rep_fun_capas_base/RUNAP_proj/RUNAP_2000.shp") %>% spTransform(crs(human.footprint_2000))
-RUNAP_shp_2010 <- readOGR("rep_fun_capas_base/RUNAP_proj/RUNAP_2010.shp") %>% spTransform(crs(human.footprint_2010))
-RUNAP_shp_2020 <- readOGR("rep_fun_capas_base/RUNAP_proj/RUNAP_2020.shp") %>% spTransform(crs(human.footprint_2020))
+RUNAP_shp_1990 <- readOGR("capas_base_ejemplos/RUNAP_shapefiles/RUNAP_1990.shp") %>% spTransform(crs(human.footprint_1990))
+RUNAP_shp_2010 <- readOGR("capas_base_ejemplos/RUNAP_shapefiles/RUNAP_2010.shp") %>% spTransform(crs(human.footprint_2010))
 
 # 1.3 Cargar archivo shapefiile Territorial
 
-Territoriales <- readOGR("rep_fun_capas_base/Territorial/Territoriales_final.shp")
+Territoriales <- readOGR("capas_base_ejemplos/Territorial/Territoriales_final.shp")
 
 # 2. Funciones
 # Cuantifica la integridad de un conjunto de poligonos de areas protegidas (AP).
@@ -303,13 +302,10 @@ delta_IntegAPS <- function(Integ1, tiempo1, Integ2, tiempo2 ){
 
 # 3.1.1 Calcular integridad
 Integ1990 <- IntegAPS(ras.Cal = human.footprint_1990, shp.Areas = RUNAP_shp_1990)
-Integ2000 <- IntegAPS(ras.Cal = human.footprint_2000, shp.Areas = RUNAP_shp_2000)
 Integ2010 <- IntegAPS(ras.Cal = human.footprint_2010, shp.Areas = RUNAP_shp_2010)
-Integ2020 <- IntegAPS(ras.Cal = human.footprint_2020, shp.Areas = RUNAP_shp_2020)
 
 # vector de la media de integridad para cada periodo a nivel nacional
-Integ_Nal <- c(Integ1990$integ_media_total, Integ2000$integ_media_total, Integ2010$integ_media_total,
-               Integ2020$integ_media_total) %>% round(3)
+Integ_Nal <- c(Integ1990$integ_media_total, Integ2010$integ_media_total) %>% round(3)
 
 # diferencia de integridad entre años (indicador)
 Delta_Integ_Nal <- c(0, diff(Integ_Nal)) %>% round(3)
@@ -329,17 +325,6 @@ Integ_Terr_1990 <- lapply(1:nrow(Territoriales), function(x) {
   }
 )
 
-Integ_Terr_2000 <- lapply(1:nrow(Territoriales), function(x) { 
-  #Terrx salida (intermedia)
-  
-  # cortar las areas protegidas a la extension de cada territorial
-  shp.Areas.terrx = rgeos::intersect(RUNAP_shp_2000, Territoriales[x, ])
-  
-  # establecer la integridad y valores asociados por territorial
-  Terrx <- IntegAPS(ras.Cal = human.footprint_2000, shp.Areas = shp.Areas.terrx)
-}
-)
-
 Integ_Terr_2010 <- lapply(1:nrow(Territoriales), function(x) { 
   #Terrx salida (intermedia)
   
@@ -348,17 +333,6 @@ Integ_Terr_2010 <- lapply(1:nrow(Territoriales), function(x) {
   
   # establecer la integridad y valores asociados por territorial
   Terrx <- IntegAPS(ras.Cal = human.footprint_2010, shp.Areas = shp.Areas.terrx)
-}
-)
-
-Integ_Terr_2020 <- lapply(1:nrow(Territoriales), function(x) { 
-  #Terrx salida (intermedia)
-  
-  # cortar las areas protegidas a la extension de cada territorial
-  shp.Areas.terrx = rgeos::intersect(RUNAP_shp_2020, Territoriales[x, ])
-  
-  # establecer la integridad y valores asociados por territorial
-  Terrx <- IntegAPS(ras.Cal = human.footprint_2020, shp.Areas = shp.Areas.terrx)
 }
 )
 
@@ -371,8 +345,7 @@ Integ_Terr_res <- list()
 
 for(i in 1:length(Territoriales)){
   
-  Integ_terri <- c(Integ_Terr_1990[[i]]$integ_media_total, Integ_Terr_2000[[i]]$integ_media_total, 
-                      Integ_Terr_2010[[i]]$integ_media_total, Integ_Terr_2020[[i]]$integ_media_total)
+  Integ_terri <- c(Integ_Terr_1990[[i]]$integ_media_total, Integ_Terr_2010[[i]]$integ_media_total)
   
   Delta_Integ_terri <- c(0, diff(Integ_terri))
   
@@ -383,30 +356,21 @@ for(i in 1:length(Territoriales)){
 
 Integ_Terr_res <- do.call(cbind.data.frame, Integ_Terr_res) %>% t() %>% round(3)
 
-tiempos <- c("1990", "2000", "2010", "2020")
+tiempos <- c("1990", "2010")
 colnames(Integ_Terr_res) <- c(paste0("Integ_", tiempos), paste0("Delta_Integ_", tiempos))
 rownames(Integ_Terr_res) <- Territoriales$nombre
 
 # 3.3 Extraer medias por Area protegida individual y calcular deltas en Q por pixel
 
-dir.create("rep_func_gdb")
+dir.create("productos/rep_func")
+dir.create("productos/rep_func/rep_func_gdb")
 
-Integ2000_1990_AP <- delta_IntegAPS(Integ1 = Integ1990, tiempo1 = "1990", Integ2 = Integ2000, tiempo2 = "2000")
-writeRaster(Integ2000_1990_AP$raster_dInteg_tiempo, "rep_func_gdb/dInteg_2000_1990.tif", overwrite = T)
-writeRaster(Integ2000_1990_AP$ras1, "rep_func_gdb/Integ_1990.tif", overwrite = T)
-writeRaster(Integ2000_1990_AP$ras2, "rep_func_gdb/Integ_2000.tif", overwrite = T)
-shapefile(Integ2000_1990_AP$shp_dInteg_tiempo2, "rep_func_gdb/dInteg_2000_1990.shp", overwrite = T)
+Integ2010_1990_AP <- delta_IntegAPS(Integ1 = Integ1990, tiempo1 = "1990", Integ2 = Integ2010, tiempo2 = "2010")
+writeRaster(Integ2010_1990_AP$raster_dInteg_tiempo, "productos/rep_func/rep_func_gdb/dInteg_2000_1990.tif", overwrite = T)
+writeRaster(Integ2010_1990_AP$ras1, "productos/rep_func/rep_func_gdb/Integ_1990.tif", overwrite = T)
+writeRaster(Integ2010_1990_AP$ras2, "productos/rep_func/rep_func_gdb/Integ_2010.tif", overwrite = T)
+shapefile(Integ2010_1990_AP$shp_dInteg_tiempo2, "productos/rep_func/rep_func_gdb/dInteg_2010_1990.shp", overwrite = T)
 
-
-Integ2010_2000_AP <- delta_IntegAPS(Integ1 = Integ2000, tiempo1 = "2000", Integ2 = Integ2010, tiempo2 = "2010")
-writeRaster(Integ2010_2000_AP$raster_dInteg_tiempo, "rep_func_gdb/dInteg_2010_2000.tif", overwrite = T)
-writeRaster(Integ2010_2000_AP$ras2, "rep_func_gdb/Integ_2010.tif", overwrite = T)
-shapefile(Integ2010_2000_AP$shp_dInteg_tiempo2, "rep_func_gdb/dInteg_2010_2000.shp", overwrite = T)
-
-Integ2020_2010_AP <- delta_IntegAPS(Integ1 = Integ2010, tiempo1 = "2010", Integ2 = Integ2020, tiempo2 = "2020")
-writeRaster(Integ2020_2010_AP$raster_dInteg_tiempo, "rep_func_gdb/dInteg_2020_2010.tif", overwrite = T)
-writeRaster(Integ2020_2010_AP$ras2, "rep_func_gdb/Integ_2020.tif", overwrite = T)
-shapefile(Integ2020_2010_AP$shp_dInteg_tiempo2, "rep_func_gdb/dInteg_2020_2010.shp", overwrite = T)
 
 
 #save(human.footprint_1990, human.footprint_2000, human.footprint_2010, human.footprint_2020, RUNAP_shp_1990,

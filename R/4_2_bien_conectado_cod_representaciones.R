@@ -1,3 +1,7 @@
+# Representaciones
+# Las representaciones con las capas base de ejemplo del repositorio son ejemplos, no versiones finales por lo que 
+# las representaciones graficas y geograficas no coinciden con los presentados en el proyecto SIM-SINAP.
+
 library("sf")
 library("rgdal")
 library("raster")

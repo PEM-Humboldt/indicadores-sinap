@@ -8,7 +8,7 @@ En desarrollo.
 
 ### Dependencias y archivos
 
-* [R](https://cran.r-project.org/mirrors.html) 4.1 o superior
+* [R](https://cran.r-project.org/mirrors.html) 4.1.1 o superior
 * [RStudio](https://www.rstudio.com/products/rstudio/download/#download) Opcional
 
 ### Librerias
@@ -46,7 +46,29 @@ Librerias requeridas y sus versiones por cada indicador
 "dplyr" 1.0.7 
 ```
 
+4. Cambio en el porcentaje de área protegida y conectada del SINAP
 
+```
+"formattable" 0.2.1
+"cowplot" 1.1.1
+"raster" 3.4-13
+"sf" 1.0-2
+"dplyr" 1.0.7
+"rmapshaper" 0.4.5
+"Makurhini" 2.0.4
+"terra" 1.3-22
+"Rcpp" 1.0.5 
+```
+
+Para instalar Makurhini use por favor:
+
+```
+library(devtools)
+library(remotes)
+install_github("connectscape/Makurhini", dependencies = TRUE, upgrade = "never")
+```
+
+Para mas información, ver documentacion del [paquete](https://github.com/connectscape/Makurhini).
 
 ##### Representaciones
 

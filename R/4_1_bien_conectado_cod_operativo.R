@@ -1,6 +1,4 @@
-# Version de R requerida: "R version 4.1.1 (2021-08-10)"
-# Version instalada y cargada en esta ejecucion
-R.version.string
+# Cambio en el porcentaje de área protegida y conectada del SINAP
 
 # Paquetes
 
@@ -30,10 +28,8 @@ library(Rcpp)
 # - Dejar a la misma extension del SINAP unido a las areas transfronterizas
 # - Para referencia de 2020 se toma la mas cercana, 2018
 
-HH1990 <- raster("bien_conectado_capas_base/HH_WDPA/HH1990.tif")
-HH2000 <- raster("bien_conectado_capas_base/HH_WDPA/HH2000.tif")
-HH2010 <- raster("bien_conectado_capas_base/HH_WDPA/HH2010.tif")
-HH2020 <- raster("bien_conectado_capas_base/HH_WDPA/HH2020.tif")
+HH1990 <- raster("capas_base_ejemplos/HuellaHumana/HH1990.tif")
+HH2010 <- raster("capas_base_ejemplos/HuellaHumana/HH2000.tif")
 
 # 1.2 Union SINAP y Areas transfronterizas 
 
@@ -42,37 +38,28 @@ HH2020 <- raster("bien_conectado_capas_base/HH_WDPA/HH2020.tif")
 # - Se recorta tal capa a un buffer de 100 km de los limites Nacionales (areas transfronterizas)
 # - Se une las areas transfronterizas al RUNAP
 
-AP_1990 <- read_sf("bien_conectado_capas_base/RUNAP_WDPA/AP_1990.shp") %>% 
+AP_1990 <- read_sf("capas_base_ejemplos/RUNAP_WDPA/AP_1990.shp") %>% 
   st_transform(crs(HH1990)) %>%
   st_simplify(preserveTopology = TRUE, 100) %>% 
   st_buffer(0)
 
-AP_2000 <- read_sf("bien_conectado_capas_base/RUNAP_WDPA/AP_2000.shp") %>% 
-  st_transform(crs(HH2000)) %>% 
-  st_simplify(preserveTopology = TRUE,100) %>% 
-  st_buffer(0)
-
-AP_2010 <-  read_sf("bien_conectado_capas_base/RUNAP_WDPA/AP_2010.shp") %>% 
+AP_2010 <- read_sf("capas_base_ejemplos/RUNAP_WDPA/AP_2010.shp") %>% 
   st_transform(crs(HH2010)) %>% 
   st_simplify(preserveTopology = TRUE,100) %>% 
   st_buffer(0)
 
-AP_2020 <- read_sf("bien_conectado_capas_base/RUNAP_WDPA/AP_2020.shp") %>% 
-  st_transform(crs(HH2020)) %>% 
-  st_simplify(preserveTopology = TRUE,100) %>% 
-  st_buffer(0)
 
 # 1.3. Territorio nacional
 
-COLOMBIA_FINAL <- read_sf("bien_conectado_capas_base/NACIONAL/Colombia_FINAL.shp") %>% 
-  st_transform(crs(HH2020)) %>%
+COLOMBIA_FINAL <- read_sf("capas_base_ejemplos/NACIONAL/Colombia_FINAL.shp") %>% 
+  st_transform(crs(HH2010)) %>%
   st_simplify(preserveTopology = TRUE, 100) %>% 
   st_buffer(0)
 
 # 1.4 Territorial
 
-Territorial <- read_sf("bien_conectado_capas_base/TERRITORIAL/Territoriales_final.shp") %>% 
-  st_transform(crs(HH2020)) %>%
+Territorial <- read_sf("capas_base_ejemplos/Territorial/Territoriales_final.shp") %>% 
+  st_transform(crs(HH2010)) %>%
   st_simplify(preserveTopology = TRUE,100) %>% 
   st_buffer(0)
 
@@ -123,8 +110,9 @@ dProtconn <- function(vector_protconn){
 
 # 3.1 Nacional
 
-# Crear carpeta territoriales
-dir.create("bien_conectado_gdb/Nacional")
+dir.create("productos/bien_conectado_gdb")
+
+dir.create("productos/bien_conectado_gdb/Nacional")
 
 # 3.1.1 Calcular ProtConn
 
@@ -136,19 +124,8 @@ AP_1990_10k_cost <- MK_ProtConn(nodes = AP_1990, region = COLOMBIA_FINAL,area_un
                                                 ram.java = 4),
                                 distance_thresholds = 10000,probability = 0.5, 
                                 transboundary = 100000,LA = NULL, plot = TRUE,
-                                write = "bien_conectado_gdb/Nacional/AP_1990_10k_cost", 
+                                write = "productos/bien_conectado_gdb/Nacional/AP_1990_10k_cost", 
                                 intern = TRUE)
-
-# B. 2000
-
-AP_2000_10k_cost <- MK_ProtConn(nodes = AP_2000, region = COLOMBIA_FINAL,area_unit = "ha",
-                                distance = list(type= "least-cost", resistance = HH2000,
-                                                least_cost.java = TRUE, cores.java = 3, 
-                                                ram.java = 4),
-                                distance_thresholds = 10000,probability = 0.5, 
-                                transboundary = 100000,LA = NULL, plot = TRUE,
-                                write = "bien_conectado_gdb/Nacional/AP_2000_10k_cost", intern = TRUE)
-
 
 # C. 2010
 
@@ -158,21 +135,10 @@ AP_2010_10k_cost <- MK_ProtConn(nodes = AP_2010, region = COLOMBIA_FINAL,area_un
                                                 ram.java = 4),
                                 distance_thresholds = 10000,probability = 0.5, 
                                 transboundary = 100000,LA = NULL, plot = TRUE,
-                                write = "bien_conectado_gdb/Nacional/AP_2010_10k_cost", intern = TRUE)
-
-
-# D. 2020
-
-AP_2020_10k_cost <- MK_ProtConn(nodes = AP_2020, region = COLOMBIA_FINAL,area_unit = "ha",
-                                distance = list(type= "least-cost", resistance = HH2020,
-                                                least_cost.java = TRUE, cores.java = 3, 
-                                                ram.java = 4),
-                                distance_thresholds = 10000,probability = 0.5, 
-                                transboundary = 100000,LA = NULL, plot = TRUE,
-                                write = "bien_conectado_gdb/Nacional/AP_2020_10k_cost", intern = TRUE)
+                                write = "productos/bien_conectado_gdb/Nacional/AP_2010_10k_cost", intern = TRUE)
 
 # Compilar corridas Areas Protegidas ProtConn a 10 km costo
-AP_10k_data <- list(AP_1990_10k_cost, AP_2000_10k_cost, AP_2010_10k_cost, AP_2020_10k_cost)
+AP_10k_data <- list(AP_1990_10k_cost, AP_2010_10k_cost)
 
 # Vector de periodos corridos
 tiempos = c("1990", "2000", "2010", "2020")

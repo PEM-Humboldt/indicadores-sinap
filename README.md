@@ -87,26 +87,20 @@ Dentro del contexto del proyecto SIM-SINAP las representaciones númericas, grá
 
 ### Archivos requeridos
 
-* BioModelos
-* RUNAP historico
-* Mapa Nacional
-* raster de Huellas Humanas
-* Mapa territorial
+Dependiendo del indicador a trabajar usted necesitar dos o más de los siguientes:
 
+* BioModelos
+* Secuencia de limites del RUNAP historico disponible
+* Mapa de limites Nacionales
+* Secuencia de imagenes raster de Huella Humana en diferentes periodos y que concuerde con los años dispobibles para RUNAP
+* Mapa territorial
+* Secuencia de mapas de Areas Protegidas en Sudamerica con un buffer minimo de 100 km desde los limites nacionales, incluyendo las areas protegidas Colombianas.
+
+Dentro de este repositorio se encuentra un conjunto de  [capas base de ejemplo]() 
 
 ## Como se ejecuta
 
-### Bien representado
-
-#### Porcentaje y cambio de la representatividad de la riqueza de especies
-
-#### Cambio en la media de representatividad de la distribución de especies
-
-#### Cambio en la media de representatividad de la integridad 
-
-### Bien conectado: 
-
-#### cambio en el porcentaje de conectividad. 
+Se sugiere correr las rutinas paso por paso, siguiendo el orden de cada script. Sin embargo, usted puede obtener los resultados de cada indicador independientemente.
 
 
 ## Autores y contacto

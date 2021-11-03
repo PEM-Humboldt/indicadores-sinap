@@ -29,7 +29,7 @@ library(Rcpp)
 # - Para referencia de 2020 se toma la mas cercana, 2018
 
 HH1990 <- raster("capas_base_ejemplos/HuellaHumana/HH1990.tif")
-HH2010 <- raster("capas_base_ejemplos/HuellaHumana/HH2000.tif")
+HH2010 <- raster("capas_base_ejemplos/HuellaHumana/HH2010.tif")
 
 # 1.2 Union SINAP y Areas transfronterizas 
 
@@ -110,9 +110,11 @@ dProtconn <- function(vector_protconn){
 
 # 3.1 Nacional
 
-dir.create("productos/bien_conectado_gdb")
+dir.create("productos/bien_conectado")
 
-dir.create("productos/bien_conectado_gdb/Nacional")
+dir.create("productos/bien_conectado/bien_conectado_gdb")
+
+dir.create("productos/bien_conectado/bien_conectado_gdb/Nacional")
 
 # 3.1.1 Calcular ProtConn
 
@@ -124,7 +126,7 @@ AP_1990_10k_cost <- MK_ProtConn(nodes = AP_1990, region = COLOMBIA_FINAL,area_un
                                                 ram.java = 4),
                                 distance_thresholds = 10000,probability = 0.5, 
                                 transboundary = 100000,LA = NULL, plot = TRUE,
-                                write = "productos/bien_conectado_gdb/Nacional/AP_1990_10k_cost", 
+                                write = "productos/bien_conectado/bien_conectado_gdb/Nacional/AP_1990_10k_cost", 
                                 intern = TRUE)
 
 # C. 2010
@@ -135,7 +137,7 @@ AP_2010_10k_cost <- MK_ProtConn(nodes = AP_2010, region = COLOMBIA_FINAL,area_un
                                                 ram.java = 4),
                                 distance_thresholds = 10000,probability = 0.5, 
                                 transboundary = 100000,LA = NULL, plot = TRUE,
-                                write = "productos/bien_conectado_gdb/Nacional/AP_2010_10k_cost", intern = TRUE)
+                                write = "productos/bien_conectado/bien_conectado_gdb/Nacional/AP_2010_10k_cost", intern = TRUE)
 
 # Compilar corridas Areas Protegidas ProtConn a 10 km costo
 AP_10k_data <- list(AP_1990_10k_cost, AP_2010_10k_cost)
@@ -156,7 +158,7 @@ colnames(AP_10k_dProtConn) <- "dProtConn"
 # 3.2 Territorial
 
 # Crear carpeta territoriales
-dir.create("bien_conectado_gdb/Territoriales")
+dir.create("productos/bien_conectado/bien_conectado_gdb/Territoriales")
 
 # 3.2.1 Calcular ProtConn
 
@@ -177,25 +179,7 @@ TERR_AP_1990_10k_cost <- lapply(1:nrow(Territorial), function(x) {
   }
 )
 
-# B. 2000
-
-TERR_AP_2000_10k_cost <- lapply(1:nrow(Territorial), function(x) { 
-  
-  #Terrx salida (intermedia)
-  Terrx <- MK_ProtConn(nodes = AP_2000,region = Territorial[x,],
-                       area_unit = "ha",
-                       distance = list(type= "least-cost",resistance = HH2000,
-                                       resist.units = FALSE, least_cost.java = TRUE,
-                                       cores.java = 3, ram.java = 4),
-                       distance_thresholds = 10000, probability = 0.5,
-                       transboundary = 20000, transboundary_type = "region",
-                       protconn_bound = FALSE, LA = NULL, plot = TRUE,
-                       intern = TRUE)
-}
-)
-
-
-# C. 2010
+# B. 2010
 
 TERR_AP_2010_10k_cost <- lapply(1:nrow(Territorial), function(x) { 
   
@@ -212,25 +196,7 @@ TERR_AP_2010_10k_cost <- lapply(1:nrow(Territorial), function(x) {
 }
 )
 
-# D. 2020
-
-TERR_AP_2020_10k_cost <- lapply(1:nrow(Territorial), function(x) { 
-  
-  #Terrx salida (intermedia)
-  Terrx <- MK_ProtConn(nodes = AP_2020,region = Territorial[x,],
-                       area_unit = "ha",
-                       distance = list(type= "least-cost",resistance = HH2020,
-                                       resist.units = FALSE, least_cost.java = TRUE,
-                                       cores.java = 3, ram.java = 4),
-                       distance_thresholds = 10000, probability = 0.5,
-                       transboundary = 20000, transboundary_type = "region",
-                       protconn_bound = FALSE, LA = NULL, plot = TRUE,
-                       intern = TRUE)
-  }
-)
-
-TERR_AP_10k_data <- list(TERR_AP_1990_10k_cost, TERR_AP_2000_10k_cost, TERR_AP_2010_10k_cost, 
-                         TERR_AP_2020_10k_cost)
+TERR_AP_10k_data <- list(TERR_AP_1990_10k_cost, TERR_AP_2010_10k_cost)
 
 # Datos protconn
 
@@ -260,8 +226,8 @@ TERRITORIAL_dProtConn <- cbind(Territorial, TERR_AP_10k_ProtConn, TERR_AP_10k_dP
 
 # Escribir shapefiles
 
-write_sf(TERRITORIAL_dProtConn, paste0("bien_conectado_gdb/Territoriales/Territorial_bien_conectado.shp"))
-
+write_sf(TERRITORIAL_dProtConn, paste0("productos/bien_conectado/bien_conectado_gdb/
+                                       Territoriales/Territorial_bien_conectado.shp"))
 
 
 # save(AP_1990, AP_1990_10k_cost, AP_2000, AP_2000_10k_cost, AP_2010, AP_2010_10k_cost,

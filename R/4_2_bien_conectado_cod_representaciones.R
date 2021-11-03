@@ -11,11 +11,13 @@ library("ggsn")
 library("heatmaply")
 library("maptools")
 
-load("bien_conectado_cod/bien_conectado_cod_operativo_objetos.RData")
+# load("bien_conectado_cod/bien_conectado_cod_operativo_objetos.RData")
 
 #######################################
 
 # 1. Representaciones
+
+dir.create("productos/bien_conectado/rep_num")
 
 # 1.1. Nacional
 
@@ -23,11 +25,13 @@ load("bien_conectado_cod/bien_conectado_cod_operativo_objetos.RData")
 
   Table_Protcon <- cbind(AP_10k_ProtConn, AP_10k_dProtConn)
   
-  write.csv(Table_Protcon, "bien_conectado/rep_num/bien_conectado_rep_num_NAL.csv")
+  write.csv(Table_Protcon, "productos/bien_conectado/rep_num/bien_conectado_rep_num_NAL.csv")
   
   # B. Representacion grafica
   
-  jpeg("bien_conectado/rep_gra/bien_conectado_rep_num_NAL.jpg", res = c(300,300), width = 1240, height = 1240)
+  dir.create("productos/bien_conectado/rep_gra")
+  
+  jpeg("productos/bien_conectado/rep_gra/bien_conectado_rep_num_NAL.jpg", res = c(300,300), width = 1240, height = 1240)
   repr_plot<- ggplot(Table_Protcon, aes(x= factor(rownames(Table_Protcon)), y = dProtConn, group = 1)) +
     geom_line()+
     ggtitle("Cambio en el porcentaje de área protegida \ny conectada del SINAP")+
@@ -49,14 +53,14 @@ load("bien_conectado_cod/bien_conectado_cod_operativo_objetos.RData")
 Tabla_Terr <- cbind(TERR_AP_10k_ProtConn, TERR_AP_10k_dProtConn)
 
 ## values
-write.csv(Tabla_Terr, "bien_conectado/rep_num/bien_conectado_rep_num_TERR.csv")
+write.csv(Tabla_Terr, "productos/bien_conectado/rep_num/bien_conectado_rep_num_TERR.csv")
 
 
 # B. Representacion grafica
 
-tiempos <- c("1990", "2000", "2010", "2020")
+tiempos <- c("1990", "2010")
 
-jpeg("bien_conectado/rep_gra/bien_conectado_rep_num_TERR.jpg", res = c(300,300), width = 2480, height = 2480)
+jpeg("productos/bien_conectado/rep_gra/bien_conectado_rep_num_TERR.jpg", res = c(300,300), width = 2480, height = 2480)
 par(mfrow=c(3,2))
   plot(t(TERR_AP_10k_dProtConn[1,]), type= "l", main="Direccion Territorial Amazonia", sub="RUNAP",
        xlab="Año", xaxt= "n", ylab="dProtConn", ylim = c(0,100))
@@ -84,10 +88,12 @@ dev.off()
 coldProtConn <- grep(names(TERRITORIAL_dProtConn), pattern = "dProtConn")
 
 
+dir.create("productos/bien_conectado/rep_geo")
+
 for(i in 2:length(tiempos)){
   
-  datai <- TERRITORIAL_dProtConn[, coldProtConn[i]]
-  index <- names(TERRITORIAL_dProtConn)[coldProtConn[i]]
+  datai <- TERRITORIAL_dProtConn[, coldProtConn]
+  index <- names(TERRITORIAL_dProtConn)[coldProtConn]
   
   toconvert <- as.data.frame(datai)[, index]
   # categorizar los datos del cambio de la conectividad
@@ -99,7 +105,7 @@ for(i in 2:length(tiempos)){
   cols <- viridis(7)# RdYlGn(7)
   names(cols) <- c("0—5%", "5—10%", "10—20%", "20—40%", "40—60%", "60—100%", "100—150%")
   
-  tiff(paste0("bien_conectado/rep_geo/TERR", tiempos[i], ".tif"), res = c(300,300), width = 2480, height = 3508, compression = "lzw")
+  tiff(paste0("productos/bien_conectado/rep_geo/TERR", tiempos[i], ".tif"), res = c(300,300), width = 2480, height = 3508, compression = "lzw")
   
   
   plotdatai <-  ggplot() + 

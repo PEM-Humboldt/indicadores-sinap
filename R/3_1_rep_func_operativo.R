@@ -35,9 +35,42 @@ Territoriales <- readOGR("capas_base_ejemplos/Territorial/Territoriales_final.sh
 
 # 2. Funciones
 # Cuantifica la integridad de un conjunto de poligonos de areas protegidas (AP).
+# https://conbio.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Fconl.12692&file=conl12692-sup-0001-SuppMat.pdf
 #
 # ras.cal: raster, indice de huella humana
 # shp.Areas: shape, multipoligono de areas protegidas
+#
+# z: integer, es un exponente que escala el producto de dos dimensiones.
+# "El término de potencia escala el producto de dos valores de calidad. Aquí,
+# seleccionamos valores de z = 0.5 ya que este valor asegura que el peso 
+# combinado (wiwj)^z es directamente proporcional al peso wi cuando i = j 
+# (es decir, wi = (wiwj)^z ). En otras palabras, el valor de una celda 
+# individual es directamente proporcional a su calidad. Valores de z > 0.5 
+# indicarían que el el valor combinado de dos celdas es desproporcionadamente 
+# mayor para los pares de alta calidad que para los de baja calidad. Por el 
+# contrario, z < 0,5 indicaría una penalización desproporcionadamente mayor 
+# para los pares de baja calidad" (Beyer et al, 2019)
+#
+# beta: integer, "El término de penalización de distancia beta determina cómo 
+# el valor combinado de dos celdas disminuye a medida que función de la 
+# distancia entre ellos (Fig. SM.2a). La elección de beta = 0,2 corresponde a 
+# un 50% de penalización a una separación de 5 km y una reducción del 95% a 
+# los 15 km, y se basó en una evaluación de cómo la métrica de integridad 
+# varía a través de un conjunto de paisajes hipotéticos que difieren en
+# área total del hábitat, calidad y fragmentación" (Beyer et al, 2019)
+#
+# rad: integer, radio sobre el cual se crean zonas buffer por Area Protegida
+# para el calculo de la integridad."En nuestra aplicación estas métricas se 
+# calculan utilizando un radio de 26,5 km, que capta el 99,5% de la 
+# distribución exponencial (es decir, la contribución de las celdas más allá 
+# de ese radio es insignificante pequeño debido al componente de ponderación
+# de distancia exponencial de la función). Sin embargo, si el métrica se
+# implementa con valores alternativos del parámetro beta, que determina la 
+# ponderación de la distancia, sería necesario ajustar el radio adecuado" 
+# (Beyer et al, 2019). 
+#
+# reescal: logic, reescalar variable de huella humana a 1km o mantener
+# resolución original.
 #
 # return lista con seis objetos: 
 # integ_media_total, vector numerico, integridad media total del conjunto de Areas protegidas 
@@ -49,8 +82,16 @@ Territoriales <- readOGR("capas_base_ejemplos/Territorial/Territoriales_final.sh
 # integ_raster, lista, lista de rasters con la informaciÃ³n por pixel de integridad por area protegida
 # integ_shp, shapefile, datos vectoriales de las areas protegidas ingestadas con su valor de integridad
 # media.
+#
+# Bibliografia
+# Beyer H, Venter O, Grantham H, Watson JEM. 2019. Catastrophic erosion of 
+# ecoregion intactness highlights urgency of globally coordinated action. 
+# Conservation Letters
+# Beyer, H.L., Venter, O., Grantham, H.S., & Watson, J.E.M.. (2020). 
+# Substantial losses in ecoregion intactness highlights urgency of globally 
+# coordinated action. Conservation Letters. 13:e12692. 
 
-IntegAPS <- function(ras.Cal, shp.Areas, z = 0.5){
+IntegAPS <- function(ras.Cal, shp.Areas, z = 0.5, beta = NULL, rad = 26.5, reescal = T){
   
   # Parametro z, basado en Beyer et al. 2020
   
@@ -88,8 +129,11 @@ IntegAPS <- function(ras.Cal, shp.Areas, z = 0.5){
       # Agregar Huella Humana a 1 km, este proceso homologa el raster para aplicar
       # metodologia de Beyer
       
-      r.q <- aggregate(r.hfi, fact=3)
-      rad <- 26.5 
+      if(isTRUE(reescal)){
+        r.q <- aggregate(r.hfi, fact=3)  
+      }
+      
+      rad <- rad 
       
       # plot(r.q)
       
@@ -103,9 +147,12 @@ IntegAPS <- function(ras.Cal, shp.Areas, z = 0.5){
       
       for (i in 1:53){
         for (j in 1:53){
-          d <- sqrt((i - 27)^2 + (j - 27)^2) 
-          #if (d <= rad) foc.w[i,j] <- exp(-gamma * d) # deprecated, pero en caso de usar gamma encender
-          if (d <= rad) foc.w[i,j] <- 1 
+          d <- sqrt((i - 27)^2 + (j - 27)^2)
+          if(is.null(beta)){
+            if (d <= rad) foc.w[i,j] <- 1   
+          }else{
+            if (d <= rad) foc.w[i,j] <- exp(-beta * d)  
+          }
         }
       }
       

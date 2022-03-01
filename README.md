@@ -13,7 +13,7 @@ En desarrollo.
 
 ### Librerias
 
-Librerias requeridas y sus versiones por cada indicador
+Librerias requeridas y sus versiones por cada indicador. Asegurese que tiene las versiones exactas de cada paquete y son compatibles con la versión de R.
 
 1. Porcentaje y cambio de la representatividad de la riqueza de especies del SINAP
 

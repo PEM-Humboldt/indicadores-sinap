@@ -9,10 +9,14 @@
 # Agosto-Octubre de 2021                 #
 #________________________________________#
 
+library(devtools)
+install_version("raster", version = "3.4-13", repos = "http://cran.us.r-project.org")
+install_version("sf", version = "1.0-2", repos = "http://cran.us.r-project.org")
+
 library(raster)
 library(rgdal)
-library(sf)
 library(dplyr)
+library(sf)
 
 options(warn = -1)
 # load("rep_func_cod/rep_func_objetos_operativo.RData")
@@ -41,36 +45,36 @@ Territoriales <- readOGR("capas_base_ejemplos/Territorial/Territoriales_final.sh
 # shp.Areas: shape, multipoligono de areas protegidas
 #
 # z: integer, es un exponente que escala el producto de dos dimensiones.
-# "El término de potencia escala el producto de dos valores de calidad. Aquí,
+# "El t?rmino de potencia escala el producto de dos valores de calidad. Aqu?,
 # seleccionamos valores de z = 0.5 ya que este valor asegura que el peso 
 # combinado (wiwj)^z es directamente proporcional al peso wi cuando i = j 
 # (es decir, wi = (wiwj)^z ). En otras palabras, el valor de una celda 
 # individual es directamente proporcional a su calidad. Valores de z > 0.5 
-# indicarían que el el valor combinado de dos celdas es desproporcionadamente 
+# indicar?an que el el valor combinado de dos celdas es desproporcionadamente 
 # mayor para los pares de alta calidad que para los de baja calidad. Por el 
-# contrario, z < 0,5 indicaría una penalización desproporcionadamente mayor 
+# contrario, z < 0,5 indicar?a una penalizaci?n desproporcionadamente mayor 
 # para los pares de baja calidad" (Beyer et al, 2019)
 #
-# beta: integer, "El término de penalización de distancia beta determina cómo 
-# el valor combinado de dos celdas disminuye a medida que función de la 
-# distancia entre ellos (Fig. SM.2a). La elección de beta = 0,2 corresponde a 
-# un 50% de penalización a una separación de 5 km y una reducción del 95% a 
-# los 15 km, y se basó en una evaluación de cómo la métrica de integridad 
-# varía a través de un conjunto de paisajes hipotéticos que difieren en
-# área total del hábitat, calidad y fragmentación" (Beyer et al, 2019)
+# beta: integer, "El t?rmino de penalizaci?n de distancia beta determina c?mo 
+# el valor combinado de dos celdas disminuye a medida que funci?n de la 
+# distancia entre ellos (Fig. SM.2a). La elecci?n de beta = 0,2 corresponde a 
+# un 50% de penalizaci?n a una separaci?n de 5 km y una reducci?n del 95% a 
+# los 15 km, y se bas? en una evaluaci?n de c?mo la m?trica de integridad 
+# var?a a trav?s de un conjunto de paisajes hipot?ticos que difieren en
+# ?rea total del h?bitat, calidad y fragmentaci?n" (Beyer et al, 2019)
 #
 # rad: integer, radio sobre el cual se crean zonas buffer por Area Protegida
-# para el calculo de la integridad."En nuestra aplicación estas métricas se 
+# para el calculo de la integridad."En nuestra aplicaci?n estas m?tricas se 
 # calculan utilizando un radio de 26,5 km, que capta el 99,5% de la 
-# distribución exponencial (es decir, la contribución de las celdas más allá 
-# de ese radio es insignificante pequeño debido al componente de ponderación
-# de distancia exponencial de la función). Sin embargo, si el métrica se
-# implementa con valores alternativos del parámetro beta, que determina la 
-# ponderación de la distancia, sería necesario ajustar el radio adecuado" 
+# distribuci?n exponencial (es decir, la contribuci?n de las celdas m?s all? 
+# de ese radio es insignificante peque?o debido al componente de ponderaci?n
+# de distancia exponencial de la funci?n). Sin embargo, si el m?trica se
+# implementa con valores alternativos del par?metro beta, que determina la 
+# ponderaci?n de la distancia, ser?a necesario ajustar el radio adecuado" 
 # (Beyer et al, 2019). 
 #
 # reescal: logic, reescalar variable de huella humana a 1km o mantener
-# resolución original.
+# resoluci?n original.
 #
 # return lista con seis objetos: 
 # integ_media_total, vector numerico, integridad media total del conjunto de Areas protegidas 
@@ -131,6 +135,8 @@ IntegAPS <- function(ras.Cal, shp.Areas, z = 0.5, beta = NULL, rad = 26.5, reesc
       
       if(isTRUE(reescal)){
         r.q <- aggregate(r.hfi, fact=3)  
+      }else{
+        r.q <- r.hfi
       }
       
       rad <- rad 

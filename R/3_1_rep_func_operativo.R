@@ -97,6 +97,8 @@ Territoriales <- readOGR("capas_base_ejemplos/Territorial/Territoriales_final.sh
 
 IntegAPS <- function(ras.Cal, shp.Areas, z = 0.5, beta = NULL, rad = 26.5, reescal = T){
   
+  print(c(paste0("z=", z), paste0("beta=", beta), paste0("rad=", rad), paste0("reescal=", reescal)))
+  
   # Parametro z, basado en Beyer et al. 2020
   
   # No se configuro un parámetro gamma para la transformación de la huella humana.

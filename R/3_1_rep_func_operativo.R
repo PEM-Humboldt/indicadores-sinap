@@ -156,7 +156,7 @@ IntegAPS <- function(ras.Cal, shp.Areas, z = 0.5, beta = NULL, rad = 26.5, reesc
       for (i in 1:53){
         for (j in 1:53){
           d <- sqrt((i - 27)^2 + (j - 27)^2)
-          if(is.null(beta)){
+          if(is.null(beta) | beta == 0){
             if (d <= rad) foc.w[i,j] <- 1   
           }else{
             if (d <= rad) foc.w[i,j] <- exp(-beta * d)  

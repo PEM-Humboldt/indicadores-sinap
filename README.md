@@ -41,7 +41,7 @@ Librerias requeridas y sus versiones por cada indicador. Asegurese que tiene las
 
 ```
 "sf" 1.0-2
-"raster" 3.4-13
+"raster" 3.5-15
 "rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023)
 "dplyr" 1.0.7 
 ```

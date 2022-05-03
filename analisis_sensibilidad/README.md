@@ -10,7 +10,7 @@
 6.	Relación con el tamaño del Área Natural protegida
 - Tablas y gráficas del ítem 1 y 2 en esta [carpeta](https://drive.google.com/drive/folders/1xX6CDFWznXzJ9HJ7mIN6FK7Heojb3zbu?usp=sharing)
 
-![boxplot_pareamientos](analisis_sensibilidad/resultados_b02_r2-30_reescalF/difgnra_1990.png)
+![boxplot_pareamientos](resultados_b02_r2-30_reescalF/difgnra_1990.png)
 
 - Items 3, 4 y 5 para cada año y cada radio se encuentran [aqui](https://drive.google.com/drive/folders/1kyRzch9FjIysCArcxTqoZtdoLTVbkXOA?usp=sharing)
 

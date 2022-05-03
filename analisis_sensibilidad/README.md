@@ -24,8 +24,8 @@
 
 8. Calcular diferencias entre las pendientes de todas las áreas y mirar cuales tienen las mayores diferencias, mapear (entre las que se pueda trazar desde 1990 a 2020)
 - Tablas, graficas y shapefile en este [directorio](https://drive.google.com/drive/folders/1vnSTeL7Mm_h9A8KABXEzrtu5qUb_bLS-?usp=sharing)
-
-  ![pendientes_radio_años](pendientes_radios_xpnn/pendiente 1990-2020 X2.png)
+  
+  ![pendientes](pendientes_radios_xpnn/pendiente 1990-2020 X2.png)
 
 
 

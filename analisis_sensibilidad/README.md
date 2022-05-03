@@ -20,7 +20,7 @@
 - Tabla [en este directorio](https://drive.google.com/file/d/1dW2dbgN0sbCQM4AB9MEF2eyhyczYo0pf/view?usp=sharing)
 - Grafica [aqui se pueden encontrar](https://drive.google.com/file/d/1ihREiyVX0I9Rs7GX5wQQ-5b7lAIKi2le/view?usp=sharing)
 
-![diferencias_pareamientos](analisis_sensibilidad/cambio_integridad_radio.png)
+![cambio_pendiente](analisis_sensibilidad/cambio_integridad_radio.png)
 
 8. Calcular diferencias entre las pendientes de todas las áreas y mirar cuales tienen las mayores diferencias, mapear (entre las que se pueda trazar desde 1990 a 2020)
 - Tablas, graficas y shapefile en este [directorio](https://drive.google.com/drive/folders/1vnSTeL7Mm_h9A8KABXEzrtu5qUb_bLS-?usp=sharing)

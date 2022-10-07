@@ -1,6 +1,6 @@
 # Indicadores Sistema Nacional de Areas Protegidas
 
-Cálculo de indicadores del sistema de monitoreo del SINAP.  Los indicadores permiten establecer si el SINAP es representativo ecológicamente a nivel de especies y si estas áreas y los sistemas en los que se encuentran cuentan con integridad funcional y conectividad que permitan su viabilidad a largo plazo. Los indicadores son: porcentaje y cambio de la representatividad de la riqueza de especies, cambio en el porcentaje de representatividad de la distribución de especies, cambio en la media de representatividad de la integridad y cambio en el porcentaje de areas protegidas y conectadas. 
+Cálculo de indicadores del sistema de monitoreo del SINAP.  Los indicadores permiten establecer si el SINAP es representativo ecológicamente a nivel de especies y si estas áreas y los sistemas en los que se encuentran cuentan con integridad funcional y conectividad que permitan su viabilidad a largo plazo. Los indicadores son: porcentaje y cambio de la representatividad de la riqueza de especies, cambio en el porcentaje de representatividad de la distribución de especies, cambio en la media de representatividad de la integridad y cambio en el porcentaje de areas protegidas y conectadas.
 
 En desarrollo.
 
@@ -21,7 +21,7 @@ Librerias requeridas y sus versiones por cada indicador. Asegurese que tiene las
 "dismo" 1.3-3
 "sf" 1.0-2
 "rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023)
-"raster" 3.4-13 
+"raster" 3.4-13
 "qpcR" 1.4-1
 "dplyr" 1.0.7
 ```
@@ -34,16 +34,16 @@ Librerias requeridas y sus versiones por cada indicador. Asegurese que tiene las
 "xfun" 0.25
 "rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023)
 "ReIns" 1.4-1 (1.0.10)
-"dplyr" 1.0.7 
+"dplyr" 1.0.7
 ```
 
-3. Cambio en la media de la representatividad de integridad estructural del SINAP	
+3. Cambio en la media de la representatividad de integridad estructural del SINAP
 
 ```
 "sf" 1.0-2
 "raster" 3.5-15
 "rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023)
-"dplyr" 1.0.7 
+"dplyr" 1.0.7
 ```
 
 4. Cambio en el porcentaje de área protegida y conectada del SINAP
@@ -57,7 +57,7 @@ Librerias requeridas y sus versiones por cada indicador. Asegurese que tiene las
 "rmapshaper" 0.4.5
 "Makurhini" 2.0.4
 "terra" 1.3-22
-"Rcpp" 1.0.5 
+"Rcpp" 1.0.5
 ```
 
 Para instalar Makurhini use por favor:
@@ -87,9 +87,9 @@ Dentro del contexto del proyecto SIM-SINAP las representaciones númericas, grá
 
 ### Archivos requeridos
 
-Dependiendo del indicador a trabajar usted necesitar dos o más de los siguientes:
+Dependiendo del indicador a trabajar usted necesitara dos o más de los siguientes:
 
-* BioModelos
+* BioModelos (Modelos de distribución de especies)
 * Secuencia de limites del RUNAP historico disponible
 * Mapa de limites Nacionales
 * Secuencia de imagenes raster de Huella Humana en diferentes periodos y que concuerde con los años dispobibles para RUNAP
@@ -107,7 +107,7 @@ Se sugiere correr las rutinas paso por paso, siguiendo el orden de cada script. 
 
 #### Porcentaje y cambio de la representatividad de la riqueza de especies del SINAP
 
-El indicador “Cambio en el porcentaje de la representatividad de la riqueza de especies del SINAP” corresponde al cambio entre periodos en el porcentaje del número de especies protegidas dentro de las unidades del patrimonio natural y cultural del país incluidas dentro del Sistema Nacional de Áreas Protegidas. El índice usa como insumos la distribución geográfica de especies de interés identificadas por medio de modelos de distribución de especies, modelos que son examinados, verificados y curados por especialistas de cada especie (Biomodelos Nivel 1). Por otra parte, usa los límites geográficos de las unidades del Sistema Nacional de Áreas Protegidas (SINAP) disponibles desde 1990 a 2020. La distribución geográfica de cada especie es cruzada o sobrelapada con cada una de las capas disponibles del SINAP, para luego contar la cantidad de especies que según la distribución geográfica son protegidas en cada unidad del sistema en un periodo determinado. Enseguida, se calcula el total de especies protegidas en todas las unidades y se divide por el número de especies consideradas y se multiplica por 100, obteniendo un porcentaje de especies representadas. Por último, se calcula la diferencia entre cada periodo consecutivo, obteniendo el índice. Como resultados se obtienen, por una parte, el aporte  de cada unidad en el cambio del porcentaje de cada unidad del SINAP a la representatividad total, y por otra, el cambio en la representatividad total del sistema.
+El indicador “Cambio en el porcentaje de la representatividad de la riqueza de especies del SINAP” corresponde al cambio entre periodos en el porcentaje del número de especies protegidas dentro de las unidades del patrimonio natural y cultural del país incluidas dentro del Sistema Nacional de Áreas Protegidas. El índice usa como insumos la distribución geográfica de especies de interés identificadas por medio de modelos de distribución de especies, modelos que son examinados, verificados y curados por especialistas de cada especie (BioModelos Nivel 1). Por otra parte, usa los límites geográficos de las unidades del Sistema Nacional de Áreas Protegidas (SINAP) disponibles desde 1990 a 2020. La distribución geográfica de cada especie es cruzada o sobrelapada con cada una de las capas disponibles del SINAP, para luego contar la cantidad de especies que según la distribución geográfica son protegidas en cada unidad del sistema en un periodo determinado. Enseguida, se calcula el total de especies protegidas en todas las unidades y se divide por el número de especies consideradas y se multiplica por 100, obteniendo un porcentaje de especies representadas. Por último, se calcula la diferencia entre cada periodo consecutivo, obteniendo el índice. Como resultados se obtienen, por una parte, el aporte  de cada unidad en el cambio del porcentaje de cada unidad del SINAP a la representatividad total, y por otra, el cambio en la representatividad total del sistema.
 
 #### Cambio en el porcentaje de representatividad ecológica del SINAP - Distribución de Especies
 
@@ -142,7 +142,7 @@ Peterson, A., Soberón, J., G. Pearson, R., Anderson, R., Martínez-Meyer, E., N
 Rodrigues, A.S.L., Andelman, S.J., Bakarr, M.I., Boitani, L., Brooks, T.M., Cowling, R.M., Fishpool, L.D.C., da Fonseca, G.A.B., Gaston, K.J., Hoffmann, M., Long, J.S., Marquet, P.A., Pilgrim, J.D., Pressey, R.L., Schipper, J., Sechrest, W., Stuart, S.N., Underhill, L.G., Waller, R.W., Watts, M.E.J. &Yan, X. (2004a) Effectiveness of the global protected area network in representing species diversity. Nature 428(6983), 640-643.
 
 Rodrigues, A.S.L., Da Fonseca, G.A.B., Akçakaya, H.R., Schipper, J., Chanson, J.S., Pilgrim, J.D., Gaston, K.J., Underhill, L.G., Fishpool, L.D.C., Boitani, L., Watts, M.E.J., Hoffmann, M., Bakarr, M.I., Marquet, P.A., Pressey, R.L., Waller, R.W., Andelman, S.J., Stuart, S.N., Brooks, T.M., Sechrest, W. &Yan, X. (2004b) Global Gap Analysis: Priority Regions for Expanding the Global Protected-Area Network. BioScience 54(12), 1092-1100.
- 
+
 
 Rudnick D, Ryan S, Beier P, et al. (2012) The role of landscape connectivity in planning and implementing conservation and restoration priorities. Issues in Ecol-ogy 16: 20–20
 
@@ -160,7 +160,7 @@ Velásquez-Tibata,  J. I., Olaya-Rodríguez, M. H., López-Lozano, D. F., Gutier
 
 * **[Camilo Andrés Correa Ayram](ccorrea@humboldt.org.co)**
 
-* **[Andrés Felipe Suárez Castro](felipesuarezca@gmail.com)** 
+* **[Andrés Felipe Suárez Castro](felipesuarezca@gmail.com)**
 
 * **[Carlos Jair Muñoz Rodriguez](cmunoz@humboldt.org.co)**
 

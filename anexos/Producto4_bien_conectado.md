@@ -1,391 +1,443 @@
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 0; ALERTS: 10.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
+![](RackMultipart20221129-1-43ifm4_html_8b7d1aa431cd7e95.png)
 
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
-<a href="#gdcalert4">alert4</a>
-<a href="#gdcalert5">alert5</a>
-<a href="#gdcalert6">alert6</a>
-<a href="#gdcalert7">alert7</a>
-<a href="#gdcalert8">alert8</a>
-<a href="#gdcalert9">alert9</a>
-<a href="#gdcalert10">alert10</a>
+**FICHA TÉCNICA DE INDICADORES**
 
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
+**Cambio en el porcentaje de área protegida y conectada del SINAP**
 
+**Identificación del indicador**
 
+**Iniciativa en la que se encuentra:** Sistema de Información de Monitoreo del SINAP.
 
+**Atributo\*:** Bien Conectado (I).
 
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+**Objetivo:** Aumentar el patrimonio natural y cultural conservado en el SINAP.
 
+**ID/Nomenclatura\*:** Ia
 
-![alt_text](images/image1.png "image_tooltip")
+**Periodicidad\***
 
+- Anual
+- Semestral
+- Trimestral
 
-<p style="text-align: right">
-Paisaje atardecer de la Mojana Sucre.  Banco de imágenes Instituto Humboldt. Autor:González, Carlos Mario</p>
+- Otro: Cada año o cada semestre
 
+**Cobertura geográfica**
 
-<p style="text-align: right">
-<strong>CONTRATO DE CONSULTORÍA 20-181 - ADICIÓN</strong></p>
+- Nacional
+- Subsistema
 
+- Departamental
 
-<p style="text-align: right">
-<strong>Objeto: </strong>Apoyar la construcción de indicadores esenciales de biodiversidad para el seguimiento de los objetivos del SINAP a nivel nacional, permitiendo interoperabilidad, articulando el cálculo de los indicadores para los atributos ecológicamente representativo y bien conectado.</p>
+- Otra:
 
+**Línea base\*:**
 
-<p style="text-align: right">
-<strong>Producto 4:</strong></p>
+1990, 2000, 2010, 2020
 
+**Insumos del indicador:**
 
-<p style="text-align: right">
-- </p>
+- Mapas de Huella Humana 1990, 2000, 2010, 2018
+- Mapa Límites Nacionales de la República de Colombia
+- Mapas del Sistema Nacional de Áreas Protegidas de Colombia 1990, 2000, 2010, 2020
+- Mapas de Áreas Protegidas del Mundo 1990, 2000, 2010, 2020
 
+**Descripción general del indicador\***
 
-<p style="text-align: right">
-<strong>Fecha: 29 de septiembre de 2021</strong></p>
+**Definición:** El indicador "Cambio en el Porcentaje de área protegida y conectada del SINAP" corresponde al cambio en el porcentaje de la superficie terrestre del país cubierta por tierras protegidas y bien conectadas establecida por medio de la métrica de conectividad Protconn en diferentes periodos y su variación temporal. El índice usa como insumos el mapa de huella humana que abarca toda Colombia para los años 1990, 2000, 2010 y 2018 (como variable más cercana al 2020). Además, usa los límites geográficos nacionales (o territoriales) como área de estudio en donde se establece el porcentaje conectado y protegido. También se hace uso de los límites geográficos de las unidades del Sistema Nacional de Áreas Protegidas (SINAP) de cuatro periodos (1990, 2000, 2010 y 2020) y los límites de las Áreas Protegidas del Mundo (WDPA) de la misma temporalidad del SINAP. El indicador usa las Áreas Protegidas mundiales informadas en el WDPA para establecer la influencia potencial de estas a la conectividad del SINAP, al generarse un buffer de 100 km alrededor de los límites nacionales (20 kilómetros para los límitesterritoriales) e incluir todas las Áreas Protegidas (AP) que interceptan total o parcialmente tal zona y fueron unidas a los mapas del SINAP Colombia. Luego se calcula la métrica ProtConn usando el paquete Makurhini por cada período usando una distancia de dispersión de 10 kilómetros. El indicador cambio en el Porcentaje de área protegida y conectada del SINAP se calcula al buscar la diferencia en el ProtConn de periodos sucesivos. Dado que el proceso se repite con cada uno de los periodos seleccionados del SINAP, se obtienen medidas multitemporales y a escalas nacionales de la conectividad, permitiendo identificar la variación de las unidades del SINAP para proteger el flujo de materia, organismos y energía a través del paisaje dentro de una matriz de cambio antrópico y de resistencia a la movilidad de las especies.
 
+**Marco conceptual:** El programa de trabajo de áreas protegidas (PTAP) aprobado por el Convenio de Diversidad Biológica –CDB-, establece que "El Sistema Nacional de Áreas Protegidas es representativo ecológicamente, si en el conjunto de sus áreas protegidas se encuentran "muestras" de la biodiversidad del país a sus diferentes niveles (especies, comunidades y ecosistemas) y si estas áreas y los sistemas en los que se encuentran cuentan con las cualidades necesarias para garantizar su viabilidad en el largo plazo". Teniendo esto en mente, durante el desarrollo de la política de sistema de monitoreo del SINAP, quedó establecido en el documento de conceptualización, que el Sistema Nacional de Áreas Protegidas es representativo ecológicamente si _i)_ la biodiversidad que se protege alcanza las metas de conservación específicas para cada nivel y, _ii)_ si estas áreas y los sistemas en los que se encuentran cuentan con la funcionalidad y otras cualidades ecológicas que permitan su viabilidad a largo plazo.
 
-**PRODUCTO 4**
+La conectividad del paisaje es una de las cualidades vitales de las Áreas Protegidas. El concepto hace referencia al flujo de materiales, organismos y energía a través del paisaje los cuales son imprescindibles para la integridad y funcionalidad de los ecosistemas, sus servicios ecosistémicos asociados y el mantenimiento de la biodiversidad (Crooks y Sanjayan, 2006). En tal sentido los objetivos de conservación de las Áreas Protegidas sólo pueden lograrse si tales unidades tienen vínculos o puentes que permitan el flujo de los procesos ecológicos como la migración, flujo de genes, dispersión y colonización (Rudnick et al., 2012). En los últimos años los estudios que evalúan la conectividad del paisaje han incrementado, aportando a la planificación de estrategias de conservación y a un mejor manejo del paisaje (Correa Ayram et al., 2016). Este tipo de información se ha convertido en una herramienta esencial al momento de monitorear, proponer y priorizar, por ejemplo, Áreas protegidas y corredores biológicos.
 
-Producto 1 - Adenda : Documento con el soporte de los indicadores aprobados en las reuniones de trabajo con socios estratégicos, y los SIRAP (Orinoquía y Andes Nororientales) que incluya los diagramas de flujo y diagramas de análisis de información, presentación gráfica de resultados y aprobación de tipología y paleta de colores de las salidas gráficas como soporte a su traducción en el sistema de información del SINAP. Este debe incluir la propuesta de representación visual de las salidas gráficas (numéricas como geográficas) la hoja metodológica en formato homologado, y las actas de reunión con los ingenieros del Sistema como soporte a los procesos validación traducción información
+**Unidad de medida del indicador\*:** Porcentaje (%)
 
+**Metodología de cálculo\*:**
 
+La Conectividad de las Áreas Protegidas (AP) en Colombia se cuantificó por medio de la métrica Protected Connected Land (ProtConn; Saura et al. 2017, Saura et al. 2018, Saura 2019). ProtConn corresponde al porcentaje de la superficie terrestre del país cubierta por tierras protegidas y bien conectadas. La métrica es el resultado de la combinación, a través del análisis de redes, de los tamaños, la cobertura y la disposición espacial de las AP con distancias de dispersión consideradas para las especies.  En esta red, los nodos corresponden a las AP ponderadas. Los enlaces representan la posibilidad de movimiento entre nodos (áreas protegidas) y están ponderados por la probabilidad de dispersión directa entre ellos. Dada esta representación gráfica, la probabilidad de conectividad se define como la probabilidad de que dos ubicaciones seleccionadas al azar dentro de un ecosistema caigan en zonas protegidas que están conectadas entre sí.  El indicador ProtConn es, en su forma propuesta, fácil de comunicar a los usuarios finales y permite la comparación con los objetivos nacionales y globales para la conectividad de las AP así como su análisis de cambio en el tiempo.
 
-**TABLA DE CONTENIDO**
+El análisis se basa en el estudio reciente de Castillo et al (2020) sobre conectividad de AP Andino-Tropicales y calculamos ProtConn considerando una distancia media (_dmed_) de dispersión de 10 km. _dmed_ se refiere a la distancia media recorrida por un dispersor (por ejemplo, un animal) desde su hogar actual a uno nuevo, según Saura y colaboradores (2017 y 2018) 10 km corresponde al valor central del rango de transformación logarítmica de todos los dmed considerados en su estudio y ha sido usado frecuentemente para alcances de metas globales de conservación.
 
+Teniendo en cuenta que las AP fuera del país pueden contribuir a la conectividad de las AP colombianas, seleccionamos un buffer de 100 km alrededor de los límites nacionales (20 kilómetros para territoriales) para incluir todas las AP transnacionales informadas en la base de datos de Áreas Protegidas del Mundo (WDPA) en las fechas seleccionadas en esta evaluación (1990-2000-2010-2020). Todas las AP que interceptan total o parcialmente esta zona de amortiguación se denominaron áreas transfronterizas que potencialmente influyen en la conectividad entre las AP dentro de las ecorregiones. Para definir áreas transfronterizas, aplicamos el mismo método para análisis globales utilizado por Santini et al. (2015).
 
-[TOC]
+Para la evaluación se utilizó una versión de este indicador de conectividad que incluye el grado de resistencia que ofrece la heterogeneidad del paisaje al movimiento de especies entre AP. Para esto se integraron los mapas de Huella Espacial Humana de 300 m de resolución espacial que abarca toda Colombia y derivado del estudio de Correa et al. (2020) para cada fecha. Estos mapas para cada año (1990-2000-2010 y 2018) incorporan de una forma espacialmente explícita el impacto acumulado del hombre sobre el paisaje por medio de dos dimensiones espaciales la intensidad del uso del suelo y el tiempo de intervención antrópica sobre los ecosistemas y permite cuantificar la resistencia de la matriz para la movilidad de una amplia gama de especies (como se necesita en una evaluación nacional e incluso regional) (Castillo et al. 2020). En este sentido las distancias entre áreas protegidas son ponderadas por el costo que ofrece atravesar cada píxel entre ellas, asumiendo que este costo genera un efecto sobre la conectividad que es más alto a medida que el nivel de huella humana se incrementa. Este enfoque se ha utilizado ampliamente en los análisis de conectividad porque funciona como un buen indicador genérico de la heterogeneidad del paisaje (Correa et al. 2017). El índice ProtConn en cada año de esta evaluación se calculó utilizando el paquete R Makurhini versión 2.0.3 diseñado específicamente para optimizar las medidas de conectividad del paisaje (Godinez y Correa, 2020). Este paquete está disponible en línea en [https://github.com/connectscape/Makurhini](https://github.com/connectscape/Makurhini).
 
+Entonces, la probabilidad conectividad continental del SINAP se evaluó por medio del cálculo del porcentaje del país (o en las territoriales) protegido y conectado (ProtConn) para cuatro tiempos (1990, 2000, 2010, 2020). Finalmente, se cuantificó el cambio en el indicador ProtConn entre los pares de años 1990-2000, 2000-2010, 2010-2020 (dProtConn) como la diferencia entre los pares de años ponderado a el primer año del par multiplicado por 100.
 
+El cálculo de ProtConn se define en la ecuación 1,
 
+1.
 
+![](RackMultipart20221129-1-43ifm4_html_8f18c92df61af46.png)
 
+En donde _n_ corresponde a la cantidad de AP dentro del territorio Colombiano, t es el número de AP dentro de un área buffer transfronteriza (en este caso para el nivel nacional se propone 100 km y en el nivel regional 20 km) fuera de los límites geográficos, ai y aj son el atributo de las AP i y j (en este caso el tamaño del AP), AL es el máximo atributo de paisaje (aquí el área total de la unidad de análisis), y p \* ij es la probabilidad máxima del producto de todas las rutas que conectan los nodos i y j.). El atributo de las AP es igual al área de las AP, en particular para esas AP que están dentro de la unidad de análisis, e igual a 0 para las AP transfronterizas fuera de la unidad de análisis. De esta manera, en la evaluación se analiza una red en la que las fuentes y destinos de los flujos de dispersión son solo aquellas AP dentro de la unidad de análisis (aquellas con ai \> 0), pero en la que el papel potencial de las AP fuera de los límites de la unidad aportan como conectores o stepping stones entre las AP (Saura et al. 2017).
 
-1. **Introducción**
+El cálculo del indicador _dProtConn_corresponde al porcentaje de variación de Protconn y se define en la ecuación 2,
 
-Dentro del proyecto “Consolidación del Sistema Nacional de Áreas Protegidas en Colombia” se busca consolidar el manejo y la planeación del Sistema Nacional de Áreas Protegidas (SINAP) en los niveles nacional y regional. Para ello, se desarrollarán instrumentos que mejoren la efectividad del manejo de áreas protegidas, incrementen la representatividad de diferentes niveles de la biodiversidad y fortalezcan la participación de actores y grupos de interés regionales en las iniciativas de conservación.
+2.
 
-El desarrollo de un Sistema de Información de Monitoreo (SIM) permitirá cumplir con parte de los compromisos internacionales adquiridos por el país y a su vez ayudará al cumplimiento de los objetivos legales y misionales de cada una de las áreas protegidas, así como a la evaluación del desempeño del SINAP. En este sentido, el Equipo GEF SINAP WWF ha trabajado directamente con múltiples entidades involucradas en los procesos de monitoreo del SINAP con el fin de establecer un marco conceptual sobre los indicadores y las variables que permitirán monitorear el cumplimiento de diferentes objetivos del SINAP a escala nacional y regional.
+![](RackMultipart20221129-1-43ifm4_html_586f62f53e32b7b2.png)
 
-En este informe se presentan como soporte del indicador bien conectado aprobado en las reuniones de trabajo con los socios estratégicos, y los SIRAP (Orinoquía y Andes Nororientales), incluyendo los diagramas de flujo y diagramas de análisis de información, presentación gráfica de resultados y tipología y paleta de colores de las salidas gráficas como soporte a su traducción en el sistema de información del SINAP. Así mismo, se explica la estructura de las carpetas de información para cada índice. Se incluye la propuesta de representación visual de las salidas gráficas (numéricas como geográficas) la hoja metodológica en formato homologado, las presentaciones con los ingenieros del Sistema como soporte a los procesos validación traducción de la información. 
+En donde ProtConntn+1 corresponde al valor de Protconn en un tiempo 2 (final) y ProtConntn
 
+corresponde al valor de Protconn en un tiempo 1 (inicial).
 
+**Pasos para el cálculo:**
 
-2. **Documento con el soporte de los indicadores aprobados en las reuniones de trabajo con socios estratégicos, y los SIRAP (Orinoquía y Andes Nororientales) que incluya los diagramas de flujo y diagramas de análisis de información, presentación gráfica de resultados y aprobación de tipología y paleta de colores de las salidas gráficas como soporte a su traducción en el sistema de información del SINAP.**
+- Extraer del SINAP de cada periodo las áreas protegidas terrestres
+- Remover de la capa WDPA de cada periodo las áreas colombianas dejando únicamente las áreas fuera de Colombia.
+- Recortar áreas fuera de Colombia con un buffer de 100 km de los límites nacionales dejando las áreas transfronterizas
+- Unir la capa del SINAP terrestre con áreas transfronterizas.
+- Extender capa de huella humana a la extensión de SINAP terrestre + áreas transfronterizas.
+- Se calcula la métrica ProtConn para cada período usando una distancia de 10 km, SINAP terrestre + Áreas transfronterizas y huella humana extendida
+- Establecer el dProtConn para cada período sucesivo
 
+**Proceso SIG:**
 
-### **_2.1 Bien conectado_**
+![](RackMultipart20221129-1-43ifm4_html_dda6706e60c377ae.png)
 
-Los soportes y resultados de la producción del indicador se encuentran en una carpeta en la nube denominada “representatividad_riqueza” y se puede acceder a ella con el enlace [https://drive.google.com/drive/folders/1L8dzKH5k9hfDtMwamQucTwqndcZbtAnS?usp=sharing](https://drive.google.com/drive/folders/1L8dzKH5k9hfDtMwamQucTwqndcZbtAnS?usp=sharing)
+**Mapa de flujo de datos:**
 
-Su contenido es el siguiente:
+![](RackMultipart20221129-1-43ifm4_html_ef908669eb16a3f4.png)
 
+**Interpretación del indicador:**
 
+Suponiendo que un país o región al que se calculó la métrica Protconn, presenta el 2% de su área protegida y conectada en el tiempo n y 4% en el tiempo n+1, entonces el cambio en el Porcentaje de áreas protegidas y conectadas o dProtConn entre n y n+1 es de 100%. Habiendo pues un cambio entre períodos del 100% (en otras palabras, del doble) en áreas protegidas y conectadas.
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+**Forma de almacenamiento de los resultados:** _(Aún por definir)_ El resultado de análisis estará alojado en el XXXX del sistema de información de monitoreo y puede ser descargado de XXXX.
 
+**Forma de presentación de los resultados:**
 
-![alt_text](images/image2.jpg "image_tooltip")
+Representación espacial: Mapas del cambio en el porcentaje de áreas conectadas y protegidas del orden territorial. En cuanto al orden nacional no fueron creados mapas ya que el índice resume la información de todo el territorio Colombiano en un único dato porcentual, por lo que su representación geográfica no tiene sentido cartográfico.
 
+Representación gráfica: Cambio en el porcentaje de áreas conectadas y protegidas del orden nacional y territorial con estimaciones en diferentes momentos en el tiempo.
 
-Carpetas
+**Pertinencia del indicador**
 
+**Finalidad/Propósito/Justificación:** Este indicador permite monitorear la conectividad del SINAP, con el fin de determinar si el Sistema Nacional de Áreas Protegidas está bien conectado. Lo anterior en relación a las metas de conservación nacionales e internacionales vigentes.
 
+**Convenios y acuerdos nacionales o internacionales:** _(Revisar para complementar)\*_
 
-* bien_conectado, elementos del índice cambio en el área protegida y conectada de la representatividad de la riqueza de especies del SINAP. Se encuentran las representaciones gráficas, geográficas y numéricas. De la misma forma la ficha y los flujos SIG y de Datos en formato jpg y editables. capas base usadas para calcular los indices de representatividad de riqueza de especies
-* bien_conectado_capas_base,  capas base usadas para calcular el índice bien conectado para las Áreas Protegidas de Colombia.
-* bien_conectado_cod, codigos y objetos en formato R y RData para la creación de los índices (operativo) y sus representaciones
-* rep_rri_gdb, bases de datos geograficas intermedias
+- Directriz CONPES 3680: Consolidar un Sistema de Información y Monitoreo del SINAP para la identificación de vacíos y prioridades de conservación.
+- Meta Aichi 11: Para 2020, al menos el 17% de las zonas terrestres y de aguas continentales y el 10% de las zonas marinas y costeras, especialmente aquellas de particular importancia para la diversidad biológica y los servicios de los ecosistemas, se conservan por medio de sistemas de áreas protegidas.
 
-Archivos
+**Metas/Estándares\*:** Por definir. (x).
 
+**Observaciones y aclaraciones generales del indicador**
 
+**Observaciones\*:**
 
-* Readme.txt, descripción del contenido de las carpetas y archivos
-* rep_rri.Rproj, gestión de proyecto
-* reunion_indice_riqueza_spp_06082021.pptx, diapositivas presentadas en la reunion del 6 de agosto de 2021 con los programadores
+**Restricciones o limitaciones del indicador:** El cálculo del indicador depende por una parte, de las modificaciones de las áreas protegidas del territorio colombiano de acuerdo a la inscripción de nuevas áreas protegidas en el Registro Único Nacional de Áreas Protegidas (RUNAP) o cambios en su delimitación; por otra depende de la periodicidad y calidad de las actualizaciones globales de áreas protegidas dentro de la base de datos WDPA. El cálculo del indicador depende también de la distancia media a usar en el cálculo de la métrica ProtConn; sin embargo, se recomienda que se sigan los lineamientos de 10 km por tener un amplio uso en el campo de la conectividad y estar suficientemente soportado en literatura. Asimismo, las distancias usadas desde los límites nacionales (o territoriales) para definir las áreas transfronterizas pueden hacer variar el indicador, sin embargo pruebas realizadas han demostrado que tal variación es mínima.
 
-Ahora se presentarán los diferentes soportes, diagramas y archivos solicitados con sus respectivos enlaces, así como las representaciones propuestas para el índice.
+**Fuentes de incertidumbre:** La insuficiente delimitación de áreas protegidas, depuración del RUNAP y parámetros usados en el cálculo de la metrica ProtConn.
 
+**Fuentes de los datos\***
 
+INSUMO 1
 
-1. La rutina estandarizada y documentada para el cálculo del indicador se encuentra escrito en lenguaje R y se denomina “bien_conectado_cod_operativo.R”, el enlace es el siguiente (carpeta “bien_conectado_cod”)
+**Nombre\*:** LHFI para los años 1990, 2000, 2010, 2018
 
-    [https://drive.google.com/drive/folders/1YjTRr_agJ4xD0hTDkxfo-kL197GYQ7mk?usp=sharing](https://drive.google.com/drive/folders/1YjTRr_agJ4xD0hTDkxfo-kL197GYQ7mk?usp=sharing)
+**Descripción:** Mapa de la huella humana para Colombia en los años 1990-2000-2010-2018
 
+**Referencia:**
 
-    En cuanto a los insumos (RUNAP, WDPA, Huella Humana y Límites nacionales o territoriales) se encuentran en este enlace (carpeta “bien_conectado_capas_base”)
+Correa Ayram, C. A., Etter, A., Díaz-Timoté, J., Rodríguez Buriticá, S., Ramírez, W., & Corzo, G. (2020). Spatiotemporal evaluation of the human footprint in Colombia: Four decades of anthropic impact in highly biodiverse ecosystems. Ecological Indicators, 117, 106630.
 
+**URL:** [http://geonetwork.humboldt.org.co/geonetwork/srv/spa/catalog.search#/metadata/e29b399c-24ee-4c16-b19c-be2eb1ce0aae](http://geonetwork.humboldt.org.co/geonetwork/srv/spa/catalog.search#/metadata/e29b399c-24ee-4c16-b19c-be2eb1ce0aae)
 
-    [https://drive.google.com/drive/folders/16NDClDMq6Pn8ckxGzU2tl_DDYCatNGZ_?usp=sharing](https://drive.google.com/drive/folders/16NDClDMq6Pn8ckxGzU2tl_DDYCatNGZ_?usp=sharing)
+**Tipo:** Raster (tif).
 
+**Institución responsable\*:** Instituto de Investigación de Recursos Biológicos Alexander von Humboldt (IAVH)
 
-    Para mayor eficiencia en la ejecución,  comparación y uso del código del indicador, se proveen dos archivos adicionales:
+**Datos del responsable:**
 
-* “bien_conectado.Rproj”, archivo tipo proyecto R, permite una configuración rápida del directorio de trabajo y por tanto asegura la portabilidad de la carpeta [https://drive.google.com/file/d/1ugS16LCBVv4k2AWlkRAXAW4k7NQdptiH/view?usp=sharing](https://drive.google.com/file/d/1ugS16LCBVv4k2AWlkRAXAW4k7NQdptiH/view?usp=sharing)
-* “bien_conectado_cod_objetos_operativo.RData”, archivo tipo RData, almacenaje de los objetos del ambiente de R al momento de correr las rutinas (carpeta “bien_conectado_cod”) [https://drive.google.com/file/d/1M-Sygnw5ATljAA8XaF1qDFmP17N-Prr6/view?usp=sharing](https://drive.google.com/file/d/1M-Sygnw5ATljAA8XaF1qDFmP17N-Prr6/view?usp=sharing)
-2. Hoja metodológica en formato homologado, consta de 13 páginas en donde se describe el indicador, metodología, cálculos, flujos de datos y proceso SIG. Se puede encontrar en el siguiente enlace (carpeta “bien_conectado”):
+- Programa de Evaluación y Monitoreo
 
-    [https://docs.google.com/document/d/1JKEIbvSxcPzLmozpwJLKisagaMOy-NLI/edit?usp=sharing&ouid=110336385847508729052&rtpof=true&sd=true](https://docs.google.com/document/d/1JKEIbvSxcPzLmozpwJLKisagaMOy-NLI/edit?usp=sharing&ouid=110336385847508729052&rtpof=true&sd=true)
+Instituto de Investigación de Recursos Biológicos Alexander von Humboldt
 
+Camilo Correa
 
+ccorrea@humboldt.org.co
 
+Tel 3202767
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+- Administrador información geoespacial (Infraestructura Institucional de Datos - I2D)
 
+Instituto de Investigación de Recursos Biológicos Alexander von Humboldt
 
-![alt_text](images/image3.png "image_tooltip")
+Tel 3202767
 
+![](RackMultipart20221129-1-43ifm4_html_8b7d1aa431cd7e95.png)
 
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+**Frecuencia de medición de los datos/Años con datos disponibles:**
 
+- Anual
+- Semestral
+- Trimestral
 
-![alt_text](images/image4.png "image_tooltip")
+- Otro:
 
+**Tipo de fuente de información** _(Sección aún por definir)_
 
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+- Registro primario de información
 
+    - Encuesta
+    - Registros en campo
+    - Registro administrativo
 
-![alt_text](images/image5.png "image_tooltip")
+- Registro secundario de información
 
+    - Estimaciones directas
 
+    - Estimaciones indirectas
 
+    - Otro:
 
-3. Flujo de datos y diagramas de información: corresponden al procesamiento de insumos geográficos (Proceso SIG) y su posterior uso para calcular los indicadores (Diagrama de Datos). Los flujos se encuentran dentro de la hoja metodológica y en los siguientes enlaces (carpeta “bien_conectado”):
-* SIG 
+INSUMO 2
 
-    [https://docs.google.com/drawings/d/1vsfves-RCZxXkCszJFqRpjscGo_i5cVtuwA4xcVcv84/edit?usp=sharing](https://docs.google.com/drawings/d/1vsfves-RCZxXkCszJFqRpjscGo_i5cVtuwA4xcVcv84/edit?usp=sharing)
+**Nombre\*:** Límites continentales de Colombia.
 
-* Datos
+**Descripción:** Mapa con la delimitación continental de Colombia.
 
-    [https://docs.google.com/drawings/d/1XopTEP3n08VayvTKjvZXmGcKTTScLfZZYcw6ja3UOzA/edit?usp=sharing](https://docs.google.com/drawings/d/1XopTEP3n08VayvTKjvZXmGcKTTScLfZZYcw6ja3UOzA/edit?usp=sharing)
+**Referencia:**
 
-4. Propuestas de representación numérica. En este documento se muestran ejemplos de las representaciones, para las versiones completas por favor remítase al  hipervínculo citado después de este párrafo, en donde encontrará la totalidad de las representaciones numéricas, gráficas y geográficas propuestas para este índice (carpeta “bien_conectado/rep_num”): 
+**URL:**
 
-    [https://drive.google.com/drive/folders/1mt4kyWfXRv_vAOcly0mgMB_hRlOlubGF?usp=sharing](https://drive.google.com/drive/folders/1mt4kyWfXRv_vAOcly0mgMB_hRlOlubGF?usp=sharing)
+**Tipo:** Shapefile.
 
+**Institución responsable\*:** Instituto Geográfico Agustín Codazzi
 
-    El guión o script para crear las representaciones, “bien_conectado_cod_representaciones.R”, se encuentra en el siguiente enlace (carpeta “bien_conectado_cod”):
+**Datos del responsable:** IGAC
 
+**Frecuencia de medición de los datos/Años con datos disponibles:**
 
-    [https://drive.google.com/file/d/1v6BJyW00arKSHCpaY8M-n54DZfjxEuc9/view?usp=sharing](https://drive.google.com/file/d/1v6BJyW00arKSHCpaY8M-n54DZfjxEuc9/view?usp=sharing)
+- Anual
+- Semestral
+- Trimestral
 
-* Representación Numérica Nacional: tabla del porcentaje de Áreas Protegidas y conectadas (ProtConn) y Cambio en el porcentaje de Áreas Protegidas y Conectadas en el SINAP (dProtConn) para cada uno de los años referidos en la columna 1 a nivel nacional.
+- Otro:
 
-<table>
-  <tr>
-   <td>
-<strong>Año</strong>
-   </td>
-   <td><strong>ProtConn</strong>
-   </td>
-   <td><strong>dProtConn</strong>
-   </td>
-  </tr>
-  <tr>
-   <td><p style="text-align: right">
-1990</p>
+**Tipo de fuente de información** _(Sección aún por definir)_
 
-   </td>
-   <td><p style="text-align: right">
-2.2645</p>
+- Registro primario de información
 
-   </td>
-   <td><p style="text-align: right">
-0</p>
+    - Encuesta
+    - Registros en campo
+    - Registro administrativo
+    - Registro secundario de información
+    - Estimaciones directas
+    - Estimaciones indirectas
+    - Otro:
 
-   </td>
-  </tr>
-  <tr>
-   <td><p style="text-align: right">
-2000</p>
+INSUMO 3
 
-   </td>
-   <td><p style="text-align: right">
-2.2647</p>
+**Nombre\*:** Mapa del Sistema Nacional de Áreas Protegidas de Colombia.
 
-   </td>
-   <td><p style="text-align: right">
-0.01</p>
+**Descripción:** Mapa con la delimitación de las áreas protegidas existentes, tanto públicas como privadas en todo el territorio colombiano.
 
-   </td>
-  </tr>
-  <tr>
-   <td><p style="text-align: right">
-2010</p>
+**Referencia:**
 
-   </td>
-   <td><p style="text-align: right">
-2.7638</p>
+**URL:** [https://storage.googleapis.com/pnn-web/uploads/2013/08/MAPA-SINAP-julio-2019.pdf](https://storage.googleapis.com/pnn-web/uploads/2013/08/MAPA-SINAP-julio-2019.pdf)
 
-   </td>
-   <td><p style="text-align: right">
-22.04</p>
+**Tipo:** Shapefile.
 
-   </td>
-  </tr>
-  <tr>
-   <td><p style="text-align: right">
-2020</p>
+**Institución responsable\*:** PNN
 
-   </td>
-   <td><p style="text-align: right">
-4.5714</p>
+**Datos del responsable:** RUNAP
 
-   </td>
-   <td><p style="text-align: right">
-65.4</p>
+**Frecuencia de medición de los datos/Años con datos disponibles:**
 
-   </td>
-  </tr>
-</table>
+- Anual
+- Semestral
+- Trimestral
 
+- Otro:
 
+**Tipo de fuente de información** _(Sección aún por definir)_
 
+- Registro primario de información
 
-* Representación Numérica Territorial: tabla del porcentaje de áreas protegidas y conectadas (ProtConn) y Cambio en el porcentaje de Áreas Protegidas y Conectadas en el SINAP (dProtConn) para cada uno de los años analizados por sistema territorial.
+    - Encuesta
+    - Registros en campo
+    - Registro administrativo
+    - Registro secundario de información
+    - Estimaciones directas
+    - Estimaciones indirectas
+    - Otro:
 
-<table>
-  <tr>
-   <td>
-<strong>Territorial</strong>
-   </td>
-   <td><strong>ProtConn1990</strong>
-   </td>
-   <td><strong>ProtConn2000</strong>
-   </td>
-   <td><strong>dProtConn1990</strong>
-   </td>
-   <td><strong>dProtConn2000</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>Direccion Territorial Amazonia
-   </td>
-   <td><p style="text-align: right">
-5.087</p>
+INSUMO 4
 
-   </td>
-   <td><p style="text-align: right">
-5.087</p>
+**Nombre\*:** Mapa de Áreas Protegidas del Mundo
 
-   </td>
-   <td><p style="text-align: right">
-0</p>
+**Descripción:** Mapa con la delimitación de áreas protegidas y otras medidas de conservación efectivas basadas en áreas del planeta.
 
-   </td>
-   <td><p style="text-align: right">
-0</p>
+**Referencia:**
 
-   </td>
-  </tr>
-  <tr>
-   <td>Direccion Territorial Andes Nororientales
-   </td>
-   <td><p style="text-align: right">
-2.3698</p>
+**URL:** [https://www.protectedplanet.net/en/resources](https://www.protectedplanet.net/en/resources)
 
-   </td>
-   <td><p style="text-align: right">
-2.3901</p>
+**Tipo:** Shapefile.
 
-   </td>
-   <td><p style="text-align: right">
-0</p>
+**Institución responsable\*:** UNEP-WCMC
 
-   </td>
-   <td><p style="text-align: right">
-0.86</p>
+**Datos del responsable:**
 
-   </td>
-  </tr>
-  <tr>
-   <td>Direccion Territorial Andes Occidentales
-   </td>
-   <td><p style="text-align: right">
-1.8971</p>
+**Frecuencia de medición de los datos/Años con datos disponibles:**
 
-   </td>
-   <td><p style="text-align: right">
-1.893</p>
+- Anual
+- Semestral
+- Trimestral
 
-   </td>
-   <td><p style="text-align: right">
-0</p>
+- Otro:
 
-   </td>
-   <td><p style="text-align: right">
-0.22</p>
+**Tipo de fuente de información** _(Sección aún por definir)_
 
-   </td>
-  </tr>
-</table>
+- Registro primario de información
 
+    - Encuesta
+    - Registros en campo
+    - Registro administrativo
+    - Registro secundario de información
+    - Estimaciones directas
+    - Estimaciones indirectas
+    - Otro:
 
+**Bibliografía/Literatura citada** _._
 
+Beyer, Hawthorne L., Venter, Oscar, Grantham, Hedley S. and Watson, James E. M. (2019).Substantial losses in ecoregion intactness highlight urgency of globally coordinated action. Conservation Letters, 13 (2) e12592, e12592. doi: 10.1111/conl.12692
 
-5. Propuestas de representación gráfica (carpeta “bien_conectadp/rep_gra”):
+Castillo, L. S., Correa Ayram, C. A., Matallana Tobón, C. L., Corzo, G., Areiza, A., González-M., R., Serrano, F., Chalán Briceño, L., Sánchez Puertas, F., More, A., Franco, O., Bloomfield, H., Aguilera Orrury, V. L., Rivadeneira Canedo, C., Morón-Zambrano, V., Yerena, E., Papadakis, J., Cárdenas, J. J., Golden Kroner, R. E., & Godínez-Gómez, O. (2020). Connectivity of Protected Areas: Effect of Human Pressure and Subnational Contributions in the Ecoregions of Tropical Andean Countries. In Land (Vol. 9, Issue 8). [https://doi.org/10.3390/land9080239](https://doi.org/10.3390/land9080239)
 
-    [https://drive.google.com/drive/folders/1_nmKTaW6T38gbe6_swrt6SQtQvfqwSI2?usp=sharing](https://drive.google.com/drive/folders/1_nmKTaW6T38gbe6_swrt6SQtQvfqwSI2?usp=sharing)
+Correa Ayram, Camilo A. Manuel E. Mendoza, Andrés Etter, Diego R & Pérez Salicrup (2017). Anthropogenic impact on habitat connectivity: A multidimensional human footprint index evaluated in a highly biodiverse landscape of Mexico, _Ecological Indicators_, 72(1), 895-909
 
-* Representación Gráfica Nacional, en el eje x los periodos en donde se calculó el índice,  en el eje y el valor del indicador. Los valores de cada año representan el Cambio en el porcentaje de Áreas Protegidas y Conectadas en el SINAP (dProtConn). La curva de tendencia es de tipo lineal sin suavizado. No se propone a priori un identificador de meta dado que no se ha discutido en las mesas técnicas o presentado una propuesta anteriormente.
+Correa Ayram, Camilo & Mendoza, Manuel & Etter, Andres & Pérez-Salicrup, Diego. (2016). Habitat connectivity in biodiversity conservation: A review of recent studies and applications. Progress in Physical Geography. 40. 7-37. 10.1177/0309133315598713.
 
-    
+Crooks K R and Sanjayan M (2006) Connectivity Conservation. Cambridge, UK: Cambridge University Press.
 
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+Godínez-Gómez, O., & Correa Ayram C.A. (2020). Makurhini: Analyzing landscape connectivity.
 
+Rudnick D, Ryan S, Beier P, et al. (2012) The role of landscape connectivity in planning and implementing conservation and restoration priorities. Issues in Ecol-ogy 16: 20–20
 
-![alt_text](images/image6.jpg "image_tooltip")
+Santini, L., Saura, S., & Rondinini, C. (2016), Connectivity of the global network of protected areas. Diversity Distrib., 22: 199-211. https://doi.org/10.1111/ddi.12390
 
+Saura, S., Pascual-Hortal, L., (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: comparison with existing indices and application to a case study. Landsc. Urban Plan. 83, 91–103.
 
-* Representación Gráfica Territorial, en el eje x los periodos de tiempo considerados mientras que en y los valores de Cambio en el porcentaje de Áreas Protegidas y Conectadas por territorial (dProtConn). Se compuso una gráfica de 2 columnas por 3 filas con las gráficas para todas las regionales, en la siguiente gráfica se muestra la primera fila de tal gráfica:
+Saura, S., Rubio, L., (2010). A common currency for the different ways in which patches and links can contribute to habitat availability and connectivity in the landscape. Ecography 33, 523–537.
 
+Saura, S., Bastin, L., Battistella, L., Mandrici, A., & Dubois, G. (2017). Protected areas in the world's ecoregions: How well connected are they? Ecological Indicators, 76, 144–158. https://doi.org/10.1016/J.ECOLIND.2016.12.047
 
+Saura, S., Bertzky, B., Bastin, L., Battistella, L., Mandrici, A., & Dubois, G. (2018). Protected area connectivity: Shortfalls in global targets and country-level priorities. Biological Conservation, 219(July 2017), 53–67. https://doi.org/10.1016/j.biocon.2017.12.020
 
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+Saura, S., Bertzky, B., Bastin, L., Battistella, L., Mandrici, A., & Dubois, G. (2019). Global trends in protected area connectivity from 2010 to 2018. Biological Conservation, 238(May 2019), 108183. https://doi.org/10.1016/j.biocon.2019.07.028
 
+**Datos de quien elaboró y/o ajustó la hoja metodológica**
 
-![alt_text](images/image7.jpg "image_tooltip")
+_Nombre:_ Carlos Jair Muñoz Rodríguez
 
+_Cargo:_ Investigador Asistente
 
+_Dependencia y entidad:_ Programa de Evaluación y Monitoreo, Instituto de Investigación de Recursos Biológicos Alexander von Humboldt
 
+_Correo electrónico:_ cmunoz@humboldt.org.co
 
-6. Propuestas de representación geográfica (carpeta “bien_conectado/rep_geo”): 
+_Teléfono:_ 3202767
 
-    [https://drive.google.com/drive/folders/10jpBN4GwfsNMhaSG-nD-bB0QwjcPHDmz?usp=sharing](https://drive.google.com/drive/folders/10jpBN4GwfsNMhaSG-nD-bB0QwjcPHDmz?usp=sharing)
+**Datos para homologación con ficha técnica de la política SINAP CONPES**
 
-* Propuesta de Representación Nacional: no fueron propuestos  ya que el índice resume la información de todo el territorio Colombiano en un único dato porcentual, por lo que su representación geográfica no tiene sentido cartográfico. 
-* Territorial: paleta de colores viridis, y 7 etiquetas de colores siguiendo las indicaciones de las mesas técnicas (colores contrastables y que se mantengan en las representaciones de cada año). Representa el Cambio en el porcentaje de Áreas Protegidas y Conectadas por territorial (dProtConn) con respecto a cada par de años.
+**Información CONPES SINAP**
 
+No. Meta: 6.3.1 Aumentar el patrimonio natural y cultural conservado en el SINAP.
 
+**Entidades**
 
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image8.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+**Entidad líder de la meta SINAP** : Corresponde a la(s) entidad (es) líder que quedó consignada en la meta SINAP que contiene este indicador.
 
+**Entidades acompañantes de la meta SINAP** : Corresponde a la(s) entidad(es) que quedó consignada como acompañante en la meta SINAP que contiene este indicador.
 
-![alt_text](images/image8.png "image_tooltip")
+**Entidad responsable del indicador:** Entidad involucrada en la concertación del indicador y de las metas. Por su misionalidad adelanta acciones de política orientadas al cumplimiento de la meta.
 
+**Entidad responsable de reportar el indicador:** Corresponde a la entidad que estará encargada de reportar al DANE la información anual de avance sobre el indicador. Generalmente coincide con la fuente de información. Sólo se incluyen entidades que hacen parte del Sistema Estadístico Nacional SEN.
 
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+**Publicación o difusión oficial de información**
 
+**Fecha de publicación:** Fecha estimada en la que recurrentemente se publican los datos de cierre de la vigencia de este indicador
 
-![alt_text](images/image9.png "image_tooltip")
+**Rezago del indicador:** Días, después de cumplido el cierre de la vigencia (año) que tarda la información para consolidarse, estar disponible y ser reportada.
 
+**Disponible en (link):** URL específica en donde puede consultar la información de este indicador en línea
 
+**Fecha consulta:** DD/MM/AAAA
 
+**Desagregaciones**
 
-* Territorial individual: no fueron propuestos  ya que el índice resume la información de todo el sistema territorial en un único dato porcentual, por lo que su representación geográfica no tiene sentido cartográfico. 
-7. Ficha de indicador Dirección Nacional de Planeación Actualizada: [https://docs.google.com/spreadsheets/d/1lYCTgv8VJuT2KEWSVaOhU7vdczhdb0MB/edit?usp=sharing&ouid=110336385847508729052&rtpof=true&sd=true](https://docs.google.com/spreadsheets/d/1lYCTgv8VJuT2KEWSVaOhU7vdczhdb0MB/edit?usp=sharing&ouid=110336385847508729052&rtpof=true&sd=true)
-8. La reunión con los desarrolladores fue realizada el día 13 de septiembre de 2021, la presentación fue la siguiente
+**Sociodemográfica:** Sexo \_\_\_\_ Edad \_\_\_ Etnia \_\_\_\_ Discapacidad
 
-    [https://docs.google.com/presentation/d/1jGQ0FiYVMpmCILMWbZBmM6Hh8h40xlti/edit?usp=sharing&ouid=110336385847508729052&rtpof=true&sd=true](https://docs.google.com/presentation/d/1jGQ0FiYVMpmCILMWbZBmM6Hh8h40xlti/edit?usp=sharing&ouid=110336385847508729052&rtpof=true&sd=true)
+**Territorial:** Regional \_X\_ Departamental \_\_\_ Municipal \_\_\_\_
 
+**Área:** Cabecera \_\_\_ Resto \_\_\_
 
-    
+**Otra ¿cuál?:**
 
-<p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image10.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+**Ninguna** \_\_\_\_
 
+**Tipo de acumulación**
 
-![alt_text](images/image10.png "image_tooltip")
+Stock \_\_\_\_ Flujo \_\_\_\_ Acumulado \_X\_ Capacidad \_\_\_\_ Reducción \_\_\_ Reducción Anual
 
+**Serie histórica disponible**
+
+| Año | Dato |
+| --- | --- |
+| 1990 | Porcentaje  |
+| 2000 | Porcentaje  |
+| 2010 | Porcentaje  |
+| 2020 | Porcentaje  |
+
+**Justificación de proyección de metas**
+
+**Tipo de proyección por**
+
+Serie histórica \_X\_\_ Ref. nacional\_\_ Otro \_\_
+
+Modelo sectorial \_\_\_\_ Ref. internacional\_\_ ¿Cuál? \_\_\_
+
+**Supuestos utilizados**
+
+La distancia media recorrida por un dispersor (dmed) usado para el cálculo representa al promedio de movimiento de las especies y por lo tanto es representativa para los cálculos. La distancia usada para definir las áreas transfronterizas se mantienen constantes. El cambio en el indicador es resultado de la creación o transformación de Áreas Protegidas.
+
+**Metodología de cálculo**
+
+Diferencia en el porcentaje de áreas protegidas y conectadas entre los pares de años ponderado a el primer año del par multiplicado por 100.
+
+**Datos persona responsable de reportar el indicador dentro de la entidad**
+
+Nombre
+
+Cargo
+
+Entidad
+
+Dependencia
+
+Correo Electrónico
+
+Teléfono
+
+**Aprobación entidad responsable del indicador**
+
+Nombre funcionario
+
+Cargo
+
+Dependencia
+
+**Aprobación DNP**
+
+Nombre funcionario
+
+Cargo
+
+Dependencia
+
+**Fecha de aprobación ficha técnica**
+
+16

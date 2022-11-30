@@ -1,5 +1,5 @@
-#VIÑETA TÉCNICA DE INDICADORES
-##Cambio en el porcentaje de área protegida y conectada del SINAP
+# VIÑETA TÉCNICA DE INDICADORES
+## Cambio en el porcentaje de área protegida y conectada del SINAP
 
 **Identificación del indicador**
 
@@ -45,14 +45,14 @@ Entonces, la probabilidad conectividad continental del SINAP se evaluó por medi
 
 El cálculo de ProtConn se define en la ecuación 1,
 
-1.
+1. ![Ecuacion 1 bien conectado](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/bien_conectado_eq1.png)
 
 
 En donde _n_ corresponde a la cantidad de AP dentro del territorio Colombiano, t es el número de AP dentro de un área buffer transfronteriza (en este caso para el nivel nacional se propone 100 km y en el nivel regional 20 km) fuera de los límites geográficos, ai y aj son el atributo de las AP i y j (en este caso el tamaño del AP), AL es el máximo atributo de paisaje (aquí el área total de la unidad de análisis), y p \* ij es la probabilidad máxima del producto de todas las rutas que conectan los nodos i y j.). El atributo de las AP es igual al área de las AP, en particular para esas AP que están dentro de la unidad de análisis, e igual a 0 para las AP transfronterizas fuera de la unidad de análisis. De esta manera, en la evaluación se analiza una red en la que las fuentes y destinos de los flujos de dispersión son solo aquellas AP dentro de la unidad de análisis (aquellas con ai \> 0), pero en la que el papel potencial de las AP fuera de los límites de la unidad aportan como conectores o stepping stones entre las AP (Saura et al. 2017).
 
 El cálculo del indicador _dProtConn_corresponde al porcentaje de variación de Protconn y se define en la ecuación 2,
 
-2.
+2. ![Ecuacion 2 bien conectado](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/bien_conectado_eq2.png)
 
 En donde ProtConntn+1 corresponde al valor de Protconn en un tiempo 2 (final) y ProtConntn
 
@@ -70,11 +70,15 @@ corresponde al valor de Protconn en un tiempo 1 (inicial).
 
 **Proceso SIG:**
 
-![](RackMultipart20221129-1-43ifm4_html_dda6706e60c377ae.png)
+![Diagrama SIG](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/bien_conectado_dSig.png)
 
 **Mapa de flujo de datos:**
 
-![](RackMultipart20221129-1-43ifm4_html_ef908669eb16a3f4.png)
+![Diagrama de datos](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/bien_conectado_dDatos.png)
+
+**Ejecutar el indicador:**
+
+La rutina estandarizada y documentada para el cálculo del indicador se encuentra escrito en lenguaje R y se denomina [“4_1_bien_conectado_cod_operativo.R”](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_1_bien_conectado_cod_operativo.R). Mientras que las representaciones geograficas, graficas y tabulares se construyen con el codigo [“4_1_bien_conectado_cod_operativo.R"](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_2_bien_conectado_cod_representaciones.R).
 
 **Interpretación del indicador:**
 
@@ -99,42 +103,6 @@ Representación gráfica: Cambio en el porcentaje de áreas conectadas y protegi
 **Restricciones o limitaciones del indicador:** El cálculo del indicador depende por una parte, de las modificaciones de las áreas protegidas del territorio colombiano de acuerdo a la inscripción de nuevas áreas protegidas en el Registro Único Nacional de Áreas Protegidas (RUNAP) o cambios en su delimitación; por otra depende de la periodicidad y calidad de las actualizaciones globales de áreas protegidas dentro de la base de datos WDPA. El cálculo del indicador depende también de la distancia media a usar en el cálculo de la métrica ProtConn; sin embargo, se recomienda que se sigan los lineamientos de 10 km por tener un amplio uso en el campo de la conectividad y estar suficientemente soportado en literatura. Asimismo, las distancias usadas desde los límites nacionales (o territoriales) para definir las áreas transfronterizas pueden hacer variar el indicador, sin embargo pruebas realizadas han demostrado que tal variación es mínima.
 
 **Fuentes de incertidumbre:** La insuficiente delimitación de áreas protegidas, depuración del RUNAP y parámetros usados en el cálculo de la metrica ProtConn.
-
-**Fuentes de los datos\***
-
-INSUMO 1
-
-**Nombre\*:** LHFI para los años 1990, 2000, 2010, 2018
-
-**Descripción:** Mapa de la huella humana para Colombia en los años 1990-2000-2010-2018
-
-**Referencia:**
-
-Correa Ayram, C. A., Etter, A., Díaz-Timoté, J., Rodríguez Buriticá, S., Ramírez, W., & Corzo, G. (2020). Spatiotemporal evaluation of the human footprint in Colombia: Four decades of anthropic impact in highly biodiverse ecosystems. Ecological Indicators, 117, 106630.
-
-**URL:** [http://geonetwork.humboldt.org.co/geonetwork/srv/spa/catalog.search#/metadata/e29b399c-24ee-4c16-b19c-be2eb1ce0aae](http://geonetwork.humboldt.org.co/geonetwork/srv/spa/catalog.search#/metadata/e29b399c-24ee-4c16-b19c-be2eb1ce0aae)
-
-**Tipo:** Raster (tif).
-
-**Institución responsable\*:** Instituto de Investigación de Recursos Biológicos Alexander von Humboldt (IAVH)
-
-**Datos del responsable:**
-
-- Programa de Evaluación y Monitoreo
-
-Instituto de Investigación de Recursos Biológicos Alexander von Humboldt
-
-Camilo Correa
-
-ccorrea@humboldt.org.co
-
-Tel 3202767
-
-- Administrador información geoespacial (Infraestructura Institucional de Datos - I2D)
-
-Instituto de Investigación de Recursos Biológicos Alexander von Humboldt
-
-Tel 3202767
 
 **Bibliografía/Literatura citada** _._
 

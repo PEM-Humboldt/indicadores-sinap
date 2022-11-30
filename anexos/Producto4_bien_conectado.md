@@ -1,8 +1,5 @@
-![](RackMultipart20221129-1-43ifm4_html_8b7d1aa431cd7e95.png)
-
-**FICHA TÉCNICA DE INDICADORES**
-
-**Cambio en el porcentaje de área protegida y conectada del SINAP**
+#VIÑETA TÉCNICA DE INDICADORES
+##Cambio en el porcentaje de área protegida y conectada del SINAP
 
 **Identificación del indicador**
 
@@ -12,35 +9,17 @@
 
 **Objetivo:** Aumentar el patrimonio natural y cultural conservado en el SINAP.
 
-**ID/Nomenclatura\*:** Ia
-
-**Periodicidad\***
-
-- Anual
-- Semestral
-- Trimestral
-
-- Otro: Cada año o cada semestre
-
 **Cobertura geográfica**
 
 - Nacional
 - Subsistema
 
-- Departamental
-
-- Otra:
-
-**Línea base\*:**
-
-1990, 2000, 2010, 2020
-
 **Insumos del indicador:**
 
-- Mapas de Huella Humana 1990, 2000, 2010, 2018
+- Mapas de Huella Humana
 - Mapa Límites Nacionales de la República de Colombia
-- Mapas del Sistema Nacional de Áreas Protegidas de Colombia 1990, 2000, 2010, 2020
-- Mapas de Áreas Protegidas del Mundo 1990, 2000, 2010, 2020
+- Mapas del Sistema Nacional de Áreas Protegidas de Colombia
+- Mapas de Áreas Protegidas del Mundo
 
 **Descripción general del indicador\***
 
@@ -68,15 +47,12 @@ El cálculo de ProtConn se define en la ecuación 1,
 
 1.
 
-![](RackMultipart20221129-1-43ifm4_html_8f18c92df61af46.png)
 
 En donde _n_ corresponde a la cantidad de AP dentro del territorio Colombiano, t es el número de AP dentro de un área buffer transfronteriza (en este caso para el nivel nacional se propone 100 km y en el nivel regional 20 km) fuera de los límites geográficos, ai y aj son el atributo de las AP i y j (en este caso el tamaño del AP), AL es el máximo atributo de paisaje (aquí el área total de la unidad de análisis), y p \* ij es la probabilidad máxima del producto de todas las rutas que conectan los nodos i y j.). El atributo de las AP es igual al área de las AP, en particular para esas AP que están dentro de la unidad de análisis, e igual a 0 para las AP transfronterizas fuera de la unidad de análisis. De esta manera, en la evaluación se analiza una red en la que las fuentes y destinos de los flujos de dispersión son solo aquellas AP dentro de la unidad de análisis (aquellas con ai \> 0), pero en la que el papel potencial de las AP fuera de los límites de la unidad aportan como conectores o stepping stones entre las AP (Saura et al. 2017).
 
 El cálculo del indicador _dProtConn_corresponde al porcentaje de variación de Protconn y se define en la ecuación 2,
 
 2.
-
-![](RackMultipart20221129-1-43ifm4_html_586f62f53e32b7b2.png)
 
 En donde ProtConntn+1 corresponde al valor de Protconn en un tiempo 2 (final) y ProtConntn
 
@@ -104,7 +80,7 @@ corresponde al valor de Protconn en un tiempo 1 (inicial).
 
 Suponiendo que un país o región al que se calculó la métrica Protconn, presenta el 2% de su área protegida y conectada en el tiempo n y 4% en el tiempo n+1, entonces el cambio en el Porcentaje de áreas protegidas y conectadas o dProtConn entre n y n+1 es de 100%. Habiendo pues un cambio entre períodos del 100% (en otras palabras, del doble) en áreas protegidas y conectadas.
 
-**Forma de almacenamiento de los resultados:** _(Aún por definir)_ El resultado de análisis estará alojado en el XXXX del sistema de información de monitoreo y puede ser descargado de XXXX.
+**Forma de almacenamiento de los resultados:** El resultado de análisis estará alojado en el XXXX del sistema de información de monitoreo y puede ser descargado de XXXX.
 
 **Forma de presentación de los resultados:**
 
@@ -115,13 +91,6 @@ Representación gráfica: Cambio en el porcentaje de áreas conectadas y protegi
 **Pertinencia del indicador**
 
 **Finalidad/Propósito/Justificación:** Este indicador permite monitorear la conectividad del SINAP, con el fin de determinar si el Sistema Nacional de Áreas Protegidas está bien conectado. Lo anterior en relación a las metas de conservación nacionales e internacionales vigentes.
-
-**Convenios y acuerdos nacionales o internacionales:** _(Revisar para complementar)\*_
-
-- Directriz CONPES 3680: Consolidar un Sistema de Información y Monitoreo del SINAP para la identificación de vacíos y prioridades de conservación.
-- Meta Aichi 11: Para 2020, al menos el 17% de las zonas terrestres y de aguas continentales y el 10% de las zonas marinas y costeras, especialmente aquellas de particular importancia para la diversidad biológica y los servicios de los ecosistemas, se conservan por medio de sistemas de áreas protegidas.
-
-**Metas/Estándares\*:** Por definir. (x).
 
 **Observaciones y aclaraciones generales del indicador**
 
@@ -167,140 +136,6 @@ Instituto de Investigación de Recursos Biológicos Alexander von Humboldt
 
 Tel 3202767
 
-![](RackMultipart20221129-1-43ifm4_html_8b7d1aa431cd7e95.png)
-
-**Frecuencia de medición de los datos/Años con datos disponibles:**
-
-- Anual
-- Semestral
-- Trimestral
-
-- Otro:
-
-**Tipo de fuente de información** _(Sección aún por definir)_
-
-- Registro primario de información
-
-    - Encuesta
-    - Registros en campo
-    - Registro administrativo
-
-- Registro secundario de información
-
-    - Estimaciones directas
-
-    - Estimaciones indirectas
-
-    - Otro:
-
-INSUMO 2
-
-**Nombre\*:** Límites continentales de Colombia.
-
-**Descripción:** Mapa con la delimitación continental de Colombia.
-
-**Referencia:**
-
-**URL:**
-
-**Tipo:** Shapefile.
-
-**Institución responsable\*:** Instituto Geográfico Agustín Codazzi
-
-**Datos del responsable:** IGAC
-
-**Frecuencia de medición de los datos/Años con datos disponibles:**
-
-- Anual
-- Semestral
-- Trimestral
-
-- Otro:
-
-**Tipo de fuente de información** _(Sección aún por definir)_
-
-- Registro primario de información
-
-    - Encuesta
-    - Registros en campo
-    - Registro administrativo
-    - Registro secundario de información
-    - Estimaciones directas
-    - Estimaciones indirectas
-    - Otro:
-
-INSUMO 3
-
-**Nombre\*:** Mapa del Sistema Nacional de Áreas Protegidas de Colombia.
-
-**Descripción:** Mapa con la delimitación de las áreas protegidas existentes, tanto públicas como privadas en todo el territorio colombiano.
-
-**Referencia:**
-
-**URL:** [https://storage.googleapis.com/pnn-web/uploads/2013/08/MAPA-SINAP-julio-2019.pdf](https://storage.googleapis.com/pnn-web/uploads/2013/08/MAPA-SINAP-julio-2019.pdf)
-
-**Tipo:** Shapefile.
-
-**Institución responsable\*:** PNN
-
-**Datos del responsable:** RUNAP
-
-**Frecuencia de medición de los datos/Años con datos disponibles:**
-
-- Anual
-- Semestral
-- Trimestral
-
-- Otro:
-
-**Tipo de fuente de información** _(Sección aún por definir)_
-
-- Registro primario de información
-
-    - Encuesta
-    - Registros en campo
-    - Registro administrativo
-    - Registro secundario de información
-    - Estimaciones directas
-    - Estimaciones indirectas
-    - Otro:
-
-INSUMO 4
-
-**Nombre\*:** Mapa de Áreas Protegidas del Mundo
-
-**Descripción:** Mapa con la delimitación de áreas protegidas y otras medidas de conservación efectivas basadas en áreas del planeta.
-
-**Referencia:**
-
-**URL:** [https://www.protectedplanet.net/en/resources](https://www.protectedplanet.net/en/resources)
-
-**Tipo:** Shapefile.
-
-**Institución responsable\*:** UNEP-WCMC
-
-**Datos del responsable:**
-
-**Frecuencia de medición de los datos/Años con datos disponibles:**
-
-- Anual
-- Semestral
-- Trimestral
-
-- Otro:
-
-**Tipo de fuente de información** _(Sección aún por definir)_
-
-- Registro primario de información
-
-    - Encuesta
-    - Registros en campo
-    - Registro administrativo
-    - Registro secundario de información
-    - Estimaciones directas
-    - Estimaciones indirectas
-    - Otro:
-
 **Bibliografía/Literatura citada** _._
 
 Beyer, Hawthorne L., Venter, Oscar, Grantham, Hedley S. and Watson, James E. M. (2019).Substantial losses in ecoregion intactness highlight urgency of globally coordinated action. Conservation Letters, 13 (2) e12592, e12592. doi: 10.1111/conl.12692
@@ -328,116 +163,3 @@ Saura, S., Bastin, L., Battistella, L., Mandrici, A., & Dubois, G. (2017). Prote
 Saura, S., Bertzky, B., Bastin, L., Battistella, L., Mandrici, A., & Dubois, G. (2018). Protected area connectivity: Shortfalls in global targets and country-level priorities. Biological Conservation, 219(July 2017), 53–67. https://doi.org/10.1016/j.biocon.2017.12.020
 
 Saura, S., Bertzky, B., Bastin, L., Battistella, L., Mandrici, A., & Dubois, G. (2019). Global trends in protected area connectivity from 2010 to 2018. Biological Conservation, 238(May 2019), 108183. https://doi.org/10.1016/j.biocon.2019.07.028
-
-**Datos de quien elaboró y/o ajustó la hoja metodológica**
-
-_Nombre:_ Carlos Jair Muñoz Rodríguez
-
-_Cargo:_ Investigador Asistente
-
-_Dependencia y entidad:_ Programa de Evaluación y Monitoreo, Instituto de Investigación de Recursos Biológicos Alexander von Humboldt
-
-_Correo electrónico:_ cmunoz@humboldt.org.co
-
-_Teléfono:_ 3202767
-
-**Datos para homologación con ficha técnica de la política SINAP CONPES**
-
-**Información CONPES SINAP**
-
-No. Meta: 6.3.1 Aumentar el patrimonio natural y cultural conservado en el SINAP.
-
-**Entidades**
-
-**Entidad líder de la meta SINAP** : Corresponde a la(s) entidad (es) líder que quedó consignada en la meta SINAP que contiene este indicador.
-
-**Entidades acompañantes de la meta SINAP** : Corresponde a la(s) entidad(es) que quedó consignada como acompañante en la meta SINAP que contiene este indicador.
-
-**Entidad responsable del indicador:** Entidad involucrada en la concertación del indicador y de las metas. Por su misionalidad adelanta acciones de política orientadas al cumplimiento de la meta.
-
-**Entidad responsable de reportar el indicador:** Corresponde a la entidad que estará encargada de reportar al DANE la información anual de avance sobre el indicador. Generalmente coincide con la fuente de información. Sólo se incluyen entidades que hacen parte del Sistema Estadístico Nacional SEN.
-
-**Publicación o difusión oficial de información**
-
-**Fecha de publicación:** Fecha estimada en la que recurrentemente se publican los datos de cierre de la vigencia de este indicador
-
-**Rezago del indicador:** Días, después de cumplido el cierre de la vigencia (año) que tarda la información para consolidarse, estar disponible y ser reportada.
-
-**Disponible en (link):** URL específica en donde puede consultar la información de este indicador en línea
-
-**Fecha consulta:** DD/MM/AAAA
-
-**Desagregaciones**
-
-**Sociodemográfica:** Sexo \_\_\_\_ Edad \_\_\_ Etnia \_\_\_\_ Discapacidad
-
-**Territorial:** Regional \_X\_ Departamental \_\_\_ Municipal \_\_\_\_
-
-**Área:** Cabecera \_\_\_ Resto \_\_\_
-
-**Otra ¿cuál?:**
-
-**Ninguna** \_\_\_\_
-
-**Tipo de acumulación**
-
-Stock \_\_\_\_ Flujo \_\_\_\_ Acumulado \_X\_ Capacidad \_\_\_\_ Reducción \_\_\_ Reducción Anual
-
-**Serie histórica disponible**
-
-| Año | Dato |
-| --- | --- |
-| 1990 | Porcentaje  |
-| 2000 | Porcentaje  |
-| 2010 | Porcentaje  |
-| 2020 | Porcentaje  |
-
-**Justificación de proyección de metas**
-
-**Tipo de proyección por**
-
-Serie histórica \_X\_\_ Ref. nacional\_\_ Otro \_\_
-
-Modelo sectorial \_\_\_\_ Ref. internacional\_\_ ¿Cuál? \_\_\_
-
-**Supuestos utilizados**
-
-La distancia media recorrida por un dispersor (dmed) usado para el cálculo representa al promedio de movimiento de las especies y por lo tanto es representativa para los cálculos. La distancia usada para definir las áreas transfronterizas se mantienen constantes. El cambio en el indicador es resultado de la creación o transformación de Áreas Protegidas.
-
-**Metodología de cálculo**
-
-Diferencia en el porcentaje de áreas protegidas y conectadas entre los pares de años ponderado a el primer año del par multiplicado por 100.
-
-**Datos persona responsable de reportar el indicador dentro de la entidad**
-
-Nombre
-
-Cargo
-
-Entidad
-
-Dependencia
-
-Correo Electrónico
-
-Teléfono
-
-**Aprobación entidad responsable del indicador**
-
-Nombre funcionario
-
-Cargo
-
-Dependencia
-
-**Aprobación DNP**
-
-Nombre funcionario
-
-Cargo
-
-Dependencia
-
-**Fecha de aprobación ficha técnica**
-
-16

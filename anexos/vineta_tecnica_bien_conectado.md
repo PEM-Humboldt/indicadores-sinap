@@ -82,8 +82,6 @@ La rutina estandarizada y documentada para el cálculo del indicador se encuentr
 
 Suponiendo que un país o región al que se calculó la métrica Protconn, presenta el 2% de su área protegida y conectada en el tiempo n y 4% en el tiempo n+1, entonces el cambio en el Porcentaje de áreas protegidas y conectadas o dProtConn entre n y n+1 es de 100%. Habiendo pues un cambio entre períodos del 100% (en otras palabras, del doble) en áreas protegidas y conectadas.
 
-**Forma de almacenamiento de los resultados:** El resultado de análisis estará alojado en el XXXX del sistema de información de monitoreo y puede ser descargado de XXXX.
-
 **Forma de presentación de los resultados:**
 
 Representación espacial: Mapas del cambio en el porcentaje de áreas conectadas y protegidas del orden territorial. En cuanto al orden nacional no fueron creados mapas ya que el índice resume la información de todo el territorio Colombiano en un único dato porcentual, por lo que su representación geográfica no tiene sentido cartográfico.

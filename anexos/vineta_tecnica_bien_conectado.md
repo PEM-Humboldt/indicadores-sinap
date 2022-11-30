@@ -5,9 +5,7 @@
 
 **Iniciativa en la que se encuentra:** Sistema de Información de Monitoreo del SINAP.
 
-**Atributo\*:** Bien Conectado (I).
-
-**Objetivo:** Aumentar el patrimonio natural y cultural conservado en el SINAP.
+**Atributo\*:** Bien Conectado.
 
 **Cobertura geográfica**
 
@@ -78,7 +76,7 @@ corresponde al valor de Protconn en un tiempo 1 (inicial).
 
 **Ejecutar el indicador:**
 
-La rutina estandarizada y documentada para el cálculo del indicador se encuentra escrito en lenguaje R y se denomina [“4_1_bien_conectado_cod_operativo.R”](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_1_bien_conectado_cod_operativo.R). Mientras que las representaciones geograficas, graficas y tabulares se construyen con el codigo [“4_1_bien_conectado_cod_operativo.R"](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_2_bien_conectado_cod_representaciones.R).
+La rutina estandarizada y documentada para el cálculo del indicador se encuentra escrito en lenguaje R y se denomina [4_1_bien_conectado_cod_operativo.R](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_1_bien_conectado_cod_operativo.R). Mientras que las representaciones geograficas, graficas y tabulares se construyen con el codigo [4_1_bien_conectado_cod_representaciones.R](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_2_bien_conectado_cod_representaciones.R).
 
 **Interpretación del indicador:**
 

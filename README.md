@@ -67,12 +67,19 @@ library(devtools)
 library(remotes)
 install_github("connectscape/Makurhini", dependencies = TRUE, upgrade = "never")
 ```
+En caso de encontrar problemas al ejecutar el código, es posible que la versión de Makhurini sea responsable del mal funcionamiento. Desinstale la versión de Makhurini que tenga e instale con los siguientes comandos
+
+```
+library(devtools)
+library(remotes)
+remotes::install_github("connectscape/Makurhini@0d9958b38a320de472a3c6245a1d3bb9353929df")
+```
 
 Para mas información, ver documentacion del [paquete](https://github.com/connectscape/Makurhini).
 
 ##### Representaciones
 
-Dentro del contexto del proyecto SIM-SINAP las representaciones númericas, gráficas y geográficas hace alusión a tablas, graficas y mapas respectivamente. Las representaciones generadas con las capas base de ejemplo ubicadas dentro de este repositorio son ejemplos de las reales, no versiones finales, por lo que tales representaciones no coinciden con los presentados en el proyecto SIM-SINAP. Revise los documentos en la carpeta anexos para encontrar enlaces a versiones finales.
+Dentro del contexto del proyecto SIM-SINAP las representaciones númericas, gráficas y geográficas hace alusión a tablas, graficas y mapas respectivamente. Las representaciones generadas con las capas base de ejemplo ubicadas dentro de este repositorio son ejemplos de las reales, no versiones finales, por lo que tales representaciones no coinciden con los presentados en el proyecto SIM-SINAP.
 
 ```
 "sf" version 1.0-2
@@ -121,6 +128,10 @@ El indicador “Cambio en la media de la representatividad de integridad estruct
 #### Cambio en el porcentaje de área protegida y conectada del SINAP
 
 El indicador “Cambio en el Porcentaje de área protegida y conectada del SINAP” corresponde al cambio en el porcentaje de la superficie terrestre del país cubierta por tierras protegidas y bien conectadas establecida por medio de la métrica de conectividad Protconn en diferentes periodos y su variación temporal. El índice usa como insumos el mapa de huella humana que abarca toda Colombia para los años 1990, 2000, 2010 y 2018 (como variable más cercana al 2020). Además, usa los límites geográficos nacionales (o territoriales) como área de estudio en donde se establece el porcentaje conectado y protegido. También se hace uso de los límites geográficos de las unidades del Sistema Nacional de Áreas Protegidas (SINAP) de cuatro periodos (1990, 2000, 2010 y 2020) y los límites de las Áreas Protegidas del Mundo (WDPA) de la misma temporalidad del SINAP. El indicador usa las Áreas Protegidas mundiales informadas en el WDPA para establecer la influencia potencial de estas a la conectividad del SINAP, al generarse un buffer de 100 km alrededor de los límites nacionales (20 kilómetros para los límites territoriales) e incluir todas las Áreas Protegidas (AP) que interceptan total o parcialmente tal zona y fueron unidas a los mapas del SINAP Colombia. Luego se calcula la métrica ProtConn usando el paquete Makurhini por cada período usando una distancia de dispersión de 10 kilómetros. El indicador cambio en el Porcentaje de área protegida y conectada del SINAP se calcula al buscar la diferencia en el ProtConn de periodos sucesivos.
+
+-[Documento técnico extenso del indicador: Cambio en el porcentaje de área protegida y conectada del SINAP](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/anexos/Producto4_bien_conectado.md)
+-[Codigo operativo](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_1_bien_conectado_cod_operativo.R)
+-[Codigo representaciones](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_2_bien_conectado_cod_representaciones.R)
 
 
 ### Referencias

@@ -1,7 +1,7 @@
 # VIÑETA TÉCNICA DE INDICADORES
 ## Cambio en el porcentaje de área protegida y conectada del SINAP
 
-**Identificación del indicador**
+### Identificación del indicador
 
 **Iniciativa en la que se encuentra:** Sistema de Información de Monitoreo del SINAP.
 
@@ -19,7 +19,7 @@
 - Mapas del Sistema Nacional de Áreas Protegidas de Colombia
 - Mapas de Áreas Protegidas del Mundo
 
-**Descripción general del indicador\***
+### Descripción general del indicador
 
 **Definición:** El indicador "Cambio en el Porcentaje de área protegida y conectada del SINAP" corresponde al cambio en el porcentaje de la superficie terrestre del país cubierta por tierras protegidas y bien conectadas establecida por medio de la métrica de conectividad Protconn en diferentes periodos y su variación temporal. El índice usa como insumos el mapa de huella humana que abarca toda Colombia para los años 1990, 2000, 2010 y 2018 (como variable más cercana al 2020). Además, usa los límites geográficos nacionales (o territoriales) como área de estudio en donde se establece el porcentaje conectado y protegido. También se hace uso de los límites geográficos de las unidades del Sistema Nacional de Áreas Protegidas (SINAP) de cuatro periodos (1990, 2000, 2010 y 2020) y los límites de las Áreas Protegidas del Mundo (WDPA) de la misma temporalidad del SINAP. El indicador usa las Áreas Protegidas mundiales informadas en el WDPA para establecer la influencia potencial de estas a la conectividad del SINAP, al generarse un buffer de 100 km alrededor de los límites nacionales (20 kilómetros para los límitesterritoriales) e incluir todas las Áreas Protegidas (AP) que interceptan total o parcialmente tal zona y fueron unidas a los mapas del SINAP Colombia. Luego se calcula la métrica ProtConn usando el paquete Makurhini por cada período usando una distancia de dispersión de 10 kilómetros. El indicador cambio en el Porcentaje de área protegida y conectada del SINAP se calcula al buscar la diferencia en el ProtConn de periodos sucesivos. Dado que el proceso se repite con cada uno de los periodos seleccionados del SINAP, se obtienen medidas multitemporales y a escalas nacionales de la conectividad, permitiendo identificar la variación de las unidades del SINAP para proteger el flujo de materia, organismos y energía a través del paisaje dentro de una matriz de cambio antrópico y de resistencia a la movilidad de las especies.
 
@@ -29,7 +29,7 @@ La conectividad del paisaje es una de las cualidades vitales de las Áreas Prote
 
 **Unidad de medida del indicador\*:** Porcentaje (%)
 
-**Metodología de cálculo\*:**
+### Metodología de cálculo
 
 La Conectividad de las Áreas Protegidas (AP) en Colombia se cuantificó por medio de la métrica Protected Connected Land (ProtConn; Saura et al. 2017, Saura et al. 2018, Saura 2019). ProtConn corresponde al porcentaje de la superficie terrestre del país cubierta por tierras protegidas y bien conectadas. La métrica es el resultado de la combinación, a través del análisis de redes, de los tamaños, la cobertura y la disposición espacial de las AP con distancias de dispersión consideradas para las especies.  En esta red, los nodos corresponden a las AP ponderadas. Los enlaces representan la posibilidad de movimiento entre nodos (áreas protegidas) y están ponderados por la probabilidad de dispersión directa entre ellos. Dada esta representación gráfica, la probabilidad de conectividad se define como la probabilidad de que dos ubicaciones seleccionadas al azar dentro de un ecosistema caigan en zonas protegidas que están conectadas entre sí.  El indicador ProtConn es, en su forma propuesta, fácil de comunicar a los usuarios finales y permite la comparación con los objetivos nacionales y globales para la conectividad de las AP así como su análisis de cambio en el tiempo.
 
@@ -76,7 +76,9 @@ corresponde al valor de Protconn en un tiempo 1 (inicial).
 
 **Ejecutar el indicador:**
 
-La rutina estandarizada y documentada para el cálculo del indicador se encuentra escrito en lenguaje R y se denomina [4_1_bien_conectado_cod_operativo.R](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_1_bien_conectado_cod_operativo.R). Mientras que las representaciones geograficas, graficas y tabulares se construyen con el codigo [4_1_bien_conectado_cod_representaciones.R](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_2_bien_conectado_cod_representaciones.R).
+La rutina estandarizada y documentada para el cálculo del indicador se encuentra escrito en lenguaje R y se denomina [4_1_bien_conectado_cod_operativo.R](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_1_bien_conectado_cod_operativo.R). Mientras que las representaciones geograficas, graficas y tabulares se construyen con el codigo [4_2_bien_conectado_cod_representaciones.R](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/4_2_bien_conectado_cod_representaciones.R).
+
+### Observaciones y aclaraciones generales del indicador
 
 **Interpretación del indicador:**
 
@@ -92,15 +94,11 @@ Representación gráfica: Cambio en el porcentaje de áreas conectadas y protegi
 
 **Finalidad/Propósito/Justificación:** Este indicador permite monitorear la conectividad del SINAP, con el fin de determinar si el Sistema Nacional de Áreas Protegidas está bien conectado. Lo anterior en relación a las metas de conservación nacionales e internacionales vigentes.
 
-**Observaciones y aclaraciones generales del indicador**
-
-**Observaciones\*:**
-
 **Restricciones o limitaciones del indicador:** El cálculo del indicador depende por una parte, de las modificaciones de las áreas protegidas del territorio colombiano de acuerdo a la inscripción de nuevas áreas protegidas en el Registro Único Nacional de Áreas Protegidas (RUNAP) o cambios en su delimitación; por otra depende de la periodicidad y calidad de las actualizaciones globales de áreas protegidas dentro de la base de datos WDPA. El cálculo del indicador depende también de la distancia media a usar en el cálculo de la métrica ProtConn; sin embargo, se recomienda que se sigan los lineamientos de 10 km por tener un amplio uso en el campo de la conectividad y estar suficientemente soportado en literatura. Asimismo, las distancias usadas desde los límites nacionales (o territoriales) para definir las áreas transfronterizas pueden hacer variar el indicador, sin embargo pruebas realizadas han demostrado que tal variación es mínima.
 
 **Fuentes de incertidumbre:** La insuficiente delimitación de áreas protegidas, depuración del RUNAP y parámetros usados en el cálculo de la metrica ProtConn.
 
-**Bibliografía/Literatura citada** _._
+### Bibliografía/Literatura citada
 
 Beyer, Hawthorne L., Venter, Oscar, Grantham, Hedley S. and Watson, James E. M. (2019).Substantial losses in ecoregion intactness highlight urgency of globally coordinated action. Conservation Letters, 13 (2) e12592, e12592. doi: 10.1111/conl.12692
 

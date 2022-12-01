@@ -1,5 +1,5 @@
 # VIÑETA TÉCNICA DE INDICADORES
-## Cambio en el porcentaje de representatividad ecológica del SINAP - Distribución de Especies**
+## Cambio en el porcentaje de representatividad ecológica del SINAP - Distribución de Especies
 
 ### Identificación del indicador
 
@@ -44,7 +44,7 @@ Se calculó la representatividad de la distribución de especies para el nivel d
 
 El cálculo se define en la ecuación 1,
 
-\1. ![Ecuacion 1](https://github.com/PEM-Humboldt/indicadores-sinap/tree/master/img/rep_distspp_eq1.png)
+\1. ![Ecuacion 1](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/rep_distspp_eq1.png)
 
 Donde *f(x)* es el indicador del Cambio en el porcentaje de la representatividad de especies en términos de distribución, *pij* representa si la especie i que se encuentra en la unidad j ha alcanzado su área mínima de representatividad (*prij* = 1) o no (*prij* = 0). *Sj* representa el número de especies en la unidad *j*, *n* el número total de unidades y *t1* y *t2* representan dos periodos de tiempo. El área mínima de representatividad (*pr*) se calcula como una función del área de distribución de la especie y es escalada logarítmicamente desde el 10% para especies con distribuciones mayores a 250,000km2, hasta el 100% para especies con distribuciones menores a 1,000km2
 
@@ -62,11 +62,15 @@ Variables:  133 Mapas de distribución de especies validados por expertos, Biomo
 
 **Mapa de flujo de datos:**
 
-![Flujo de datos](https://github.com/PEM-Humboldt/indicadores-sinap/tree/master/img/rep_distSpp_flujo_dDatos.png)
+![Flujo de datos](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/rep_distSpp_flujo_dDatos.jpg)
 
 **Proceso SIG:**
 
-![Flujo SIG](https://github.com/PEM-Humboldt/indicadores-sinap/tree/master/img/rep_distSpp_dSig.png)
+![Flujo SIG](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/rep_distSpp_dSig.jpg)
+
+**Ejecutar el indicador:**
+
+La rutina estandarizada y documentada para el cálculo del indicador se encuentra escrito en lenguaje R y se denomina [2_1_rep_distspp_operativo.R](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/2_1_rep_distspp_operativo.R). Mientras que las representaciones geograficas, graficas y tabulares se construyen con el codigo [2_2_rep_distspp_representaciones.R](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/R/2_2_rep_distspp_representaciones.R).
 
 ### Observaciones y aclaraciones generales del indicador
 

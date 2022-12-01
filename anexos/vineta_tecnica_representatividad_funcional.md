@@ -15,8 +15,8 @@
 
 **Insumos del indicador:**
 
-- Mapas de Huella Humana nacional para 1990, 2000, 2010, 2020
-- Mapas del Sistema Nacional de Áreas Protegidas de Colombia 1990, 2000, 2010, 2020
+- Mapas de Huella Humana nacional
+- Mapas del Sistema Nacional de Áreas Protegidas de Colombia
 
 ### Descripción general del indicador
 

@@ -41,7 +41,7 @@ Se calculó la representatividad de la riqueza de especies para el nivel de paí
 
 El cálculo se define en la ecuación 1,
 
-1. ![Ecuacion 1](https://github.com/PEM-Humboldt/indicadores-sinap/tree/master/img/cambio_rri_eq1.png)
+1. ![Ecuacion 1](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/cambio_rri_eq1.png)
 
 En cada tiempo (t) calculamos para cada Área Protegida (AP) una matriz de valores 0 y 1 indicando la presencia o ausencia de especies respectivamente. Luego se aplican sumatorias de los valores 0 y 1 por AP y especies para obtener los cocientes que deben ser divididos entre el número de especies totales del sistema (n especies). El valor resultante será el valor de representatividad en cada conjunto de Áreas Protegidas del SINAP, el cual debe ser multiplicado por 100 para obtener el porcentaje de representatividad. Una vez tenemos la representatividad de t1 y t2 calculadas, obtenemos la diferencia (Δ t1-t2) de las representatividades de los dos tiempos.
 

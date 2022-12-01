@@ -1,23 +1,31 @@
+# Mayo de 2022
+# Codigo para generar el analisis de sensibilidad utilizando nueve diferentes radios: 
+# 2, 6, 10, 14, 18, 22, 26, 26.5 y 30 km. Al comparar la diferencia entre pares de radios adyacentes 
+# (e.g. 2-6 km, 6-10 km) y manteniendo un valor beta constante (Beta = 0.2)
+
+# Paquetes 
+
 library(data.table)
 library(dplyr)
 library(ggplot2)
 library(sf)
 library(gridExtra)
 
-# cargar información geografica
+# Insumos
 
-# shapefiles runap
+# Shapefiles runap
 
 RUNAP_shp_1990 <- st_read("rep_func_capas_base/RUNAP_proj/RUNAP_1990.shp")
 RUNAP_shp_2000 <- st_read("rep_func_capas_base/RUNAP_proj/RUNAP_2000.shp")
 RUNAP_shp_2010 <- st_read("rep_func_capas_base/RUNAP_proj/RUNAP_2010.shp")
 RUNAP_shp_2020 <- st_read("rep_func_capas_base/RUNAP_proj/RUNAP_2020.shp")
 
+# Shapefiles nacional
+
 nacional <- st_read("rep_func_otros/Nacional/Colombia_FINAL.shp")
 
-# plot(runap[,1])
+#Cargar informacion cruda de integridad
 
-#Cargar información de integridad
 testresults <- list.files(path = getwd(), pattern = "test", full.names = T) %>% 
   lapply(X = ., FUN = function(X){y = read.csv(file = X, stringsAsFactors = F)})
 
@@ -25,6 +33,8 @@ testresults[[1]]$idPNN <- RUNAP_shp_1990$IDPNN
 testresults[[2]]$idPNN <- RUNAP_shp_2000$IDPNN
 testresults[[3]]$idPNN <- RUNAP_shp_2010$IDPNN
 testresults[[4]]$idPNN <- RUNAP_shp_2020$id_pnn
+
+# 2. Funciones
 
 pares_integridad <- function(DB, reference, another, runap, tiempo, id, shp_back){
   
@@ -224,17 +234,3 @@ write_sf(RUNAP_shp_2020B, "pendiente_radios_1990_2020.shp", delete_layer = T)
 fwrite(group_wide, "pendiente_radios_xpnn_wide.csv", row.names = F)
 fwrite(grouped2, "pendiente_radios_xpnn_long.csv", row.names = F)
 fwrite(testresults_long, "integridad_radios_test_long.csv", row.names = F)
-
-
-####
-# elegir unicamente los de beta y sin reescalar de la tabla en donde se deja mover betas, radio y reescalamiento
-#colsb0.2 <- testresults[ , grepl(pattern = "(?=.*b0.2)(?=.*rsFALSE)", x = colnames(testresults), perl = T)]
-
-# nombres acordes al radio, lo unico que esta variando
-#colnames(colsb0.2) <- colnames(colsb0.2) %>% strsplit(split = "_") %>% 
-#  lapply(X = ., FUN = function(X){data <- X[2]}) %>% unlist()
-
-
-# anp que esta cambiando mas
-#maxcambio <- max(compar[, "differences"], na.rm = T)
-#anpmaxcambio <- runap[which(as.vector(runap[, colrefano]) == maxcambio), id ]

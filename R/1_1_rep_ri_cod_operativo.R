@@ -1,10 +1,11 @@
 # Bien Representado Ecológicamente
 #
-# Indicador: Porcentaje de la representatividad de la riqueza de especies del SINAP
+# Indicador: Porcentaje y cambio en el porcentaje de la representatividad de la riqueza de especies del SINAP
 #
-# Porcentaje de la representatividad de la riqueza de especies corresponde al porcentaje de especies 
-# protegidas dentro de las unidades del patrimonio natural y cultural del país incluidas dentro del 
-# Sistema Nacional de Áreas Protegidas con relación al número de especies disponibles para el análisis
+# Porcentaje y cambio en el porcentaje de la representatividad de la riqueza de especies corresponde al porcentaje 
+# y cambio en el porcentaje de especies protegidas dentro de las unidades del patrimonio natural y cultural del país 
+# incluidas dentro del Sistema Nacional de Áreas Protegidas con relación al número de especies disponibles para el 
+# análisis
 
 # librerias necesarias
 library("dismo")

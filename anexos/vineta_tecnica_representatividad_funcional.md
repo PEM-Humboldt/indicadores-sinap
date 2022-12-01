@@ -35,13 +35,13 @@ El cálculo del indicador tiene 3 momentos. El primero es a nivel de área prote
 El cálculo de *Q* para cada área se define en la ecuación 1,
 
 
-\1. ![Ecuacion 1](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/rep_func_eq1.png)
+1. ![Ecuacion 1](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/rep_func_eq1.png)
 
 Donde *Qa* es el indicador de degradación estructural en la unidad *a*, *dij* corresponde a la distancia entre dos celdas *i* y *j* (km), *g* es una medida de la calidad que hábitat cuyo rango se encuentra entre 0 y 1 (calculado aquí como 1 - [huella humana/100]), *z* es un exponente que escala el producto de dos dimensiones, y n es el número de celdas dentro de un área protegida. El parámetro beta determina cómo el valor combinado de los pares de celdas disminuye como una función de la distancia entre ellas, mientras que el denominador estandariza la métrica de manera que el estado actual es relativo a un estado hipotético en el que no ha ocurrido pérdida de hábitat o fragmentación, es decir todos los valores de calidad de hábitat corresponden a 1.
 
 El cálculo del  indicador ‘Cambio en el porcentaje de la representatividad de integridad estructural del SINAP’ se define en la ecuación 2,
 
-\2. ![Ecuacion 2](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/rep_func_eq2.png)
+2. ![Ecuacion 2](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/rep_func_eq2.png)
 
 Donde *Qa* es el indicador de degradación estructural en el área protegida *a* (ecuación 1) y *N* es el número total de áreas protegidas.								
 

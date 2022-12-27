@@ -1,8 +1,8 @@
 # Indicadores Sistema Nacional de Areas Protegidas
 
-Cálculo de indicadores del sistema de monitoreo del SINAP.  Los indicadores permiten establecer si el SINAP es representativo ecológicamente a nivel de especies y si estas áreas y los sistemas en los que se encuentran cuentan con integridad funcional y conectividad que permitan su viabilidad a largo plazo. Los indicadores son: porcentaje y cambio de la representatividad de la riqueza de especies, cambio en el porcentaje de representatividad de la distribución de especies, cambio en la media de representatividad de la integridad y cambio en el porcentaje de areas protegidas y conectadas. La última actualización de las rutinas se realizó en noviembre de 2022.
+Cálculo de indicadores del sistema de monitoreo del SINAP.  Los indicadores permiten establecer si el SINAP es representativo ecológicamente a nivel de especies y si estas áreas y los sistemas en los que se encuentran cuentan con integridad funcional y conectividad que permitan su viabilidad a largo plazo. Los indicadores son: porcentaje y cambio de la representatividad de la riqueza de especies, cambio en el porcentaje de representatividad de la distribución de especies, cambio en la media de representatividad de la integridad y cambio en el porcentaje de areas protegidas y conectadas.
 
-En desarrollo.
+Última actualización de las rutinas: noviembre de 2022.
 
 ## Prerequisitos
 

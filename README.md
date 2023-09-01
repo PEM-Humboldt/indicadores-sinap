@@ -13,7 +13,7 @@ Cálculo de indicadores del sistema de monitoreo del SINAP.  Los indicadores per
 
 ### Librerias
 
-Librerias requeridas y sus versiones por cada indicador. Asegurese que tiene las versiones exactas de cada paquete y son compatibles con la versión de R.
+Librerias requeridas y sus versiones por cada indicador. Asegurese que tiene las versiones exactas de cada paquete y son compatibles con la versión de R. En algunos indicadores existen nuevas versiones en las cuales se puede correr el flujo. 
 
 1. Porcentaje y cambio de la representatividad de la riqueza de especies del SINAP
 
@@ -35,6 +35,16 @@ Librerias requeridas y sus versiones por cada indicador. Asegurese que tiene las
 "rgdal" 1.5-27 (puede presentar incompatibilidad desde 2023)
 "ReIns" 1.4-1 (1.0.10)
 "dplyr" 1.0.7
+```
+
+Nota 2023 septiembre: Versión 4.1.3 [R](https://cran.r-project.org/bin/windows/base/old/4.1.3/) corriendo. Los siguientes son los paquetes y versiones funcionando
+
+```
+"raster" 3.5-15
+"xfun" 0.30 o 0.39
+"rgdal" 1.5-31 o 1.6-16 (puede presentar incompatibilidad desde 2023)
+"ReIns" 1.0.12
+"dplyr" 1.0.9 o 1.1.2
 ```
 
 3. Cambio en la media de la representatividad de integridad estructural del SINAP

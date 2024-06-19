@@ -36,7 +36,7 @@ library(sf)
 
 #### Descargar WDPA
 
-Instalamos y configuramos phantomjs para descargar los datos.
+Instalamos y configuramos phantomjs para descargar los datos de WDPA.
 
 ```
 webdriver::install_phantomjs()
@@ -52,7 +52,13 @@ mult_data <- lapply(X = country_codes, FUN = function(X) {
 mult_data <- st_as_sf(as_tibble(bind_rows(mult_data)))
 WDPA2023 <- mult_data[mult_data$STATUS_YR < 2024,] |> 
   st_transform("EPSG:4686")
+```
 
+#### Cargar datos RUNAP
+
+Cargar datos del RUNAP
+
+```
 RUNAP2023 <- read_sf("RUNAP_2023.shp") |> 
   st_transform("EPSG:4686")
 ```

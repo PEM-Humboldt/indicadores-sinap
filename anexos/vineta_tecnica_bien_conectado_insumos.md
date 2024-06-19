@@ -30,7 +30,6 @@ library(wdpar)
 library(dplyr)
 library(terra)
 library(qgisprocess)
-library(rowr)
 library(sf)
 ```
 

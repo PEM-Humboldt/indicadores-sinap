@@ -19,7 +19,7 @@
 - [Mapas del Sistema Nacional de Áreas Protegidas de Colombia](https://docs.google.com/document/d/1ikapUO27gE1hucJHv512WV4G1QmUP--B2Toj_jI3ggI/edit?usp=sharing)
 - [Mapas de Áreas Protegidas del Mundo](https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA)
 
-En la [viñeta tecnica del indicador](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/anexos/vineta_tecnica_bien_conectado.md) fueron descritos los procesos geograficos para la ejecución del indicador. **En este documento se presenta una rutina en R para generar la capa que une los Mapas del Sistema Nacional de Áreas Protegidas de Colombia y los Mapas de Áreas Protegidas del Mundo.** Se usa como ejemplo las capas para el año 2023.
+En la [viñeta tecnica del indicador](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/anexos/vineta_tecnica_bien_conectado.md) fueron descritos los procesos geograficos para la ejecución del indicador. **En este documento se presenta una rutina en R para generar la capa que une los Mapas del Sistema Nacional de Áreas Protegidas de Colombia y los Mapas de Áreas Protegidas del Mundo.** Esta, aunque escrita en lenguaje R utiliza el paquete `qgisprocess` la cual usa las funciones disponibles dentro del software QGIS ([mayor información](https://r-spatial.github.io/qgisprocess/articles/qgisprocess.html)). El uso de esta paqueteria se hace necesario porque las librerias nativas de R para el procesamiento geografico dejan residuos de errores topologicos y geometricos en las capas. Problemas que no suelen ser graves en la mayoria de aplicaciones, pero que en este caso imposibilitan el uso de la herramienta [MAKHURINI](https://github.com/connectscape/Makurhini) el cual es muy sensible a estos errores (topologia y geometria). Se usa como ejemplo las capas para el año 2023.
 
 #### Cargar Librerías
 
@@ -33,13 +33,17 @@ library(qgisprocess)
 library(sf)
 ```
 
-#### Descargar WDPA
+#### Descargar WDPA (base de datos de Areas Protegidas del mundo)
 
-Instalamos y configuramos phantomjs para descargar los datos de WDPA.
+Para poder descargar la base de datos WDPA, es necesario instalar y configurar phantomjs.
 
 ```
 webdriver::install_phantomjs()
+```
 
+Iniciar la descarga.
+
+```
 country_codes <- c("BRA", "ECU", "NLD", "PAN", "PER", "VEN")
 
 # Descargar y limpiar los datos para cada país
@@ -74,7 +78,7 @@ col <- read_sf("D:/humboldt/indicadores-sinap/capas_base_ejemplos/Nacional/Colom
 
 #### Arreglar Estructura de las Geometrías WDPA
 
-Utilizamos qgis_run_algorithm para arreglar las geometrías.
+Utilizamos los metodos que corrigen la estructura y las   para arreglar las geometrías.
 
 ```
 WDPA2023 <- qgis_run_algorithm(
@@ -92,51 +96,43 @@ WDPA2023 <- qgis_run_algorithm(
   st_as_sf()
 ```
 
-#### Disolver
+#### Arreglar Estructura de las Geometrías RUNAP
 
-Disolvemos las geometrías para unir áreas contiguas.
+Arreglamos las geometrías de RUNAP utilizando los metodos de estructura y 
 
 ```
-WDPA2023 <- qgis_run_algorithm(
-  "native:dissolve",
-  INPUT = WDPA2023
-) %>% 
-  st_as_sf()
+RUNAP2023 <- qgis_run_algorithm(
+  "native:fixgeometries",
+  INPUT = RUNAP2023, 
+  METHOD = 1
+) |>
+  sf::st_as_sf()
+
+RUNAP2023 <- qgis_run_algorithm(
+  "native:fixgeometries",
+  INPUT = RUNAP2023, 
+  METHOD = 0
+) |>
+  sf::st_as_sf()
 ```
+
 
 #### Cortar WDPA con Buffer de 500 km
 
 Cortamos WDPA utilizando el buffer creado previamente.
 
 ```
-WDPA2023 <- WDPA2023 |> 
-  vect() |> 
-  crop(vect(col)) |> 
-  mask(vect(col)) |> 
+WDPA2023 <- qgis_run_algorithm(
+  "native:clip",
+  INPUT = WDPA2023, 
+  OVERLAY = col
+)%>% 
   st_as_sf()
 ```
 
-#### Arreglar Estructura de las Geometrías RUNAP
+#### Unir WDPA y RUNAP
 
-Arreglamos las geometrías de RUNAP utilizando qgis_run_algorithm.
-
-```
-RUNAP2023 <- qgis_run_algorithm(
-  "native:fixgeometries",
-  INPUT = RUNAP2023, 
-  METHOD = 1
-) |>
-  sf::st_as_sf()
-
-RUNAP2023 <- qgis_run_algorithm(
-  "native:fixgeometries",
-  INPUT = RUNAP2023, 
-  METHOD = 0
-) |>
-  sf::st_as_sf()
-```
-
-#### Unir wdpa y RUNAP arreglados
+Una vez se obtiene el WDPA cortado con el buffer de 500km y previamente arreglada su geometria, se une con la capa de RUNAP, lacual fue igualmente arreglada su geometria y topologia. 
 
 ```
 AP_2023 <- qgis_run_algorithm(

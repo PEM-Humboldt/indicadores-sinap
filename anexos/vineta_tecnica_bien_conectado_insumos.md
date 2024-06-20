@@ -78,7 +78,7 @@ col <- read_sf("D:/humboldt/indicadores-sinap/capas_base_ejemplos/Nacional/Colom
 
 #### Arreglar Estructura de las Geometrías WDPA
 
-Utilizamos los metodos que corrigen la estructura y las   para arreglar las geometrías.
+Utilizamos primero el metodo structure (`METHOD = 1`) el cual primero valida todos los anillos y luego fusiona las envolventes y resta los huecos de las envolventes para generar un resultado válido. Asume que los huecos y las envolventes están categorizados correctamente y las   para arreglar las geometrías.Segundo Linework (`METHOD = 0`) el cual combina todos los anillos en un conjunto de líneas nodadas y luego extrae polígonos válidos de ese trabajo de líneas ([vease](https://www.qgistutorials.com/en/docs/3/handling_invalid_geometries.html)
 
 ```
 WDPA2023 <- qgis_run_algorithm(
@@ -98,7 +98,7 @@ WDPA2023 <- qgis_run_algorithm(
 
 #### Arreglar Estructura de las Geometrías RUNAP
 
-Arreglamos las geometrías de RUNAP utilizando los metodos de estructura y 
+Arreglamos las geometrías de RUNAP utilizando los metodos structure y linework.
 
 ```
 RUNAP2023 <- qgis_run_algorithm(

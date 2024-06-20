@@ -57,6 +57,10 @@ WDPA2023 <- mult_data[mult_data$STATUS_YR < 2024,] |>
   st_transform("EPSG:4686")
 ```
 
+Representación geográfica de la base de datos de Areas Protegidas del mundo circunscritas a los paises limitrofes con Colombia
+
+![WDPAWOrld](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/wdpa_world.png)
+
 #### Cargar datos RUNAP
 
 Cargar datos del RUNAP
@@ -65,6 +69,10 @@ Cargar datos del RUNAP
 RUNAP2023 <- read_sf("RUNAP_2023.shp") |> 
   st_transform("EPSG:4686")
 ```
+
+Representación geográfica de la base de datos RUNAP.
+
+ ![RUNAP](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/RUNAP.png)
 
 #### Crear Buffer
 
@@ -116,7 +124,6 @@ RUNAP2023 <- qgis_run_algorithm(
   sf::st_as_sf()
 ```
 
-
 #### Cortar WDPA con Buffer de 500 km
 
 Cortamos WDPA utilizando el buffer creado previamente.
@@ -130,6 +137,9 @@ WDPA2023 <- qgis_run_algorithm(
   st_as_sf()
 ```
 
+![WDPABuffCol](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/wdpaBuffCol.png)
+
+
 #### Unir WDPA y RUNAP
 
 Una vez se obtiene el WDPA cortado con el buffer de 500km y previamente arreglada su geometria, se une con la capa de RUNAP, lacual fue igualmente arreglada su geometria y topologia. 
@@ -142,3 +152,4 @@ AP_2023 <- qgis_run_algorithm(
 ) |>
   sf::st_as_sf()
 ```
+![WDPARUNAP](https://github.com/PEM-Humboldt/indicadores-sinap/blob/master/img/WDPARUNAP.png)
